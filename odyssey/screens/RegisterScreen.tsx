@@ -28,7 +28,7 @@ const RegisterScreen = ({navigation}) => {
 
             {/*  Lets Get to Planning your trip goes here*/}
             <View>
-                <Image source={require("../assets/login-register-backdrop.png")} />
+                <Image source={require("../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
                 <View style={styles.tagline}>
                     <Text style={styles.taglineText}>Let's get to planning your next trip!</Text>
                 </View>
@@ -44,13 +44,14 @@ const RegisterScreen = ({navigation}) => {
                         <ImageButton source={require("../assets/apple-logo.png")} onPress={() => console.log("Apple pressed")}/>
                     </View>
 
-                    <Text style={{marginVertical: "5%"}}>Or register with email...</Text>
-                    <InputField title="Email" text={email} placeholder="odysseus@gmail.com" onChangeText={(text) => setEmail(text)} />
-                    <InputField title="First Name" text={firstName} placeholder="Odysseus" onChangeText={(text) => setFirstName(text)} />
-                    <InputField title="Last Name" text={lastName} placeholder="Odyssey" onChangeText={(text) => setLastName(text)} />
-                    <InputField title="Password" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
-                    <InputField title="Confirm Password" text={confirmPassword} placeholder="Password" onChangeText={(text) => setConfirmPassword(text)} secure={true}/>
-                    <Button style={{marginTop: "5%"}} label="Register" onPress={() => console.log("Trying to register")}/>                
+                    <Text style={{marginVertical: "5%", color: '#999999'}}>Or register with email...</Text>
+                    <InputField title="" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} />
+                    <InputField title="" text={firstName} placeholder="First Name" onChangeText={(text) => setFirstName(text)} />
+                    {/* <InputField title="" text={lastName} placeholder="Last Name" onChangeText={(text) => setLastName(text)} /> */}
+                    <InputField title="" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
+                    <InputField title="" text={confirmPassword} placeholder="Verify Password" onChangeText={(text) => setConfirmPassword(text)} secure={true}/>
+                    <Button style={{marginTop: "5%"}} label="Register" onPress={() => console.log("Trying to register")}/>
+                    <Text style={styles.registerText}>Already have an account? {<Text onPress={() => navigation.navigate("Login")} style={{textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold'}}>Go Here</Text>}</Text>                
             </View>
         </Screen>
     )
