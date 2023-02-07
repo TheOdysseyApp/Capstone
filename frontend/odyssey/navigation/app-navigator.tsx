@@ -1,12 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //TODO - clean up imports via an index file??
-import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
-import ConfirmCodeScreen from "../screens/ConfirmCodeScreen";
-import HomeScreen from "../screens/HomeScreen";
-import ForgotPassword from "../screens/ForgotPassword";
-import ResetPassword from "../screens/ResetPassword";
+import LoginScreen from "../screens/auth/LoginScreen";
+import RegisterScreen from "../screens/auth/RegisterScreen";
+import ConfirmCodeScreen from "../screens/auth/ConfirmCodeScreen";
+import ForgotPassword from "../screens/auth/ForgotPassword";
+import ResetPassword from "../screens/auth/ResetPassword";
+import Header from "../components/Header";
+import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
 
 const Stack = createNativeStackNavigator()
 
@@ -37,13 +38,6 @@ const AppStack = () => {
                     }}
                 />
                 <Stack.Screen 
-                    name="Home"
-                    component={HomeScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen 
                     name="ForgotPassword"
                     component={ForgotPassword}
                     options={{
@@ -57,6 +51,13 @@ const AppStack = () => {
                         headerShown: false
                     }}
                 />
+                <Stack.Screen 
+                    name="QuestionnaireStart"
+                    component={QuestionnaireStartScreen}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
             </Stack.Group>
         </Stack.Navigator>
     )

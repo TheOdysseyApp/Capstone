@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Text, View, Image, StyleSheet, SafeAreaView } from "react-native";
-import InputField from "../components/InputField";
-import Button from "../components/Button";
-import ImageButton from "../components/ImageButton";
-import Header from '../components/Header';
-import Screen from '../components/Screen';
 import { Auth } from 'aws-amplify';
+import InputField from "../../components/InputField";
+import Button from "../../components/Button";
+import ImageButton from "../../components/ImageButton";
+import Header from '../../components/Header';
+import Screen from '../../components/Screen';
 
 const RegisterScreen = ({navigation}) => {
     const [email, setEmail] = useState<string>("")
@@ -49,7 +49,7 @@ const RegisterScreen = ({navigation}) => {
 
             {/*  Lets Get to Planning your trip goes here*/}
             <View>
-                <Image source={require("../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
+                <Image source={require("../../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
                 <View style={styles.tagline}>
                     <Text style={styles.taglineText}>Let's get to planning your next trip!</Text>
                 </View>
@@ -60,9 +60,9 @@ const RegisterScreen = ({navigation}) => {
                     <Text style={styles.header}>Sign Up</Text>
 
                     <View style={styles.imageButtonContainer}>
-                        <ImageButton source={require("../assets/google-logo.png")} onPress={() => console.log("Google pressed")}/>
-                        <ImageButton source={require("../assets/facebook-logo.png")} onPress={() => console.log("Facebook pressed")}/>
-                        <ImageButton source={require("../assets/apple-logo.png")} onPress={() => console.log("Apple pressed")}/>
+                        <ImageButton source={require("../../assets/google-logo.png")} onPress={() => console.log("Google pressed")}/>
+                        <ImageButton source={require("../../assets/facebook-logo.png")} onPress={() => console.log("Facebook pressed")}/>
+                        <ImageButton source={require("../../assets/apple-logo.png")} onPress={() => console.log("Apple pressed")}/>
                     </View>
 
                     <Text style={{marginVertical: "5%", color: '#999999'}}>Or register with email...</Text>
