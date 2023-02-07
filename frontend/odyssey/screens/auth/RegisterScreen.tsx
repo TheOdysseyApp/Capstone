@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-import InputField from "../components/InputField";
-import Button from "../components/Button";
-import ImageButton from "../components/ImageButton";
-import Header from '../components/Header';
-import Screen from '../components/Screen';
+import InputField from "../../components/InputField";
+import Button from "../../components/Button";
+import ImageButton from "../../components/ImageButton";
+import Header from '../../components/Header';
+import Screen from '../../components/Screen';
 import { Ionicons } from '@expo/vector-icons';
 
 const RegisterScreen = ({navigation}) => {
@@ -28,7 +28,7 @@ const RegisterScreen = ({navigation}) => {
 
             {/*  Lets Get to Planning your trip goes here*/}
             <View>
-                <Image source={require("../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
+                <Image source={require("../../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
                 <View style={styles.tagline}>
                     <Text style={styles.taglineText}>Let's get to planning your next trip!</Text>
                 </View>
@@ -39,9 +39,9 @@ const RegisterScreen = ({navigation}) => {
                     <Text style={styles.header}>Sign Up</Text>
 
                     <View style={styles.imageButtonContainer}>
-                        <ImageButton source={require("../assets/google-logo.png")} onPress={() => console.log("Google pressed")}/>
-                        <ImageButton source={require("../assets/facebook-logo.png")} onPress={() => console.log("Facebook pressed")}/>
-                        <ImageButton source={require("../assets/apple-logo.png")} onPress={() => console.log("Apple pressed")}/>
+                        <ImageButton source={require("../../assets/google-logo.png")} onPress={() => console.log("Google pressed")}/>
+                        <ImageButton source={require("../../assets/facebook-logo.png")} onPress={() => console.log("Facebook pressed")}/>
+                        <ImageButton source={require("../../assets/apple-logo.png")} onPress={() => console.log("Apple pressed")}/>
                     </View>
 
                     <Text style={{marginVertical: "5%", color: '#999999'}}>Or register with email...</Text>
@@ -50,7 +50,7 @@ const RegisterScreen = ({navigation}) => {
                     {/* <InputField title="" text={lastName} placeholder="Last Name" onChangeText={(text) => setLastName(text)} /> */}
                     <InputField title="" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
                     <InputField title="" text={confirmPassword} placeholder="Verify Password" onChangeText={(text) => setConfirmPassword(text)} secure={true}/>
-                    <Button style={{marginTop: "5%"}} label="Register" onPress={() => console.log("Trying to register")}/>
+                    <Button style={{marginTop: "5%"}} label="Register" onPress={() => navigation.navigate("QuestionnaireStart")}/>
                     <Text style={styles.registerText}>Already have an account? {<Text onPress={() => navigation.navigate("Login")} style={{textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold'}}>Go Here</Text>}</Text>                
             </View>
         </Screen>
