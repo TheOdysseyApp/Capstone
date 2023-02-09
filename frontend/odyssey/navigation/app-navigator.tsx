@@ -8,7 +8,10 @@ import ForgotPassword from "../screens/auth/ForgotPassword";
 import ResetPassword from "../screens/auth/ResetPassword";
 import Header from "../components/Header";
 import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
-
+import QuestionnaireWhatInterestsYou from "../screens/questionnaire/QuestionnaireWhatInterestsYou";
+import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/QuestionnaireWhatBringsYouHere";
+import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/QuestionnaireHowLongWillYouBeThere";
+import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
 const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
@@ -54,6 +57,34 @@ const AppStack = () => {
                 <Stack.Screen 
                     name="QuestionnaireStart"
                     component={QuestionnaireStartScreen}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen 
+                    name="QuestionnaireWhatInterestsYou"
+                    component={QuestionnaireWhatInterestsYou}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen 
+                    name="QuestionnaireWhatBringsYouHere"
+                    component={QuestionnaireWhatBringsYouHere}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen 
+                    name="QuestionnaireHowLongWillYouBeThere"
+                    component={QuestionnaireHowLongWillYouBeThere}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen 
+                    name="QuestionaireWhereAreYouTravelingTo"
+                    component={QuestionaireWhereAreYouTravelingTo}
                     options={{
                         headerShown: false
                     }}

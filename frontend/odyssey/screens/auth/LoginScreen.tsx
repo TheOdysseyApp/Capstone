@@ -6,10 +6,13 @@ import ImageButton from '../../components/ImageButton';
 import Header from '../../components/Header';
 import Screen from "../../components/Screen"
 import {Auth} from 'aws-amplify'
+import Calendar from "../../components/Calendar";
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    // DELETE THIS
+    // const [showCalendar, setShowCalendar] = useState<boolean>(false)
 
     useEffect(() => {
         Auth.currentAuthenticatedUser()
@@ -43,6 +46,11 @@ const LoginScreen = ({navigation}) => {
 
             {/*  Lets Get to Planning your trip goes here*/}
             <View>
+                {/* Testing calendar component */}
+                 <View>
+                    <Calendar></Calendar>
+                </View>
+
                 <Image source={require("../../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
                 <View style={styles.tagline}>
                     <Text style={styles.taglineText}>Let's get to planning your next trip!</Text>
