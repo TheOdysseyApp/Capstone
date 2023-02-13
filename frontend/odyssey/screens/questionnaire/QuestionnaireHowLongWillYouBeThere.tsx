@@ -39,7 +39,7 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                     </View>
 
                     <View>
-                        <Button style={{ marginTop: "10%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>
+                        <Button style={{ marginTop: "10%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireWhatDoYouWantToDo")}/>
                     </View>
 
                     <View>
