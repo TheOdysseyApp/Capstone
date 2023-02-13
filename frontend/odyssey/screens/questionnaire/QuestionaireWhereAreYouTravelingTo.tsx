@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
-import SearchButton from "../../components/SearchButton";
+import SearchBar from "../../components/SearchBar";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar, Searchbar} from 'react-native-paper';
@@ -16,29 +16,23 @@ const QuestionaireWhereAreYouTravelingTo = ({navigation}) => {
     
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '220%'}} >
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '120%'}} >
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatInterestsYou")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireStart")}/>
                         <Header/>
                     </View>
                     <View style={styles.header}>
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>Where are you traveling to?</Text>
                     </View>
-
-                    <View style={styles.rowContainer}>
-                        <Searchbar style={styles.searchBar}
-                            placeholder="Search"
-                            onChangeText={onChangeSearch}
-                            value={searchQuery}
-                        />
-                        <SearchButton label={''} onPress={function (): void {
+                    <View>
+                        <SearchBar style={{marginTop:"20%"}} label={''} onPress={function (): void {
                             throw new Error('Function not implemented.');
                         } }/>
                     </View>
                     <View>
-                            <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "110%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
@@ -73,8 +67,8 @@ const styles = StyleSheet.create({
     },
     searchBar:{
         flex: 1,
-        marginLeft: 50,
-        marginRight: 30,
+        // marginLeft: 50,
+        // marginRight: 30,
         marginTop: 50,
         color: '#929292',
         borderRadius: 10

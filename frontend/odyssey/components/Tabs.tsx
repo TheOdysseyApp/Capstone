@@ -1,28 +1,27 @@
 import * as React from 'react'
 import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle} from 'react-native'
 
-type ButtonProps = {
+type TabProps = {
     style?: ViewStyle
     textStyle?: TextStyle
     label: string
     onPress: () => void
 }
 
-const SearchButton = ({style, textStyle, label, onPress}: ButtonProps) => {
+const Button = ({style, textStyle, label, onPress}: TabProps) => {
     return (
-        <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+        <TouchableOpacity style={[styles.tab, style]} onPress={onPress}>
             <Text style={[styles.text, textStyle]}>{label}</Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    button: {
+    tab: {
         backgroundColor: '#194260',
-        width: '20%',
-        marginTop: '12%',
-        height: '50%',
-        borderRadius: 4,
+        width: '80%',
+        padding: 20,
+        borderRadius: 10,
     },
     text: {
         textAlign: 'center',
@@ -30,5 +29,3 @@ const styles = StyleSheet.create({
         fontSize: 20,
     }
 })
-
-export default SearchButton;

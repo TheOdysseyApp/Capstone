@@ -12,6 +12,8 @@ import QuestionnaireWhatInterestsYou from "../screens/questionnaire/Questionnair
 import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/QuestionnaireWhatBringsYouHere";
 import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/QuestionnaireHowLongWillYouBeThere";
 import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
+import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
+import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
 const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
@@ -78,6 +80,20 @@ const AppStack = () => {
                 <Stack.Screen 
                     name="QuestionnaireHowLongWillYouBeThere"
                     component={QuestionnaireHowLongWillYouBeThere}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen
+                    name="QuestionnaireWhatDoYouWantToDo"
+                    component={QuestionnaireWhatDoYouWantToDo}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen
+                    name="QuestionnaireWhatsYourBudget"
+                    component={QuestionnaireWhatsYourBudget}
                     options={{
                         headerShown: false
                     }}
