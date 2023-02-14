@@ -16,7 +16,7 @@ const QuestionaireWhereAreYouTravelingTo = ({navigation}) => {
     
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '120%'}} >
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '130%'}} >
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireStart")}/>
@@ -29,7 +29,7 @@ const QuestionaireWhereAreYouTravelingTo = ({navigation}) => {
                     <View>
                         <SearchBar style={{marginTop:"20%"}} label={''} onPress={function (): void {
                             throw new Error('Function not implemented.');
-                        } }/>
+                        }}/>
                     </View>
                     <View>
                             <ProgressBar style={{marginTop: "110%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
@@ -67,8 +67,6 @@ const styles = StyleSheet.create({
     },
     searchBar:{
         flex: 1,
-        // marginLeft: 50,
-        // marginRight: 30,
         marginTop: 50,
         color: '#929292',
         borderRadius: 10

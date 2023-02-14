@@ -11,7 +11,7 @@ const bgImage = require("../../assets/questionnaire-start-screen-bg.png")
 const QuestionnaireStartScreen = ({navigation}) => {
     return (
 <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '127%'}}>
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '125%'}}>
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" />
