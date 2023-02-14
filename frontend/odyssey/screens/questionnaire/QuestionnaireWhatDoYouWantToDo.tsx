@@ -17,7 +17,7 @@ const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
 
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '110%'}}>
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '100%'}}>
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>

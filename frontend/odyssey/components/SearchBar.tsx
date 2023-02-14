@@ -15,16 +15,16 @@ const SearchBar = ({style, textStyle, label, onPress}: ButtonProps) => {
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
-                    <View style={styles.rowContainer}>
-                            <Searchbar style={styles.searchBar}
-                                placeholder="Search"
+        <View style={styles.rowContainer}>
+            <Searchbar style={styles.searchBar}
+                        placeholder="Search"
                                 onChangeText={onChangeSearch}
                                 value={searchQuery}
                             />
                             <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
                                 <Text style={[styles.text, textStyle]}>{label}</Text>
                             </TouchableOpacity>
-                            <AntDesign style={{marginLeft: "-10%"}} name="right" size={24} color="white" onPress={onPress}/>
+                            <AntDesign style={{marginLeft: "-11%"}} name="right" size={24} color="white" onPress={onPress}/>
                     </View>
     )
 }
@@ -33,10 +33,9 @@ const styles = StyleSheet.create({
     button: {
         // flex: 2,
         backgroundColor: '#194260',
-        width: '15%',
-        marginTop: '12%',
-        marginLeft: '68%',
-        height: '56%',
+        width: '17%',
+        marginLeft: '78%',
+        height: '60%',
         borderRadius: 10,
         // marginRight: 50,
         // position: 'absolute'
@@ -48,10 +47,11 @@ const styles = StyleSheet.create({
     },
     searchBar:{
         // flex: 1,
-        marginLeft: 80,
+        marginLeft: 50,
         // marginRight: 100,
-        width: '100%',
-        marginTop: 40,
+        width: '117%',
+        height: '64%',
+        marginTop: 30,
         color: '#929292',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 0,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'center',
-        // position: 'absolute',
+        position: 'absolute',
         // backgroundColor:'#FFFFFF'
         
         

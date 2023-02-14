@@ -8,7 +8,7 @@ type TabProps = {
     onPress: () => void
 }
 
-const Button = ({style, textStyle, label, onPress}: TabProps) => {
+const Tabs = ({style, textStyle, label, onPress}: TabProps) => {
     return (
         <TouchableOpacity style={[styles.tab, style]} onPress={onPress}>
             <Text style={[styles.text, textStyle]}>{label}</Text>
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#194260',
         width: '80%',
         padding: 20,
-        borderRadius: 10,
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
     },
     text: {
         textAlign: 'center',
@@ -29,3 +30,5 @@ const styles = StyleSheet.create({
         fontSize: 20,
     }
 })
+
+export default Tabs;

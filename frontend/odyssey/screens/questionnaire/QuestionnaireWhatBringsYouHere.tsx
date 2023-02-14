@@ -7,13 +7,13 @@ import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import CheckBoxComponent from '../../components/CheckBox';
 
-const bgImage = require("../../assets/what-interests-you-bg.png") //change this later
+const bgImage = require("../../assets/what-brings-you-here-bg.png") //change this later
 
 const QuestionnaireWhatBringsYouHere = ({navigation}) => {
     const info = ["Work & Travel", "Self Exploration", "Friends Trip", "Romantic Trip", "Family Trip", "Adventure"];
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '290%'}} >
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '120%'}} >
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatInterestsYou")}/>

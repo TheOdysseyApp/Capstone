@@ -6,7 +6,7 @@ import { DataTable } from 'react-native-paper';
 // note: This Calendar component was created using this tutorial for React.js: https://derrickotte.medium.com/how-to-create-a-calendar-from-scratch-in-react-1f2db197454d
 
 const Calendar = () => {
-    let weekdays : string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let weekdays : string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     let months : string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     let state = { currentDay : new Date() };
@@ -84,7 +84,7 @@ const CalendarDays = (props:{day: Date}) =>{
     for( let f = 0; f < 6; f++){
       let weekItem = [];
       let k = 0;
-      while (k < 6){
+      while (k < 7){
         weekItem.push(currentDays[i]);
         k++;
         i++;

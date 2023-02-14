@@ -1,22 +1,21 @@
 import { useState } from 'react'
 import React from 'react';
 import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
-import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import { ProgressBar} from 'react-native-paper';
+import ProgressBar from 'react-native-paper';
+import Button from '../../components/Button';
 import { AntDesign } from '@expo/vector-icons'; 
-import CheckBoxComponent from '../../components/CheckBox';
 
 const bgImage = require("../../assets/what-interests-you-bg.png") //change this later
 
-const QuestionnaireWhatsYourBudget = ({navigation}) => {
+const QuestionnaireIdeasForYou = ({navigation}) => {
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '290%'}}>
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatDoYouWantToDo")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
                         <Header/>
                     </View>
                     <View>
@@ -24,9 +23,6 @@ const QuestionnaireWhatsYourBudget = ({navigation}) => {
                         <Text style={styles.secondary}>What's Your Budget?</Text>
                     </View>
 
-                    <View>
-                        <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
-                    </View>
                 </SafeAreaView>
             </ImageBackground>
         </Screen>
@@ -62,4 +58,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireWhatsYourBudget;
+export default QuestionnaireIdeasForYou;
