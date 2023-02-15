@@ -15,12 +15,23 @@ const SearchBar = ({style, textStyle, label, onPress}: ButtonProps) => {
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
+        // <View 
+        //     style={ styles.inputContainer
+        //     }>
+        //     <AntDesign name="search1" size={24}/>
+        //     <TextInput style={styles.searchBar}
+        //         placeholder="Search"
+        //     />
+        //     {/* <TouchableOpacity onPress={onPress} style={styles.icon}>
+        //         <AntDesign name="right" size={24} color="white"/>
+        //     </TouchableOpacity> */}
+        // </View>
         <View style={styles.inputContainer}>
-            <AntDesign name="search1" size={24}/>
-            <TextInput style={styles.searchBar}/>
-            <TouchableOpacity onPress={onPress} style={styles.icon}>
-                <AntDesign name="right" size={24} color="white"/>
-            </TouchableOpacity>
+            <Searchbar style={styles.searchBar}
+                placeholder="Search"
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+            />
         </View>
 
 
@@ -29,23 +40,30 @@ const SearchBar = ({style, textStyle, label, onPress}: ButtonProps) => {
 
 const styles = StyleSheet.create({
     inputContainer: { 
-        flexDirection: 'row', 
+        // flexDirection: 'row', 
         alignSelf: 'center', 
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: "#f4f4f4",
-        width:  "80%",
+        // backgroundColor: "#f4f4f4",
+        width:  "130%",
+        height: '23%',
         marginTop: "5%",
+        borderRadius:10,
       },
-    icon: {
-        alignSelf: 'flex-end',
-        color: '194260',
-        backgroundColor: "#194260",
-    },
+    // icon: {
+    //     alignSelf: 'flex-end',
+    //     color: '194260',
+    //     backgroundColor: "#194260",
+    //     paddingLeft: '10%'
+    // },
     searchBar: {
-        width: "90%",
+        width: "100%",
         fontSize: 20,
-        color: '#FFFFFF',
+        alignSelf: 'center', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        // color: '#FFFFFF',
+        borderRadius:10,
     }
 })
 
