@@ -8,7 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import {ProgressBar, Checkbox} from 'react-native-paper';
 import {AntDesign } from '@expo/vector-icons'; 
 import React from 'react';
-import {Text, StyleSheet, View, ImageBackground,SafeAreaView} from 'react-native';
+import {Text, StyleSheet, View, ImageBackground} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import CheckBoxComponent from '../../components/CheckBox';
 
 const bgImage = require("../../assets/what-interests-you-bg.png")
@@ -18,7 +19,7 @@ const QuestionnaireWhatInterestsYou = ({navigation}) => {
     const info = ["Mountains", "Beach", "City","Rural/Countryside", "Lake"];
     return (
 <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '100%'}} >
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '130%'}} >
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireStart")}/>

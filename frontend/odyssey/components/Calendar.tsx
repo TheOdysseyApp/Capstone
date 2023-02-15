@@ -5,6 +5,11 @@ import { DataTable } from 'react-native-paper';
 
 // note: This Calendar component was created using this tutorial for React.js: https://derrickotte.medium.com/how-to-create-a-calendar-from-scratch-in-react-1f2db197454d
 
+
+// instance variables: first and last date of range selected by user on the calendar
+let selDayFirst = new Date();
+let selDayLast = new Date();
+
 const Calendar = () => {
     let weekdays : string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     let months : string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -20,9 +25,9 @@ const Calendar = () => {
                 visible = {calendarVisible}
                 onRequestClose = {() => {setCalendarVisible(!calendarVisible);}}>
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>{months[state.currentDay.getMonth()]} {state.currentDay.getFullYear()}</Text>
-                        <DataTable style={{padding: 0, alignContent:'center', borderRadius:0}}>
+                  <View style={styles.modalView}>
+                    <Text style={styles.modalText}>{months[state.currentDay.getMonth()]} {state.currentDay.getFullYear()}</Text>
+                    <DataTable style={{padding: 0, alignContent:'center', borderRadius:0}}>
                           <DataTable.Header style={{padding: 0, alignContent:'center', borderRadius:0}}>
                             {
                               weekdays.map((weekday) => {
@@ -31,13 +36,13 @@ const Calendar = () => {
                             }
                           </DataTable.Header>
                         <CalendarDays day={state.currentDay}></CalendarDays>
-                        </DataTable>
+                    </DataTable>
                     <Pressable
                         style={[styles.button, styles.buttonClose]}
                         onPress={() => setCalendarVisible(!calendarVisible)}>
                         <Text style={styles.textStyle}>Set Dates</Text>
                     </Pressable>
-                  </View>
+                    </View>
                 </View>
             </Modal>
             <Pressable
@@ -109,9 +114,11 @@ const CalendarDays = (props:{day: Date}) =>{
               <DataTable.Row>{
                 week.map((day) =>{
                   return (
-                    <DataTable.Cell>
-                      {day.number}
-                    </DataTable.Cell>
+                      <DataTable.Cell>
+                        <Pressable onPress={()=> setDate(day)}>
+                          <Text>{day.number}</Text>
+                        </Pressable>
+                      </DataTable.Cell>
                   );
                 })}
               </DataTable.Row>
@@ -141,6 +148,24 @@ const CalendarDays = (props:{day: Date}) =>{
 }
 
 
+const setDate = (d: Date) =>{
+  if (selDayFirst < selDayLast){
+    selDayFirst = d;
+  }
+  else{
+    selDayLast = d;
+  }
+}
+
+ 
+const dateDisplay = () =>{
+  return(
+    <View>
+      <Text style={{fontWeight: "bold"}}>Selected Range: {selDayFirst.getMonth()} {selDayFirst.getDate()}, {selDayFirst.getFullYear()}</Text>
+      <Text style={{fontWeight: "bold"}}>to {selDayLast.getMonth()} {selDayLast.getDate()}, {selDayLast.getFullYear()}</Text>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -150,7 +175,7 @@ const styles = StyleSheet.create({
         marginTop: 22,
       },
       modalView: {
-        height: '50%',
+        height: '60%',
         width: '90%',
         padding: 15,
         backgroundColor: 'white',
