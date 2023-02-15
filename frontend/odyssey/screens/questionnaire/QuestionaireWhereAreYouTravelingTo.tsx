@@ -7,6 +7,7 @@ import { ProgressBar, Searchbar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import CheckBoxComponent from '../../components/CheckBox';
 import React from 'react';
+import Button from '../../components/Button';
 
 const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
 
@@ -26,13 +27,17 @@ const QuestionaireWhereAreYouTravelingTo = ({navigation}) => {
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>Where are you traveling to?</Text>
                     </View>
+
                     <View>
                         <SearchBar style={{marginTop:"20%"}} label={''} onPress={function (): void {
                             throw new Error('Function not implemented.');
                         }}/>
                     </View>
+
+                    <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("")}/>
+
                     <View>
-                            <ProgressBar style={{marginTop: "110%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "20%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
