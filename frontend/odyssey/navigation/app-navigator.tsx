@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import Header from "../components/Header";
+import QuestionnaireHelpPlanning from "../screens/questionnaire/QuestionaireHelpPlanning";
 import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
 import QuestionnaireWhatInterestsYou from "../screens/questionnaire/QuestionnaireWhatInterestsYou";
 import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/QuestionnaireWhatBringsYouHere";
@@ -11,6 +12,7 @@ import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/Questio
 import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
 import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
 import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
+import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
 const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
@@ -74,9 +76,23 @@ const AppStack = () => {
                         headerShown: false
                     }}
                     />
+                <Stack.Screen
+                    name="QuestionnaireIdeasForYou"
+                    component={QuestionnaireIdeasForYou}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
                 <Stack.Screen 
                     name="QuestionaireWhereAreYouTravelingTo"
                     component={QuestionaireWhereAreYouTravelingTo}
+                    options={{
+                        headerShown: false
+                    }}
+                    />
+                <Stack.Screen 
+                    name="QuestionnaireHelpPlanning"
+                    component={QuestionnaireHelpPlanning}
                     options={{
                         headerShown: false
                     }}
