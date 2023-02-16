@@ -8,6 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import CheckBoxComponent from '../../components/CheckBox';
 import React from 'react';
 import Button from '../../components/Button';
+import QuestionnaireHelpPlanning from './QuestionaireHelpPlanning';
 
 const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
 
@@ -34,7 +35,7 @@ const QuestionaireWhereAreYouTravelingTo = ({navigation}) => {
                         }}/>
                     </View>
 
-                    <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("")}/>
+                    <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireHelpPlanning")}/>
 
                     <View>
                             <ProgressBar style={{marginTop: "20%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
