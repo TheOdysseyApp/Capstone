@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import React from 'react';
 import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
 import Button from "../../components/Button";
@@ -6,7 +5,6 @@ import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
-import CheckBoxComponent from '../../components/CheckBox';
 
 const bgImage = require("../../assets/what-interests-you-bg.png") //change this later
 
@@ -23,9 +21,11 @@ const QuestionnaireWhatsYourBudget = ({navigation}) => {
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What's Your Budget?</Text>
                     </View>
-
                     <View>
                         <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
+                    </View>
+                    <View>
+                        <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.8} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
