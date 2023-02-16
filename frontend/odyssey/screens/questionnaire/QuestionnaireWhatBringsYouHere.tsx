@@ -35,7 +35,7 @@ const QuestionnaireWhatBringsYouHere = ({navigation}) => {
                         <Button style={{ marginTop: "10%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>
                     </View>
                     <View>
-                            <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
+                        <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>

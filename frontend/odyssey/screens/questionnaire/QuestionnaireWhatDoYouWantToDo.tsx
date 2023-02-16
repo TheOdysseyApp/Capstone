@@ -5,10 +5,11 @@ import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import {AntDesign } from '@expo/vector-icons';
 import {ProgressBar, Checkbox} from 'react-native-paper';
-import {Text, View, StyleSheet, SafeAreaView, ImageBackground} from "react-native";
+import {Text, View, StyleSheet, ImageBackground} from "react-native";
 import CheckBoxComponent from '../../components/CheckBox';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-const bgImage = require("../../assets/what-interests-you-bg.png") // change
+const bgImage = require("../../assets/what-do-bg.png") // change
 
 const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
     const [checked, setChecked] = React.useState(false);
@@ -17,7 +18,7 @@ const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
 
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '100%'}}>
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '120%'}}>
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
+import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
@@ -28,6 +28,7 @@ const QuestionnaireStartScreen = ({navigation}) => {
                         </View>
                 </SafeAreaView>
             </ImageBackground>
+            
 </Screen>
 
     )
