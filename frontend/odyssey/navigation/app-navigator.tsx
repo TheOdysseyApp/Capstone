@@ -3,13 +3,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //TODO - clean up imports via an index file??
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import Header from "../components/Header";
+import ConfirmCodeScreen from "../screens/ConfirmCodeScreen";
 
 const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Login">
             <Stack.Group>
                 <Stack.Screen 
                     name="Login"
@@ -22,6 +22,13 @@ const AppStack = () => {
                 <Stack.Screen 
                     name="Register"
                     component={RegisterScreen}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen 
+                    name="Confirm"
+                    component={ConfirmCodeScreen}
                     options={{
                         headerShown: false
                     }}

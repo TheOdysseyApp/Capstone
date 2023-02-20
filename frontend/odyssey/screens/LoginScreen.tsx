@@ -5,10 +5,23 @@ import InputField from "../components/InputField";
 import ImageButton from '../components/ImageButton';
 import Header from '../components/Header';
 import Screen from "../components/Screen"
+import { Auth } from 'aws-amplify';
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+
+    const signIn = async () => {
+        try {
+            const user = await Auth.signIn(email, password)
+        }
+        catch(error) {
+            console.log("Error logging in: " + error)
+            if(error.message.includes("User is not confirmed.")) {
+                navigation.navigate("Confirm", {email: email})
+            }
+        }
+    }
 
     return (
         <Screen preset="scroll">
@@ -29,7 +42,7 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.header}>Login</Text>
                 <InputField title="" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} />
                 <InputField title="" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
-                <Button style={{marginTop: "5%"}} label="Login" onPress={() => console.log("Trying to login")}/>
+                <Button style={{marginTop: "5%"}} label="Login" onPress={signIn}/>
                 
                 <Text style={{marginVertical: "5%", color: '#999999'}}>Or log in with...</Text>
                 <View style={styles.imageButtonContainer}>
