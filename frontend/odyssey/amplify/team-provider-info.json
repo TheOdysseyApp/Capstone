@@ -1,0 +1,21 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-odyssey-staging-212514-authRole",
+      "UnauthRoleArn": "arn:aws:iam::572780329593:role/amplify-odyssey-staging-212514-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::572780329593:role/amplify-odyssey-staging-212514-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-odyssey-staging-212514-deployment",
+      "UnauthRoleName": "amplify-odyssey-staging-212514-unauthRole",
+      "StackName": "amplify-odyssey-staging-212514",
+      "StackId": "arn:aws:cloudformation:us-west-2:572780329593:stack/amplify-odyssey-staging-212514/66f33bf0-ae40-11ed-9f71-02e4b234c611",
+      "AmplifyAppId": "d22utvf18glivb"
+    },
+    "categories": {
+      "auth": {
+        "odyssey2ed12e06": {},
+        "odysseye60f8fa0": {}
+      }
+    }
+  }
+}
