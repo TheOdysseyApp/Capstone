@@ -17,6 +17,7 @@ const ConfirmCodeScreen = ({route, navigation}) => {
                 const user = payload.data;
                 // assign user, navigate to Home?
                 console.log(user)
+                navigation.navigate("Home")
             } else if (event === 'autoSignIn_failure') {
                 // redirect to sign in page
                 console.log("Error with auto sign in ...")
@@ -61,8 +62,8 @@ const ConfirmCodeScreen = ({route, navigation}) => {
         {/* Text inputs and login info */}
         <View style={styles.inputContainer}>
             <Text style={styles.header}>Confirm Email</Text>
-                <Text style={styles.confirmCode}>Enter the code sent to <Text style={{fontWeight: 'bold'}}>{email}</Text></Text>
-                <InputField title="" text={code} placeholder="" onChangeText={(text) => setCode(text)} keyboardType={'number-pad'}/>
+                <Text style={styles.confirmCode}>Enter the code sent to: <Text style={{fontWeight: 'bold'}}>{email}</Text></Text>
+                <InputField title="Code" text={code} placeholder="" onChangeText={(text) => setCode(text)} keyboardType={'number-pad'}/>
                 <Text style={styles.resendText}>Didn't get one? {<Text style={styles.resendLink} onPress={resendCode}>Resend code.</Text>}</Text>
                 <Button style={{marginTop: "5%"}} label="Register" onPress={confirmCode}/>
         </View>
@@ -93,8 +94,9 @@ const styles = StyleSheet.create({
     },
     confirmCode: {
         width: '80%',
-        textAlign: 'center', 
-        fontSize: 16
+        textAlign: 'left', 
+        fontSize: 16,
+        marginBottom: '5%'
     },
     tagline: {
         position: 'absolute',

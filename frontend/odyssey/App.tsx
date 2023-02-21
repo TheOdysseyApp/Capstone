@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { AppNavigator } from './navigation/app-navigator';
 import { Amplify } from 'aws-amplify'
 import awsconfig from './aws-exports'
@@ -11,12 +10,3 @@ export default function App() {
     <AppNavigator />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
