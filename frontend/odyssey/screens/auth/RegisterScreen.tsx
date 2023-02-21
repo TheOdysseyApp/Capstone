@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { Text, View, Image, StyleSheet, SafeAreaView } from "react-native";
+import { Auth } from 'aws-amplify';
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import ImageButton from "../../components/ImageButton";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import { Ionicons } from '@expo/vector-icons';
 
 const RegisterScreen = ({navigation}) => {
     const [email, setEmail] = useState<string>("")
@@ -13,6 +13,27 @@ const RegisterScreen = ({navigation}) => {
     const [lastName, setLastName] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [confirmPassword, setConfirmPassword] = useState<string>("")
+
+    //TODO - move this to an Auth Class
+    const signUp = async () => {
+        try {
+            const {user} = await Auth.signUp({
+                username: email,
+                password: password,
+                attributes: {
+                    name: `${firstName} ${lastName}`
+                },
+                autoSignIn: {
+                    enabled: true
+                }
+            })
+            navigation.navigate("Confirm", {email: email})
+        }
+        catch (error) {
+            console.log("Error signing up user: " + error)
+        }
+        navigation.navigate("Confirm", {email: email})
+    }
 
 
     return (
@@ -45,12 +66,12 @@ const RegisterScreen = ({navigation}) => {
                     </View>
 
                     <Text style={{marginVertical: "5%", color: '#999999'}}>Or register with email...</Text>
-                    <InputField title="" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} />
-                    <InputField title="" text={firstName} placeholder="First Name" onChangeText={(text) => setFirstName(text)} />
-                    {/* <InputField title="" text={lastName} placeholder="Last Name" onChangeText={(text) => setLastName(text)} /> */}
-                    <InputField title="" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
-                    <InputField title="" text={confirmPassword} placeholder="Verify Password" onChangeText={(text) => setConfirmPassword(text)} secure={true}/>
-                    <Button style={{marginTop: "5%"}} label="Register" onPress={() => navigation.navigate("QuestionnaireStart")}/>
+                    <InputField title="Email" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} autoCap={'none'}/>
+                    <InputField title="First Name" text={firstName} placeholder="First Name" onChangeText={(text) => setFirstName(text)} />
+                    <InputField title="Last Name" text={lastName} placeholder="Last Name" onChangeText={(text) => setLastName(text)} />
+                    <InputField title="Password" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
+                    <InputField title="Confirm Password" text={confirmPassword} placeholder="Verify Password" onChangeText={(text) => setConfirmPassword(text)} secure={true}/>
+                    <Button style={{marginTop: "5%"}} label="Register" onPress={signUp}/>
                     <Text style={styles.registerText}>Already have an account? {<Text onPress={() => navigation.navigate("Login")} style={{textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold'}}>Go Here</Text>}</Text>                
             </View>
         </Screen>

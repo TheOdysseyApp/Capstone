@@ -10,9 +10,11 @@ type InputFieldProps = {
     title: string;
     onChangeText: (a: string) => void;
     secure?: boolean
+    keyboardType?: any
+    autoCap?: any
 }
 
-const InputField = ({style, titleStyle, placeholder, title, text, secure, onChangeText, er}: InputFieldProps) => {
+const InputField = ({style, titleStyle, placeholder, title, text, secure, onChangeText, er, keyboardType, autoCap}: InputFieldProps) => {
     const [error, setError] = useState<any>(null)
 
     useEffect(() => {
@@ -22,7 +24,7 @@ const InputField = ({style, titleStyle, placeholder, title, text, secure, onChan
     return (
         <View style={styles.container}>
             <Text style={[styles.title, titleStyle]}>{title}</Text>
-            <TextInput secureTextEntry={secure} style={[styles.inputContainer, style, {borderWidth: error ? 1 : 0, borderColor: error && 'red'}]} placeholder={placeholder} value={text} onChangeText={onChangeText}/>
+            <TextInput secureTextEntry={secure} keyboardType={keyboardType} style={[styles.inputContainer, style, {borderWidth: error ? 1 : 0, borderColor: error && 'red'}]} placeholder={placeholder} value={text} onChangeText={onChangeText} autoCapitalize={autoCap}/>
             {error && <Text style={styles.error}>{error}</Text>}
         </View>
     )
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold',
         marginBottom: "2%"
     },
     error: {

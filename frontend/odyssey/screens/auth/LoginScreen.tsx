@@ -1,10 +1,11 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native"
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import ImageButton from '../../components/ImageButton';
 import Header from '../../components/Header';
 import Screen from "../../components/Screen"
+import {Auth} from 'aws-amplify'
 import Calendar from "../../components/Calendar";
 
 const LoginScreen = ({navigation}) => {
@@ -12,6 +13,30 @@ const LoginScreen = ({navigation}) => {
     const [password, setPassword] = useState<string>("")
     // DELETE THIS
     // const [showCalendar, setShowCalendar] = useState<boolean>(false)
+
+    useEffect(() => {
+        Auth.currentAuthenticatedUser()
+            .then((user => {
+                console.log("USER LOGGED IN")
+                navigation.navigate("Home")
+            }))
+            .catch((error => {
+                console.log("Not logged in")
+            }))
+    }, [])
+
+    const signIn = async () => {
+        try {
+            await Auth.signIn(email, password)
+            navigation.navigate("Home")
+        }
+        catch(error) {
+            console.log("Error logging in: " + error)
+            if(error.message.includes("User is not confirmed.")) {
+                navigation.navigate("Confirm", {email: email})
+            }
+        }
+    }
 
     return (
         <Screen preset="scroll">
@@ -35,9 +60,11 @@ const LoginScreen = ({navigation}) => {
             {/* Text inputs and login info */}
             <View style={styles.inputContainer}>
                 <Text style={styles.header}>Login</Text>
-                <InputField title="" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} />
-                <InputField title="" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
-                <Button style={{marginTop: "5%"}} label="Login" onPress={() => console.log("Trying to login")}/>
+                <InputField title="Email" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} autoCap={'none'}/>
+                <InputField title="Password" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
+                <Text style={{ width: '80%', textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold', textAlign: 'right', marginTop: "-2%"}} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password?</Text>
+
+                <Button style={{marginTop: "5%"}} label="Login" onPress={signIn}/>
                 
                 <Text style={{marginVertical: "5%", color: '#999999'}}>Or log in with...</Text>
                 <View style={styles.imageButtonContainer}>
