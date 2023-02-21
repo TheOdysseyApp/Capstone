@@ -1,70 +1,63 @@
-import {useState} from "react";
-import { StyleSheet, View, Text } from "react-native";
-import moment from "moment";
-import DateRangePicker from "react-native-daterange-picker";
 import React from "react";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { Button } from 'react-native-paper';
+import { DatePickerModal } from 'react-native-paper-dates';
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
-// export default class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       startDate: null,
-//       endDate: null,
-//       displayedDate: moment(),
-//     };
-//   }
+const SelectCalendar = () => { 
+  const [range, setRange] = React.useState({ startDate: undefined, endDate: undefined });
+  const [open, setOpen] = React.useState(false);
 
-//   setDates = (dates) => {
-//     this.setState({
-//       ...dates,
-//     });
-//   };
+  const onDismiss = React.useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
 
-//   render() {
-//     const { startDate, endDate, displayedDate } = this.state;
-//     return (
-//       <View style={styles.container}>
-//         <DateRangePicker
-//           onChange={this.setDates}
-//           endDate={endDate}
-//           startDate={startDate}
-//           displayedDate={displayedDate}
-//           range
-//         >
-//           <Text>Click me!</Text>
-//         </DateRangePicker>
-//       </View>
-//     );
-//   }
-// }
-
-const SelectCalendar = () => {
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const [displayedDate, setDisplayedDate] = useState(moment())
+  const onConfirm = React.useCallback(
+    ({ startDate, endDate }) => {
+      setOpen(false);
+      setRange({ startDate, endDate });
+    },
+    [setOpen, setRange]
+  );
 
   return (
-    <View style={styles.container}>
-         <DateRangePicker
-          onChange={(dates) => console.log(JSON.stringify(dates))}
-          endDate={endDate}
-          startDate={startDate}
-          displayedDate={displayedDate}
-          range
-        >
-          <Text>Click me!</Text>
-        </DateRangePicker>
+    <SafeAreaView>
+      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <Button style={[styles.button]} onPress={() => setOpen(true)} uppercase={false} mode="outlined">
+            <Text style={styles.text}>Calendar</Text>
+        </Button>
+        <DatePickerModal
+          locale="en"
+          mode="range"
+          visible={open}
+          onDismiss={onDismiss}
+          startDate={range.startDate}
+          endDate={range.endDate}
+          onConfirm={onConfirm}
+        />
       </View>
-  )
+    </SafeAreaView>
+  );
 }
 
-export default SelectCalendar;
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+    button: {
+        backgroundColor: '#FFFFFF',
+        padding: 20,
+        color: '#194260',
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        borderWidth: 0
+    },
+    text: {
+        fontSize: 16,
+        fontWeight:  '600',
+        textAlign: "center",
+        marginTop: "1%",
+        color: '#00000',
+    }
+})
+
+export default SelectCalendar;

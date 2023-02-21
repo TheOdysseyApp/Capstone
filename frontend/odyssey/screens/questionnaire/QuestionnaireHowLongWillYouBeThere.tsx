@@ -8,6 +8,7 @@ import Calendar from '../../components/Calendar';
 import {ProgressBar, Card} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import CheckBoxComponent from '../../components/CheckBox';
+import SelectCalendar from '../../components/SelectCalendar';
 
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
 
@@ -33,7 +34,7 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                         </View>
                         <Card>
                             <Card.Content style={styles.cardContent} >
-                                <Calendar/>
+                                <SelectCalendar/>
                             </Card.Content>
                         </Card>
                     </View>
