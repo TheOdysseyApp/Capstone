@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import { Button } from 'react-native-paper';
 import { DatePickerModal } from 'react-native-paper-dates';
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -23,9 +23,9 @@ const SelectCalendar = () => {
   return (
     <SafeAreaView>
       <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
-        <Button style={[styles.button]} onPress={() => setOpen(true)} uppercase={false} mode="outlined">
-            <Text style={styles.text}>Calendar</Text>
-        </Button>
+        <TouchableOpacity style={[styles.button]} onPress={() => setOpen(true)}>
+            <Text style={[styles.text]}>Calendar</Text>
+        </TouchableOpacity>
         <DatePickerModal
           locale="en"
           mode="range"
@@ -49,14 +49,19 @@ const styles = StyleSheet.create({
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        borderWidth: 0
+        // borderWidth: 0,
+        borderRadius: 10,
+        width: '50%',
+        height: '100%',
+
     },
     text: {
-        fontSize: 16,
-        fontWeight:  '600',
+        fontSize: 12,
+        fontWeight:  '400',
         textAlign: "center",
         marginTop: "1%",
         color: '#00000',
+        
     }
 })
 

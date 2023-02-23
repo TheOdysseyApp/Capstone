@@ -19,7 +19,7 @@ const ConfirmCodeScreen = ({route, navigation}) => {
                 const user = payload.data;
                 // assign user, navigate to Home?
                 console.log(user)
-                navigation.navigate("Home")
+                navigation.navigate("QuestionnaireStart")
             } else if (event === 'autoSignIn_failure') {
                 // redirect to sign in page
                 console.log("Error with auto sign in ...")
