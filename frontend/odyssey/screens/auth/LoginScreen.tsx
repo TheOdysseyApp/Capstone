@@ -19,7 +19,7 @@ const LoginScreen = ({navigation}) => {
         Auth.currentAuthenticatedUser()
             .then((user => {
                 console.log("USER LOGGED IN")
-                navigation.navigate("QuestionnaireStart")
+                navigation.navigate("Home")
             }))
             .catch((error => {
                 console.log("Not logged in")
@@ -63,7 +63,7 @@ const LoginScreen = ({navigation}) => {
                 onSubmit={async (values) => {
                     try {
                         await Auth.signIn(values.email, values.password)
-                        navigation.navigate("QuestionnaireStart")
+                        navigation.navigate("Home")
                     }
                     catch(error) {
                         console.log("Error logging in: " + error)

@@ -24,7 +24,6 @@ const QuestionnaireStartScreen = ({navigation}) => {
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '125%'}}>
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" />
                         <Header/>
                     </View>
                         <View>
