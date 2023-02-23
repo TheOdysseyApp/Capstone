@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { Auth, Hub } from 'aws-amplify';
+import QuestionnaireStartScreen from '../questionnaire/QuestionnaireStartScreen';
 
 const ConfirmCodeScreen = ({route, navigation}) => {
     const {email} = route.params
@@ -17,7 +18,7 @@ const ConfirmCodeScreen = ({route, navigation}) => {
                 const user = payload.data;
                 // assign user, navigate to Home?
                 console.log(user)
-                navigation.navigate("Home")
+                navigation.navigate("QuestionnaireStart")
             } else if (event === 'autoSignIn_failure') {
                 // redirect to sign in page
                 console.log("Error with auto sign in ...")

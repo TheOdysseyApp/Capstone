@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Screen from "../../components/Screen"
 import {Auth} from 'aws-amplify'
 import Calendar from "../../components/Calendar";
+import QuestionnaireStartScreen from '../questionnaire/QuestionnaireStartScreen';
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState<string>("")
@@ -18,7 +19,7 @@ const LoginScreen = ({navigation}) => {
         Auth.currentAuthenticatedUser()
             .then((user => {
                 console.log("USER LOGGED IN")
-                navigation.navigate("Home")
+                navigation.navigate("QuestionnaireStart")
             }))
             .catch((error => {
                 console.log("Not logged in")
@@ -28,7 +29,7 @@ const LoginScreen = ({navigation}) => {
     const signIn = async () => {
         try {
             await Auth.signIn(email, password)
-            navigation.navigate("Home")
+            navigation.navigate("QuestionnaireStart")
         }
         catch(error) {
             console.log("Error logging in: " + error)
@@ -46,10 +47,6 @@ const LoginScreen = ({navigation}) => {
 
             {/*  Lets Get to Planning your trip goes here*/}
             <View>
-                {/* Testing calendar component */}
-                 <View>
-                    <Calendar></Calendar>
-                </View>
 
                 <Image source={require("../../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
                 <View style={styles.tagline}>

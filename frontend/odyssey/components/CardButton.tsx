@@ -20,9 +20,11 @@ const CardButton = ({style, textStyle, label, onPress}: ButtonProps) => {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: '#194260',
-        width: '80%',
+        width: '100%',
         padding: 20,
-        borderRadius: 0
+       borderTopRightRadius: 10,
+        borderTopLeftRadius: 10,
+        
     },
     text: {
         textAlign: 'center',
