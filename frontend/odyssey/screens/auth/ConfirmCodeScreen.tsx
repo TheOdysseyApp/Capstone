@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Text, View, Image, StyleSheet, SafeAreaView } from "react-native";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { Auth, Hub } from 'aws-amplify';
+import { Formik } from 'formik';
+import * as Yup from 'yup'
+import { regex } from '../../utils/regex';
 
 const ConfirmCodeScreen = ({route, navigation}) => {
     const {email} = route.params
-    const [code, setCode] = useState("")
 
     useEffect(() => {
         Hub.listen('auth', ({payload}) => {
@@ -17,7 +19,7 @@ const ConfirmCodeScreen = ({route, navigation}) => {
                 const user = payload.data;
                 // assign user, navigate to Home?
                 console.log(user)
-                navigation.navigate("Home")
+                navigation.navigate("QuestionnaireStart")
             } else if (event === 'autoSignIn_failure') {
                 // redirect to sign in page
                 console.log("Error with auto sign in ...")
@@ -26,15 +28,6 @@ const ConfirmCodeScreen = ({route, navigation}) => {
         })
     }, [])
 
-    const confirmCode = async () => {
-        try {
-            await Auth.confirmSignUp(email, code)
-            console.log("Successfully accepted code!")
-        }
-        catch(error) {
-            console.log("Error confirming code: " + error)
-        }
-    }
 
     const resendCode = async () => {
         try {
@@ -44,6 +37,13 @@ const ConfirmCodeScreen = ({route, navigation}) => {
             console.log("Error resending Auth code: " + error)
         }
     }
+
+    const confirmCodeSchema = Yup.object().shape({
+        code: Yup.string().required("This field is required.")
+            .min(6, "Code should be 6 digits long.")
+            .max(6, "Code should be 6 digits long.")
+            .matches(regex.code.pattern, regex.code.error)
+    })
 
     return (
         <Screen preset="scroll">
@@ -62,10 +62,38 @@ const ConfirmCodeScreen = ({route, navigation}) => {
         {/* Text inputs and login info */}
         <View style={styles.inputContainer}>
             <Text style={styles.header}>Confirm Email</Text>
-                <Text style={styles.confirmCode}>Enter the code sent to: <Text style={{fontWeight: 'bold'}}>{email}</Text></Text>
-                <InputField title="Code" text={code} placeholder="" onChangeText={(text) => setCode(text)} keyboardType={'number-pad'}/>
-                <Text style={styles.resendText}>Didn't get one? {<Text style={styles.resendLink} onPress={resendCode}>Resend code.</Text>}</Text>
-                <Button style={{marginTop: "5%"}} label="Register" onPress={confirmCode}/>
+            
+            <Formik
+                initialValues={{
+                    code: ""
+                }}
+                validationSchema={confirmCodeSchema}
+                onSubmit={async (values) => {
+                    try {
+                        await Auth.confirmSignUp(email, values.code)
+                        console.log("Successfully accepted code!")
+                    }
+                    catch(error) {
+                        console.log("Error confirming code: " + error)
+                    }
+                }}
+            >
+                {({handleSubmit, values, errors, touched, setFieldValue}) => (
+                    <>
+                        <Text style={styles.confirmCode}>Enter the code sent to: <Text style={{fontWeight: 'bold'}}>{email}</Text></Text>
+                        <InputField 
+                            title="Code" 
+                            text={values.code} 
+                            placeholder="" 
+                            onChangeText={(text) => setFieldValue("code", text, true)} 
+                            keyboardType={'number-pad'}
+                            er={errors.code && touched.code ? errors.code : null}
+                        />
+                        <Text style={styles.resendText}>Didn't get one? {<Text style={styles.resendLink} onPress={resendCode}>Resend code.</Text>}</Text>
+                        <Button style={{marginTop: "5%"}} label="Register" onPress={() => handleSubmit()}/>
+                    </>
+                )}
+            </Formik>
         </View>
     </Screen>
     )

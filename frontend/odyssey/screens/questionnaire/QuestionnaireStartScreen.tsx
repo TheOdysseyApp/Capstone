@@ -5,10 +5,20 @@ import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
+import {Auth} from 'aws-amplify'
 
 const bgImage = require("../../assets/questionnaire-start-screen-bg.png")
 
 const QuestionnaireStartScreen = ({navigation}) => {
+    const handleSignOut = async () => {
+        try {
+            await Auth.signOut();
+            navigation.navigate("Login")
+        }
+        catch (error) {
+            console.log("Error signing out" + error)
+        }
+    }
     return (
 <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '125%'}}>
@@ -22,6 +32,7 @@ const QuestionnaireStartScreen = ({navigation}) => {
                             <Text style={styles.secondary}>Where are you traveling to?</Text>
                             <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="I’m flexible, let’s explore!" onPress={() => navigation.navigate("QuestionnaireWhatInterestsYou")}/>
                             <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="I know where I’m traveling" onPress={() => navigation.navigate("QuestionaireWhereAreYouTravelingTo")}/>
+                            <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="Sign Out" onPress={handleSignOut}/>
                         </View>
                         <View>
                             <ProgressBar style={{marginTop: 295, marginLeft: 20, marginRight:20, height:17, }}progress={0.1} color="#FFBC59" />

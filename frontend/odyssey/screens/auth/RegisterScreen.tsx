@@ -6,43 +6,30 @@ import Button from "../../components/Button";
 import ImageButton from "../../components/ImageButton";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
+import { Formik } from 'formik';
+import * as Yup from 'yup'
+import { regex } from '../../utils/regex';
 
 const RegisterScreen = ({navigation}) => {
-    const [email, setEmail] = useState<string>("")
-    const [firstName, setFirstName] = useState<string>("")
-    const [lastName, setLastName] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [confirmPassword, setConfirmPassword] = useState<string>("")
-
-    //TODO - move this to an Auth Class
-    const signUp = async () => {
-        try {
-            const {user} = await Auth.signUp({
-                username: email,
-                password: password,
-                attributes: {
-                    name: `${firstName} ${lastName}`
-                },
-                autoSignIn: {
-                    enabled: true
-                }
-            })
-            navigation.navigate("Confirm", {email: email})
-        }
-        catch (error) {
-            console.log("Error signing up user: " + error)
-        }
-        navigation.navigate("Confirm", {email: email})
-    }
-
+    const registerSchema = Yup.object().shape({
+        email: Yup.string()
+            .required("This field is required.")
+            .matches(regex.email.pattern, regex.email.error),
+        firstName: Yup.string().required("This field is required."),
+        lastName: Yup.string().required("This field is required"),
+        password: Yup.string()
+            .required("This field is required.")
+            .min(8, "Your password must be at least 8 characters long.")
+            .matches(regex.password.pattern, regex.password.error),
+        confirmPassword: Yup.string()
+            .required("This field is required.")
+            .min(8, "Your password must be at least 8 characters long.")
+            .matches(regex.password.pattern, regex.password.error)
+    })
 
     return (
         <Screen preset="scroll">
             <SafeAreaView>
-                {/* <TouchableOpacity  style={{position: 'absolute', top: 50, left: 10}}  onPress={() => console.log("Back")}>
-                    <Ionicons name="chevron-back" size={24} color="#"/>
-                </TouchableOpacity> */}
-
                 {/* Odyssey Logo goes here */}
                 <Header />
             </SafeAreaView>
@@ -65,13 +52,85 @@ const RegisterScreen = ({navigation}) => {
                         <ImageButton source={require("../../assets/apple-logo.png")} onPress={() => console.log("Apple pressed")}/>
                     </View>
 
-                    <Text style={{marginVertical: "5%", color: '#999999'}}>Or register with email...</Text>
-                    <InputField title="Email" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} autoCap={'none'}/>
-                    <InputField title="First Name" text={firstName} placeholder="First Name" onChangeText={(text) => setFirstName(text)} />
-                    <InputField title="Last Name" text={lastName} placeholder="Last Name" onChangeText={(text) => setLastName(text)} />
-                    <InputField title="Password" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
-                    <InputField title="Confirm Password" text={confirmPassword} placeholder="Verify Password" onChangeText={(text) => setConfirmPassword(text)} secure={true}/>
-                    <Button style={{marginTop: "5%"}} label="Register" onPress={signUp}/>
+                    <Formik
+                        initialValues={{
+                            email: "",
+                            firstName: "",
+                            lastName: "",
+                            password: "",
+                            confirmPassword: ""
+                        }}
+                        validationSchema={registerSchema}
+                        onSubmit={async (values, actions) => {
+                            if(values.password === values.confirmPassword) {
+                                try {
+                                    await Auth.signUp({
+                                        username: values.email,
+                                        password: values.password,
+                                        attributes: {
+                                            name: `${values.firstName} ${values.lastName}`
+                                        },
+                                        autoSignIn: {
+                                            enabled: true
+                                        }
+                                    })
+                                }
+                                catch (error) {
+                                    console.log("Error signing up user: " + error)
+                                }
+                                navigation.navigate("Confirm", {email: values.email})
+                            }
+                            else {
+                                //password and confirm password are not matching
+                                actions.setFieldError("confirmPassword", "Passwords do not match.")
+                            }
+                        }}
+                    >
+                        {({handleSubmit, values, errors, touched, setFieldValue}) => (
+                            <>
+                                <Text style={{marginVertical: "5%", color: '#999999'}}>Or register with email...</Text>
+                                <InputField 
+                                    title="Email" 
+                                    text={values.email} 
+                                    placeholder="Email" 
+                                    onChangeText={(text) => setFieldValue("email", text, true)} 
+                                    autoCap={'none'}
+                                    er={errors.email && touched.email ? errors.email : null}
+                                />
+                                <InputField 
+                                    title="First Name" 
+                                    text={values.firstName} 
+                                    placeholder="First Name" 
+                                    onChangeText={(text) => setFieldValue("firstName", text, true)} 
+                                    er={errors.firstName && touched.firstName ? errors.firstName : null}
+                                />
+                                <InputField 
+                                    title="Last Name" 
+                                    text={values.lastName} 
+                                    placeholder="Last Name" 
+                                    onChangeText={(text) => setFieldValue("lastName", text, true)} 
+                                    er={errors.lastName && touched.lastName ? errors.lastName : null}
+                                />
+                                <InputField 
+                                    title="Password" 
+                                    text={values.password} 
+                                    placeholder="Password" 
+                                    onChangeText={(text) => setFieldValue("password", text, true)} 
+                                    er={errors.password && touched.password ? errors.password : null}
+                                    secure={true}
+                                />
+                                <InputField 
+                                    title="Confirm Password" 
+                                    text={values.confirmPassword} 
+                                    placeholder="Verify Password" 
+                                    onChangeText={(text) => setFieldValue("confirmPassword", text, true)} 
+                                    er={errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
+                                    secure={true}
+                                />
+                                <Button style={{marginTop: "5%"}} label="Register" onPress={() => handleSubmit()}/>
+                            </>
+                        )}
+                    </Formik>
                     <Text style={styles.registerText}>Already have an account? {<Text onPress={() => navigation.navigate("Login")} style={{textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold'}}>Go Here</Text>}</Text>                
             </View>
         </Screen>

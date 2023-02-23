@@ -5,23 +5,29 @@ import InputField from "../../components/InputField"
 import Button from "../../components/Button"
 import Header from "../../components/Header"
 import {Auth} from 'aws-amplify'
+import { Formik } from "formik"
+import * as Yup from 'yup'
+import { regex } from "../../utils/regex"
 
 
 const ResetPassword = ({route, navigation}) => {
     const {email} = route.params
-    const [code, setCode] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [confirmPassword, setConfirmPassword] = useState<string>("")
 
-    const resetPassword = async () => {
-        try {
-            await Auth.forgotPasswordSubmit(email, code, password)
-            navigation.navigate("Login")
-        }
-        catch(error) {
-            console.log("Error setting new password: " + error)
-        }
-    }
+    const resetPasswordSchema = Yup.object().shape({
+        code: Yup.string()
+            .required("This field is required.")
+            .min(6, "Code should be 6 digits long.")
+            .max(6, "Code should be 6 digits long.")
+            .matches(regex.code.pattern, regex.code.error),
+        password: Yup.string()
+            .required("This field is required.")
+            .min(8, "Your password must be at least 8 characters long.")
+            .matches(regex.password.pattern, regex.password.error),
+        confirmPassword: Yup.string()
+            .required("This field is required.")
+            .min(8, "Your password must be at least 8 characters long.")
+            .matches(regex.password.pattern, regex.password.error)
+    })
 
 
     return (
@@ -41,11 +47,58 @@ const ResetPassword = ({route, navigation}) => {
             {/* Text inputs and login info */}
             <View style={styles.inputContainer}>
                 <Text style={styles.header}>Reset Password</Text>
-                <InputField title="Code" text={code} placeholder="000111" onChangeText={(text) => setCode(text)} />
-                <InputField title="New Password" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure/>
-                <InputField title="Confirm New Password" text={confirmPassword} placeholder="Confirm Password" onChangeText={(text) => setConfirmPassword(text)} secure/>
-                <Button style={{marginTop: "5%"}} label="Reset Password" onPress={resetPassword}/>
- 
+
+                <Formik
+                    initialValues={{
+                        code: "",
+                        password: "",
+                        confirmPassword: ""
+                    }}
+                    validationSchema={resetPasswordSchema}
+                    onSubmit={async (values, actions) => {
+                        if(values.password === values.confirmPassword) {
+                            try {
+                                await Auth.forgotPasswordSubmit(email, values.code, values.password)
+                                navigation.navigate("Login")
+                            }
+                            catch(error) {
+                                console.log("Error setting new password: " + error)
+                            }
+                        }
+                        else {
+                            actions.setFieldError("confirmPassword", "Passwords do not match.")
+                        }
+                    }}
+                >
+                    {({handleSubmit, values, errors, touched, setFieldValue}) => (
+                        <>
+                            <InputField 
+                                title="Code" 
+                                text={values.code} 
+                                placeholder="000111" 
+                                onChangeText={(text) => setFieldValue("code",text, true)} 
+                                er={errors.code && touched.code ? errors.code : null}
+                            />
+                            <InputField 
+                                title="New Password" 
+                                text={values.password} 
+                                placeholder="Password" 
+                                onChangeText={(text) => setFieldValue("password", text, true)} 
+                                secure
+                                er={errors.password && touched.password ? errors.password : null}
+                            />
+                            <InputField 
+                                title="Confirm New Password" 
+                                text={values.confirmPassword} 
+                                placeholder="Confirm Password" 
+                                onChangeText={(text) => setFieldValue("confirmPassword", text, true)} 
+                                secure
+                                er={errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
+                            />
+                            <Button style={{marginTop: "5%"}} label="Reset Password" onPress={() => handleSubmit()}/>
+                        </>
+                    )}
+                </Formik>
             </View>
         </Screen>
     )

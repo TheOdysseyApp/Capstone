@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native"
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
@@ -7,10 +7,11 @@ import Header from '../../components/Header';
 import Screen from "../../components/Screen"
 import {Auth} from 'aws-amplify'
 import Calendar from "../../components/Calendar";
+import {Formik} from 'formik'
+import * as Yup from 'yup'
+import { regex } from '../../utils/regex';
 
 const LoginScreen = ({navigation}) => {
-    const [email, setEmail] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
     // DELETE THIS
     // const [showCalendar, setShowCalendar] = useState<boolean>(false)
 
@@ -18,25 +19,22 @@ const LoginScreen = ({navigation}) => {
         Auth.currentAuthenticatedUser()
             .then((user => {
                 console.log("USER LOGGED IN")
-                navigation.navigate("Home")
+                navigation.navigate("QuestionnaireStart")
             }))
             .catch((error => {
                 console.log("Not logged in")
             }))
     }, [])
 
-    const signIn = async () => {
-        try {
-            await Auth.signIn(email, password)
-            navigation.navigate("Home")
-        }
-        catch(error) {
-            console.log("Error logging in: " + error)
-            if(error.message.includes("User is not confirmed.")) {
-                navigation.navigate("Confirm", {email: email})
-            }
-        }
-    }
+    const loginSchema = Yup.object().shape({
+        email: Yup.string()
+            .required("This field is required.")
+            .matches(regex.email.pattern, regex.email.error),
+        password: Yup.string()
+            .required("This field is required.")
+            .min(8, "Your password must be at least 8 characters long.")
+            .matches(regex.password.pattern, regex.password.error)
+    })
 
     return (
         <Screen preset="scroll">
@@ -46,11 +44,6 @@ const LoginScreen = ({navigation}) => {
 
             {/*  Lets Get to Planning your trip goes here*/}
             <View>
-                {/* Testing calendar component */}
-                 <View>
-                    <Calendar></Calendar>
-                </View>
-
                 <Image source={require("../../assets/login-register-backdrop.png")} style={{alignItems: 'center',width: '100%'}}/>
                 <View style={styles.tagline}>
                     <Text style={styles.taglineText}>Let's get to planning your next trip!</Text>
@@ -58,13 +51,53 @@ const LoginScreen = ({navigation}) => {
             </View>
 
             {/* Text inputs and login info */}
+            
             <View style={styles.inputContainer}>
-                <Text style={styles.header}>Login</Text>
-                <InputField title="Email" text={email} placeholder="Email" onChangeText={(text) => setEmail(text)} autoCap={'none'}/>
-                <InputField title="Password" text={password} placeholder="Password" onChangeText={(text) => setPassword(text)} secure={true}/>
-                <Text style={{ width: '80%', textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold', textAlign: 'right', marginTop: "-2%"}} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password?</Text>
 
-                <Button style={{marginTop: "5%"}} label="Login" onPress={signIn}/>
+                <Formik
+                initialValues={{
+                    email: "",
+                    password: ""
+                }}
+                validationSchema={loginSchema}
+                onSubmit={async (values) => {
+                    try {
+                        await Auth.signIn(values.email, values.password)
+                        navigation.navigate("QuestionnaireStart")
+                    }
+                    catch(error) {
+                        console.log("Error logging in: " + error)
+                        if(error.message.includes("User is not confirmed.")) {
+                            navigation.navigate("Confirm", {email: values.email})
+                        }
+                    }
+                }}
+                >
+                    {({handleSubmit, values, errors, touched, setFieldValue}) => (
+                    <>
+                        <Text style={styles.header}>Login</Text>
+                        <InputField 
+                            title="Email" 
+                            text={values.email} 
+                            placeholder="Email" 
+                            onChangeText={(text) => setFieldValue("email", text, true)} 
+                            autoCap={'none'}
+                            er={errors.email && touched.email ? errors.email : null}
+                        />
+                        <InputField 
+                            title="Password" 
+                            text={values.password} 
+                            placeholder="Password" 
+                            onChangeText={(text) => setFieldValue("password", text, true)} 
+                            secure={true}
+                            er={errors.password && touched.password ? errors.password : null}
+                        />
+                        <Text style={{ width: '80%', textDecorationLine: 'underline', color: '#194260', fontWeight: 'bold', textAlign: 'right', marginTop: "-2%"}} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password?</Text>
+
+                        <Button style={{marginTop: "5%"}} label="Login" onPress={() => handleSubmit()}/>
+                    </>
+                    )}
+                </Formik>
                 
                 <Text style={{marginVertical: "5%", color: '#999999'}}>Or log in with...</Text>
                 <View style={styles.imageButtonContainer}>
