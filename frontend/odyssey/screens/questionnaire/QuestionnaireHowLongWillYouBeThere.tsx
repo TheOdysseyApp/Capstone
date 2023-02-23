@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, ImageBackground, TouchableOpacity } from "react-native";
 import CardButton from "../../components/CardButton";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
@@ -6,8 +6,14 @@ import Screen from '../../components/Screen';
 import {ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import SelectCalendar from '../../components/SelectCalendar';
+import Dropdown from '../../components/Dropdown';
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import MenuButton from "../../components/MenuButton"
+import SelectDropdown from "react-native-select-dropdown";
 
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
+const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
     
     return (
@@ -29,12 +35,39 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                                 <CardButton style={styles.cardButton} label="Choose Exact Dates"  onPress={() => null}/>
                                 <CardButton style={styles.cardButtonInactive} label="I’m Flexible" onPress={() => null}/>
                             </View>
-                            <View style={{paddingTop:'20%'}}>
-                                <SelectCalendar/>
+                            <View style={{paddingTop:'2%'}}>
+                                {/* <SelectCalendar/> */}
+                                <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
+                                    <MenuButton label={"3 Days"} onPress={function (): void {
+                                        throw new Error("Function not implemented.");
+                                    } }></MenuButton>
+                                    <MenuButton label={"One Week"} onPress={function (): void {
+                                        throw new Error("Function not implemented.");
+                                    } }></MenuButton>
+                                    <MenuButton label={"One Month"} onPress={function (): void {
+                                        throw new Error("Function not implemented.");
+                                    } }></MenuButton>
+                                </View>
+                                    <SelectDropdown 
+                                        dropdownStyle={styles.dropdown}
+                                        buttonTextStyle={styles.dropdownTextButton}
+                                        rowTextStyle={styles.dropdownText}
+                                        defaultButtonText={'Choose a Month (optional)'}
+                                        data={countries}
+                                        onSelect={(selectedItem, index) => {
+                                            console.log(selectedItem, index)
+                                        }}
+                                        buttonTextAfterSelection={(selectedItem, index) => {
+                                            return selectedItem
+                                        }}
+                                        rowTextForSelection={(item, index) => {
+                                            return item
+                                        }}
+                                    />
                             </View>
                         </View>
                     </View>
-
+                                        
                     <View>
                         <Button style={{ marginTop: "-24%", justifyContent: 'center', marginLeft:"14%", width:'73%'}} label="Next" onPress={() => navigation.navigate("QuestionnaireWhatDoYouWantToDo")}/>
                     </View>
@@ -49,6 +82,15 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    dropdown:{
+        
+    },
+    dropdownTextButton:{
+
+    },
+    dropdownText:{
+        
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
