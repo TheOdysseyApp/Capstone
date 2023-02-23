@@ -6,7 +6,7 @@ import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 
-const bgImage = require("../../assets/what-interests-you-bg.png") //change this later
+const bgImage = require("../../assets/whats-your-budget-bg.png")
 
 const QuestionnaireWhatsYourBudget = ({navigation}) => {
     return (
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: "20%",
         width: '10%'
-    }
+    },
 })
 
 export default QuestionnaireWhatsYourBudget;
