@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "odyssey",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-02-25T00:40:13.322Z"
+}
