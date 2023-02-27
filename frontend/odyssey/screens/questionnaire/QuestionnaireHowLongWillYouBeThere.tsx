@@ -13,7 +13,7 @@ import MenuButton from "../../components/MenuButton"
 import SelectDropdown from "react-native-select-dropdown";
 
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
-const countries = ["Egypt", "Canada", "Australia", "Ireland"]
+const countries = ["Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", "Jun 2023", "Jul 2023", "Aug 2023", "Sec 2023", "Nov 2023", "Dec 2023"]
 const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
     
     return (
@@ -28,15 +28,9 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>How long will you be there?</Text>
                     </View>
-
                     <View style={styles.calendar}>
                         <View style={styles.cardContent}>
-                            <View style={styles.containerStyle}>
-                                <CardButton style={styles.cardButton} label="Choose Exact Dates"  onPress={() => null}/>
-                                <CardButton style={styles.cardButtonInactive} label="I’m Flexible" onPress={() => null}/>
-                            </View>
-                            <View style={{paddingTop:'2%'}}>
-                                {/* <SelectCalendar/> */}
+                            <Text style={styles.tertiary} >I'm Flexible</Text>
                                 <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                                     <MenuButton label={"3 Days"} onPress={function (): void {
                                         throw new Error("Function not implemented.");
@@ -48,12 +42,14 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                                         throw new Error("Function not implemented.");
                                     } }></MenuButton>
                                 </View>
-                                    <SelectDropdown 
-                                        dropdownStyle={styles.dropdown}
+                                <SelectDropdown 
+                                        buttonStyle={styles.dropdown}
+                                        // dropdownStyle={styles.dropdown}
                                         buttonTextStyle={styles.dropdownTextButton}
                                         rowTextStyle={styles.dropdownText}
                                         defaultButtonText={'Choose a Month (optional)'}
                                         data={countries}
+
                                         onSelect={(selectedItem, index) => {
                                             console.log(selectedItem, index)
                                         }}
@@ -63,10 +59,19 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                                         rowTextForSelection={(item, index) => {
                                             return item
                                         }}
+                                        renderDropdownIcon={isOpened => (
+                                            <AntDesign style={{marginLeft: "6%"}} name="down" size={11} color="#666666"/>
+                                        )}
                                     />
+                                <View>
+                                    
+                                    <Text style={styles.tertiary}>Or</Text>
+                                    <SelectCalendar/>
+                                </View>
                             </View>
+                            
                         </View>
-                    </View>
+                    
                                         
                     <View>
                         <Button style={{ marginTop: "-24%", justifyContent: 'center', marginLeft:"14%", width:'73%'}} label="Next" onPress={() => navigation.navigate("QuestionnaireWhatDoYouWantToDo")}/>
@@ -83,13 +88,33 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
 
 const styles = StyleSheet.create({
     dropdown:{
-        
+        backgroundColor: '#FFFFFF',
+        width: '73%',
+        height: '12%',
+        borderRadius: 8,
+        shadowColor: '#171717',
+        shadowOffset: {width: 0, height: 4},
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        // margin: -10,
+        // height:'100%',
+        alignself: 'center', 
+        marginRight:'14%', 
+        marginTop:'10%',
+        marginBottom: '2%'
     },
     dropdownTextButton:{
-
+        textAlign: 'left',
+        color: '#666666',
+        fontSize: 11,
+        fontWeight: '300'
+        
     },
     dropdownText:{
-        
+        textAlign: 'center',
+        color: '#000000',
+        fontSize: 11,
+        fontWeight: '300'
     },
     header: {
         fontSize: 24,
@@ -104,6 +129,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '300'
     },
+    tertiary:{
+        textAlign: "center",
+        // fontStyle: 'italic',
+        marginTop: 10,
+        fontSize: 12,
+        fontWeight: '300',
+        marginBottom: 18
+    },
     button:{
         justifyContent: 'center',
         marginTop: "20%",
@@ -114,6 +147,8 @@ const styles = StyleSheet.create({
         height: '75%',
         borderRadius: 10,
         borderWidth: 0.5,
+        paddingTop:'2%'
+        
     },
     cardButton:{
         backgroundColor: '#ECF0F3',
