@@ -12,8 +12,8 @@ type EagerUser = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly fullname: string;
-  readonly created?: number | null;
+  readonly authID: string;
+  readonly fullName: string;
   readonly username: string;
   readonly description?: string | null;
   readonly createdAt?: string | null;
@@ -26,8 +26,8 @@ type LazyUser = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly fullname: string;
-  readonly created?: number | null;
+  readonly authID: string;
+  readonly fullName: string;
   readonly username: string;
   readonly description?: string | null;
   readonly createdAt?: string | null;
