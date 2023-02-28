@@ -1,13 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 //TODO - clean up imports via an index file??
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import ConfirmCodeScreen from "../screens/auth/ConfirmCodeScreen";
 import ForgotPassword from "../screens/auth/ForgotPassword";
 import ResetPassword from "../screens/auth/ResetPassword";
+import HomeScreen from "../screens/home/HomeScreen";
 import QuestionnaireHelpPlanning from "../screens/questionnaire/QuestionaireHelpPlanning";
 import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
 import QuestionnaireWhatInterestsYou from "../screens/questionnaire/QuestionnaireWhatInterestsYou";
@@ -146,6 +147,21 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
+            <Tab.Screen
+                name="LandingPage"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => <Entypo name="home" size={24} color="white" />,
+                    tabBarStyle: {
+                        backgroundColor: '#194260'
+                    },
+                    tabBarLabel: "Home",
+                    tabBarLabelStyle: {
+                        color: 'white'
+                    }
+                }}
+            />
             <Tab.Screen 
                 name="Questionnaire"
                 component={QuestionnaireNavigator}

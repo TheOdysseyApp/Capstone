@@ -4,7 +4,9 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import { Auth, Hub } from 'aws-amplify';
+import { Auth, Hub, DataStore } from 'aws-amplify';
+//import Amplify from "@aws-amplify/core";
+import { User } from '../../src/models/index.js';
 import { Formik } from 'formik';
 import * as Yup from 'yup'
 import { regex } from '../../utils/regex';
@@ -13,13 +15,19 @@ const ConfirmCodeScreen = ({route, navigation}) => {
     const {email} = route.params
 
     useEffect(() => {
-        Hub.listen('auth', ({payload}) => {
+        Hub.listen('auth', async ({payload}) => {
             const { event } = payload;
             if (event === 'autoSignIn') {
-                const user = payload.data;
-                // assign user, navigate to Home?
-                console.log(user)
-                navigation.navigate("QuestionnaireStart")
+                const {attributes} = payload.data;
+                await DataStore.save(
+                    new User({
+                        authID: attributes.sub,
+                        fullName: attributes.name,
+                        username: attributes.email,
+                        description: ""
+                    })
+                )
+                navigation.navigate("Home")
             } else if (event === 'autoSignIn_failure') {
                 // redirect to sign in page
                 console.log("Error with auto sign in ...")
