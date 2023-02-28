@@ -4,7 +4,9 @@ import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 're
 
 const BudgetSlider = () => {
     return (
-        <View></View>
+        <View>
+            
+        </View>
     )
 }
 

@@ -1,18 +1,23 @@
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
+import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground, TextInput } from "react-native";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import BudgetSlider from '../../components/BudgetSlider'
+import CardButton from '../../components/CardButton';
+// import { number } from 'yup';
 
-const bgImage = require("../../assets/whats-your-budget-bg.png")
+const bgImage = require("../../assets/budget-bg.png")
 
 const QuestionnaireWhatsYourBudget = ({navigation}) => {
+    const [numberMax, onChangeMax] = React.useState('');
+    const [numberMin, onChangeMin] = React.useState('');
+
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '290%'}}>
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '220%'}}>
                 <SafeAreaView>
                     <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatDoYouWantToDo")}/>
@@ -22,14 +27,36 @@ const QuestionnaireWhatsYourBudget = ({navigation}) => {
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What's Your Budget?</Text>
                     </View>
-                    <View>
+                    <View style={styles.cardContent}>
+                        <CardButton label={''} onPress={function (): void {
+                            throw new Error('Function not implemented.');
+                        } }></CardButton>
                         <BudgetSlider/>
+                        <View style={{flexDirection:'row', alignSelf:'center', alignItems:'center', marginTop:'50%', marginBottom:'-40%'}}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={onChangeMax}
+                            value={numberMax}
+                            placeholder="Min"
+                            keyboardType="numeric"
+                            textAlign='center'
+                        />
+                        <Text> — </Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={onChangeMin}
+                            value={numberMin}
+                            placeholder="Max"
+                            keyboardType="numeric"
+                            textAlign='center'
+                        />
+                        </View>
                     </View>
                     <View>
-                        <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
+                        <Button style={{width: '70%', marginTop: "10%", alignSelf:'center'}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
                     </View>
                     <View>
-                        <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.8} color="#FFBC59" />
+                        <ProgressBar style={{marginTop:"10%", marginLeft: "10%", marginRight:"10%", height:17}}progress={0.6} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
@@ -38,11 +65,15 @@ const QuestionnaireWhatsYourBudget = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    textInput:{
+        
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
         textAlign: "center",
-        marginTop: "1%"
+        marginTop: "5%"
+        
     },
     image: {
         flex: 1,
@@ -52,6 +83,15 @@ const styles = StyleSheet.create({
             width: 50,
 
     },
+    input: {
+        height: '60%',
+        width: '25%',
+        margin: 12,
+        borderWidth: 0.5,
+        padding: 10,
+        borderRadius: 10,
+        placeholderfontsize: 10,
+      },
     secondary:{
         textAlign: "center",
         fontStyle: 'italic',
@@ -61,9 +101,21 @@ const styles = StyleSheet.create({
     },
     button:{
         justifyContent: 'center',
-        marginTop: "20%",
+        marginTop: "10%",
         width: '10%'
     },
+    cardContent:{
+        backgroundColor: '#F4F4F4',
+        height: '45%',
+        borderRadius: 10,
+        borderWidth: 0.5,
+        marginTop:'10%',
+        marginRight:'15%',
+        marginLeft:'15%',
+        marginBttom:'-15%',
+        
+    },
+
 })
 
 export default QuestionnaireWhatsYourBudget;
