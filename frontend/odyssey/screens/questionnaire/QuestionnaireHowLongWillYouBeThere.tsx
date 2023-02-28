@@ -6,7 +6,6 @@ import Screen from '../../components/Screen';
 import {ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import SelectCalendar from '../../components/SelectCalendar';
-import Dropdown from '../../components/Dropdown';
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import MenuButton from "../../components/MenuButton"
