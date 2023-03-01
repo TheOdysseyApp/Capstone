@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
-import BudgetSlider from '../../components/BudgetSlider'
+import RangeSlider from '../../components/RangeSlider/RangeSlider';
 import CardButton from '../../components/CardButton';
 // import { number } from 'yup';
 
@@ -31,26 +31,9 @@ const QuestionnaireWhatsYourBudget = ({navigation}) => {
                         <CardButton label={''} onPress={function (): void {
                             throw new Error('Function not implemented.');
                         } }></CardButton>
-                        <BudgetSlider/>
-                        <View style={{flexDirection:'row', alignSelf:'center', alignItems:'center', marginTop:'50%', marginBottom:'-40%'}}>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={onChangeMax}
-                            value={numberMax}
-                            placeholder="Min"
-                            keyboardType="numeric"
-                            textAlign='center'
-                        />
-                        <Text> — </Text>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={onChangeMin}
-                            value={numberMin}
-                            placeholder="Max"
-                            keyboardType="numeric"
-                            textAlign='center'
-                        />
-                        </View>
+                        
+                        <RangeSlider from={60} to={5000} />
+                        
                     </View>
                     <View>
                         <Button style={{width: '70%', marginTop: "10%", alignSelf:'center'}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
