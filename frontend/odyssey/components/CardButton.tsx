@@ -9,6 +9,7 @@ type ButtonProps = {
 }
 
 const CardButton = ({style, textStyle, label, onPress}: ButtonProps) => {
+    const [buttonStyle] = useState()
     return (
         <View style={{flexDirection:'row'}}>
             <TouchableOpacity style={[styles.button, style]} onPress={onPress}>

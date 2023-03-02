@@ -44,7 +44,7 @@ const QuestionnaireWhatInterestsYou = ({navigation}) => {
                         </View>
 
                         <View>
-                            <ProgressBar style={{marginTop: 100, marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "12%", marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
             </ImageBackground>

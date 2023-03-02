@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
-import { Button } from 'react-native-paper';
 import { DatePickerModal } from 'react-native-paper-dates';
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { useState } from "react";
 
 const theme = {
-  ...MD3LightTheme, // or MD3DarkTheme
+  ...MD3LightTheme,
   roundness: 2,
   colors: {
     ...MD3LightTheme.colors,
@@ -15,21 +14,42 @@ const theme = {
   },
 }
 
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+})
 const SelectCalendar = () => { 
-  const [range, setRange] = React.useState({ startDate: undefined, endDate: undefined });
+  const [range, setRange] = React.useState<{
+                              startDate: undefined
+                              endDate: undefined
+                            }>({ startDate: undefined, endDate: undefined })
+
   const [open, setOpen] = React.useState(false);
 
   const onDismiss = React.useCallback(() => {
     setOpen(false);
+    // ChangeText(range.startDate, range.endDate)
   }, [setOpen]);
+  
+
+  // const ChangeText = React.useCallback((startDate, endDate) => {
+  //   DateText = startDate.toString().slice(0,15) + ' - ' + endDate.toString().slice(0,15)
+  //   DateText = startDate + ' - ' + endDate
+  // }, []);
 
   const onConfirm = React.useCallback(
     ({ startDate, endDate }) => {
       setOpen(false);
       setRange({ startDate, endDate });
+      setShow(!show)
+      // ChangeText(startDate, endDate)
     },
     [setOpen, setRange]
   );
+  
+  const [show,setShow] = useState(false)
+  // let DateText
 
   return (
     <SafeAreaView>
@@ -49,6 +69,14 @@ const SelectCalendar = () => {
             onConfirm={onConfirm}
             
           />
+        </View>
+        <View>
+          {show && <Text style={{alignSelf:"center", marginTop:'5%'}} > 
+                {[
+                  range.startDate ? dateFormatter.format(range.startDate) : '',
+                  range.endDate ? dateFormatter.format(range.endDate) : '',
+                ].join(' - ')}
+          </Text>}
         </View>
       </PaperProvider>
     </SafeAreaView>

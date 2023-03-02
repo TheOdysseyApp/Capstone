@@ -6,15 +6,32 @@ import Screen from '../../components/Screen';
 import {ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import SelectCalendar from '../../components/SelectCalendar';
-import React from "react";
+import React, { useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import MenuButton from "../../components/MenuButton"
 import SelectDropdown from "react-native-select-dropdown";
+import { useState } from "react";
 
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
-const countries = ["Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", "Jun 2023", "Jul 2023", "Aug 2023", "Sec 2023", "Nov 2023", "Dec 2023"]
+const month = ["Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", "Jun 2023", "Jul 2023", "Aug 2023", "Sec 2023", "Nov 2023", "Dec 2023"]
+
 const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
-    
+
+const MenuButtonPress = useCallback(
+    (button) => {
+        if(button == 'first'){
+
+        }
+        else if(button == 'second'){
+
+        }
+        else{
+
+        }
+    },
+    []
+    );
+
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '170%'}} >
@@ -47,7 +64,7 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                                         buttonTextStyle={styles.dropdownTextButton}
                                         rowTextStyle={styles.dropdownText}
                                         defaultButtonText={'Choose a Month (optional)'}
-                                        data={countries}
+                                        data={month}
 
                                         onSelect={(selectedItem, index) => {
                                             console.log(selectedItem, index)
@@ -77,7 +94,7 @@ const QuestionnaireHowLongWillYouBeThere = ({navigation}) => {
                     </View>
 
                     <View>
-                            <ProgressBar style={{marginTop: '-5%', marginLeft: 45, marginRight:0, height:17, width:'80%'}}progress={0.30} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: '4%', marginLeft: 45, marginRight:0, height:17, width:'80%'}}progress={0.30} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
