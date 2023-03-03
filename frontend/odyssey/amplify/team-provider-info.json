@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "odysseye60f8fa0": {}
+        "odysseye60f8fa0": {},
+        "userPoolGroups": {}
       },
       "api": {
         "odyssey": {}
