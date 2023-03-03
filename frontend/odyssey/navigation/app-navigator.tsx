@@ -8,12 +8,13 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 import ConfirmCodeScreen from "../screens/auth/ConfirmCodeScreen";
 import ForgotPassword from "../screens/auth/ForgotPassword";
 import ResetPassword from "../screens/auth/ResetPassword";
+import HomeScreen from "../screens/questionnaire/HomeScreen";
 import QuestionnaireHelpPlanning from "../screens/questionnaire/QuestionaireHelpPlanning";
 import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
 import QuestionnaireWhatInterestsYou from "../screens/questionnaire/QuestionnaireWhatInterestsYou";
 import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/QuestionnaireWhatBringsYouHere";
 import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/QuestionnaireHowLongWillYouBeThere";
-import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
+import QuestionnaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
 import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
 import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
 import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
@@ -76,6 +77,13 @@ const AppStack = () => {
 const QuestionnaireNavigator = () => {
     return (
         <Stack.Navigator>
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{
+                    headerShown: false
+                }}
+            />
             <Stack.Screen 
                 name="QuestionnaireStart"
                 component={QuestionnaireStartScreen}
@@ -126,8 +134,8 @@ const QuestionnaireNavigator = () => {
                 }}
             />
             <Stack.Screen 
-                name="QuestionaireWhereAreYouTravelingTo"
-                component={QuestionaireWhereAreYouTravelingTo}
+                name="QuestionnaireWhereAreYouTravelingTo"
+                component={QuestionnaireWhereAreYouTravelingTo}
                 options={{
                     headerShown: false
                 }}

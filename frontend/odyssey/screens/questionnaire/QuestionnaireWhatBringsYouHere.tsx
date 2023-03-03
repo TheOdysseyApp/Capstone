@@ -7,7 +7,7 @@ import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import CheckBoxComponent from '../../components/CheckBox';
 
-const bgImage = require("../../assets/what-brings-you-here-bg.png") //change this later
+const bgImage = require("../../assets/what-brings-you-here-bg.png")
 
 const QuestionnaireWhatBringsYouHere = ({navigation}) => {
     const info = ["Work & Travel", "Self Exploration", "Friends Trip", "Romantic Trip", "Family Trip", "Adventure"];
