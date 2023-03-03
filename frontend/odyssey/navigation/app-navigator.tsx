@@ -18,6 +18,7 @@ import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/Questionnai
 import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
 import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
 import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 'react-native'
+import QuestionaireTravelingFrom from "../screens/questionnaire/QuestionnaireTravelingFrom";
 
 const Stack = createNativeStackNavigator()
 
@@ -134,6 +135,13 @@ const QuestionnaireNavigator = () => {
             <Stack.Screen 
                 name="QuestionnaireHelpPlanning"
                 component={QuestionnaireHelpPlanning}
+                options={{
+                    headerShown: false
+                }}
+            />
+             <Stack.Screen 
+                name="QuestionaireTravelingFrom"
+                component={QuestionaireTravelingFrom}
                 options={{
                     headerShown: false
                 }}
