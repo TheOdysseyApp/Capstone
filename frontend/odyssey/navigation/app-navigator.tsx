@@ -17,6 +17,8 @@ import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/Questio
 import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
 import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
 import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
+import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 'react-native'
+import QuestionaireTravelingFrom from "../screens/questionnaire/QuestionnaireTravelingFrom";
 
 const Stack = createNativeStackNavigator()
 
@@ -137,6 +139,13 @@ const QuestionnaireNavigator = () => {
                     headerShown: false
                 }}
             />
+             <Stack.Screen 
+                name="QuestionaireTravelingFrom"
+                component={QuestionaireTravelingFrom}
+                options={{
+                    headerShown: false
+                }}
+            />
         </Stack.Navigator>
     )
 }
@@ -151,13 +160,25 @@ const TabNavigator = () => {
                 component={QuestionnaireNavigator}
                 options={{
                     headerShown: false,
-                    tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="white" />,
+                    tabBarIcon: () => 
+                        <View style={{
+                            width: 35,
+                            height: 35,
+                            borderRadius: 150 / 2,
+                            backgroundColor: '#FFFFFF',}}>
+                            <AntDesign name="pluscircleo" size={32} color="#194260" style={{alignSelf:'center',marginTop:'5%'}}/>
+                        </View>,
                     tabBarStyle: {
-                        backgroundColor: '#194260'
+                        backgroundColor: '#194260',
+                        height:'8%' 
                     },
-                    tabBarLabel: "Plan a Trip!",
+                    tabBarLabel: "Plan a Trip",
                     tabBarLabelStyle: {
-                        color: 'white'
+                        color: 'white',
+                        marginBottom:'-3%', 
+                        // marginTop:'3%'
+                        // paddingBottom:'2%',
+                        // paddingTop:'-2%' 
                     }
                 }}
             />
@@ -165,6 +186,16 @@ const TabNavigator = () => {
     )
 }
 
+// const styles = StyleSheet.create({
+//     bar: {
+        
+//     },
+//     text: {
+//         textAlign: 'center',
+//         color: 'white',
+//         fontSize: 20,
+//     }
+// })
 
 //TODO - type check these props 
 export const AppNavigator = (props) => {

@@ -28,7 +28,7 @@ const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What do you want to do while you're there?</Text>
                     </View>
-                    <View style={{marginTop:"10%", alignItems: 'center'}}>
+                    <View style={{marginTop:"5%", alignItems: 'center'}}>
                         {info.map((activity) => (
                             <CheckBoxComponent
                                 label={activity}
@@ -41,7 +41,7 @@ const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
                     </View>
 
                     <View>
-                        <ProgressBar style={{marginTop: 50, marginLeft: 20, marginRight:20, height:17}}progress={0.6} color="#FFBC59" />
+                        <ProgressBar style={{marginTop: "5%", marginLeft: 20, marginRight:20, height:17}}progress={0.6} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>

@@ -1,38 +1,39 @@
 import { useState } from 'react'
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
+import { ScrollView, Text, View, Image, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import ProgressBar from 'react-native-paper';
 import Button from '../../components/Button';
 import { AntDesign } from '@expo/vector-icons'; 
 import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const bgImage = require("../../assets/ideas-for-you-bg.png")
 
 const QuestionnaireIdeasForYou = ({navigation}) => {
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '290%'}}>
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '185%'}}>
                 <SafeAreaView>
-                    <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatsYourBudget")}/>
+                    <View style={{}}>
                         <Header/>
                     </View>
-                    <View>
-                        <Text style={styles.header}>Let’s Plan Your Trip!</Text>
-                        <Text style={styles.mainText}>{`
+                    
+                        <Text style={styles.header}>We’ve got some great{"\n"}ideas for you!</Text>
+                    <View style={styles.textcontainer}>
+                        <Text style={styles.mainText}>
                         The Odyssey app is still in beta testing.
                         Soon we'll have instant results consisting of
                         detailed itineraries with suggested locations
                         to visit, where to book, what to do, and
                         available coworking spaces.
-                        `}</Text>
-                        <Text style={styles.bottomText}>{`
+                        </Text>
+                        <Text style={styles.bottomText}>
                         Until then, please give us 24 hours to
                         complete your itinerary. Be sure to check
                         your email!
-                        `}
+                        
                         </Text>
                     </View>
 
@@ -43,46 +44,35 @@ const QuestionnaireIdeasForYou = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    textcontainer:{
+        alignContent: "center",
+        // marginRight:'19%'
+        paddingRight:'13%',
+        paddingLeft:'13%'
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
         textAlign: "center",
-        marginTop: "1%",
+        marginTop: "3%",
         color: 'white'
     },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        resizeMode: 'contain',
-            height: 50,
-            width: 50,
-
-    },
-    secondary:{
-        textAlign: "center",
-        fontStyle: 'italic',
-        marginTop: 27,
-        fontSize: 20,
-        fontWeight: '300'
-    },
     mainText:{
+        textAlignVertical: "center",
         textAlign: "center",
-        marginTop: 35,
+        marginTop: '20%',
         fontSize: 16,
         fontWeight: '300',
         color: 'white'
     },
     bottomText:{
+        textAlignVertical: "center",
         textAlign: "center",
-        marginTop: 65,
+        marginTop: '7%',
         fontSize: 16,
-        fontWeight: '400',
+        fontWeight: '600',
         color: 'white'
-    },
-    button:{
-        justifyContent: 'center',
-        marginTop: "20%",
-        width: '10%'
+        
     }
 })
 

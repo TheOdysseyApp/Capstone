@@ -11,7 +11,7 @@ import React from 'react';
 import {Text, StyleSheet, View, ImageBackground} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CheckBoxComponent from '../../components/CheckBox';
-
+import QuestionaireTravelingFrom from './QuestionnaireTravelingFrom';
 const bgImage = require("../../assets/what-interests-you-bg.png")
 
 const QuestionnaireWhatInterestsYou = ({navigation}) => {
@@ -22,7 +22,7 @@ const QuestionnaireWhatInterestsYou = ({navigation}) => {
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '130%'}} >
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireStart")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionaireTravelingFrom")}/>
                         <Header/>
                     </View>
                         <View>
@@ -44,7 +44,7 @@ const QuestionnaireWhatInterestsYou = ({navigation}) => {
                         </View>
 
                         <View>
-                            <ProgressBar style={{marginTop: 100, marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "12%", marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
             </ImageBackground>

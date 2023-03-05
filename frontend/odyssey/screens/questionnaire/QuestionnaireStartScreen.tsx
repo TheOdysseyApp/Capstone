@@ -6,6 +6,7 @@ import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import {Auth} from 'aws-amplify'
+import QuestionaireTravelingFrom from './QuestionnaireTravelingFrom';
 
 const bgImage = require("../../assets/questionnaire-start-screen-bg.png")
 
@@ -29,8 +30,8 @@ const QuestionnaireStartScreen = ({navigation}) => {
                         <View>
                             <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                             <Text style={styles.secondary}>Where are you traveling to?</Text>
-                            <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="I’m flexible, let’s explore!" onPress={() => navigation.navigate("QuestionnaireWhatInterestsYou")}/>
-                            <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="I know where I’m traveling" onPress={() => navigation.navigate("QuestionaireWhereAreYouTravelingTo")}/>
+                            <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="I’m flexible, let’s explore!" onPress={() => navigation.navigate("QuestionaireTravelingFrom")}/>
+                            <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="I know where I’m traveling" onPress={() => navigation.navigate("QuestionaireTravelingFrom")}/>
                             <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="Sign Out" onPress={handleSignOut}/>
                         </View>
                         <View>
