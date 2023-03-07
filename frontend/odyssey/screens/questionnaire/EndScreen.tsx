@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react';
 import { ScrollView, Text, View, Image, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
 import Header from '../../components/Header';
@@ -8,10 +8,16 @@ import Button from '../../components/Button';
 import { AntDesign } from '@expo/vector-icons'; 
 import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import { useStores } from '../../mobx-models';
 
 const bgImage = require("../../assets/ideas-for-you-bg.png")
 
 const EndScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
+
+    useEffect(() => {
+        console.log(questionnaireStore)
+    }, [])
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '185%'}}>

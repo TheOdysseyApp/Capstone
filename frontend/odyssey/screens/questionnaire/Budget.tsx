@@ -7,6 +7,7 @@ import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
 import CardButton from '../../components/CardButton';
+import { useStores } from '../../mobx-models';
 
 const bgImage = require("../../assets/budget-bg.png")
 
@@ -15,12 +16,18 @@ const BudgetScreen = ({navigation}) => {
     const [totalRange, setTotalRange] = useState<{min: number, max: number}>({min: 2000, max: 10000})
     const [isDaily, setIsDaily] = useState<boolean>(true)
 
+    const {questionnaireStore} = useStores()
+
     const handleSubmit = () => {
+        questionnaireStore.setIsBudgetPerDay(isDaily)
+
         if(isDaily) {
-            console.log("Daily budget: " + JSON.stringify(dailyRange))
+            questionnaireStore.setMinBudget(dailyRange.min)
+            questionnaireStore.setMaxBudget(dailyRange.max)
         }
         else {
-            console.log("Total budget: " + JSON.stringify(totalRange))
+            questionnaireStore.setMinBudget(totalRange.min)
+            questionnaireStore.setMaxBudget(totalRange.max)
         }
         navigation.navigate("QuestionnaireIdeasForYou")
     }

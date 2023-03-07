@@ -8,13 +8,27 @@ import {Text, StyleSheet, View, ImageBackground} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CheckBoxComponent from '../../components/CheckBox';
 import interestsData from '../../data/interests.json'
+import { useStores } from "../../mobx-models";
 
 const bgImage = require("../../assets/what-interests-you-bg.png")
 
 const InterestsScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
+
     const handleSubmit = () => {
-        console.log(interestsData)
-        navigation.navigate("QuestionnaireWhatBringsYouHere")
+        const interests = []
+        interestsData.map((interest) => {
+            if(interest.checked) interests.push(interest.name)
+        })
+        
+        if(interests.length > 0) {
+            questionnaireStore.setInterests(interests)
+            console.log(questionnaireStore)
+            navigation.navigate("QuestionnaireWhatBringsYouHere")
+        }
+        else {
+            //error checking
+        }
     }
     return (
         <Screen preset="scroll">

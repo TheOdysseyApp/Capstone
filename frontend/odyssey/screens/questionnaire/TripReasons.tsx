@@ -6,14 +6,24 @@ import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import CheckBoxComponent from '../../components/CheckBox';
 import info from '../../data/whatBringsYouHere.json'
+import { useStores } from "../../mobx-models";
 
 const bgImage = require("../../assets/what-brings-you-here-bg.png")
 
 const TripReasonsScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
 
     const handleSubmit = () => {
-        console.log(info)
-        navigation.navigate("QuestionnaireHowLongWillYouBeThere")
+        const reasons = []
+        info.map((reason) => {
+            if(reason.checked) reasons.push(reason.name)
+        })
+
+        if(reasons.length > 0) {
+            questionnaireStore.setTripReasons(reasons)
+            console.log(questionnaireStore)
+            navigation.navigate("QuestionnaireHowLongWillYouBeThere")
+        }
     }
 
     return (

@@ -4,19 +4,29 @@ import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import {AntDesign } from '@expo/vector-icons';
-import {ProgressBar, Checkbox} from 'react-native-paper';
+import {ProgressBar} from 'react-native-paper';
 import {Text, View, StyleSheet, ImageBackground} from "react-native";
 import CheckBoxComponent from '../../components/CheckBox';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import activities from '../../data/whatToDo.json'
+import { useStores } from '../../mobx-models';
 
 const bgImage = require("../../assets/what-do-bg.png") // change
 
 const RelevantActivitiesScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
 
     const handleSubmit = () => {
-        console.log(activities)
-        navigation.navigate("QuestionnaireWhatsYourBudget")
+        const selectedActivities = []
+        activities.map((activity) => {
+            if(activity.checked) selectedActivities.push(activity.name)
+        })
+
+        if(selectedActivities.length > 0) {
+            questionnaireStore.setActivities(selectedActivities)
+            console.log(questionnaireStore)
+            navigation.navigate("QuestionnaireWhatsYourBudget")
+        }
     }
 
     return (
@@ -37,7 +47,7 @@ const RelevantActivitiesScreen = ({navigation}) => {
                                 key={index}
                                 label={activity.name}
                                 initialState={activity.checked}
-                                onChange={(result) => activity[index].checked = result}
+                                onChange={(result) => activities[index].checked = result}
                             />
                         ))}
                     </View>

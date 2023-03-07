@@ -6,11 +6,23 @@ import Screen from '../../components/Screen';
 import { ProgressBar } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import Button from '../../components/Button';
+import { useStores } from '../../mobx-models';
 
 const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
 
 const TravelingToScreen = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const {questionnaireStore} = useStores()
+
+    const handleSubmit = () => {
+        if(searchQuery && searchQuery.length > 1) {
+            questionnaireStore.setWhereFrom(searchQuery.trim())
+            navigation.navigate("QuestionnaireHelpPlanning")
+        }
+        else {
+            //TODO error handling
+        }
+    }
     
     return (
         <Screen preset="scroll">
@@ -40,7 +52,7 @@ const TravelingToScreen = ({navigation}) => {
                     <Button 
                         style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} 
                         label="Next" 
-                        onPress={() => navigation.navigate("QuestionnaireHelpPlanning")}
+                        onPress={handleSubmit}
                     />
                     <View>
                             <ProgressBar style={{marginTop: "20%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />

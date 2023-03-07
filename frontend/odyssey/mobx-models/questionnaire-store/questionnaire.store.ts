@@ -6,7 +6,6 @@ export const QuestionnaireStoreModel = types
         whereFrom: types.maybe(types.string),
         destination: types.maybe(types.string),
         planningOptions: types.maybe(types.frozen([])),
-        duration: types.maybe(types.string),
         startDate: types.maybe(types.Date),
         endDate: types.maybe(types.Date),
         activities: types.maybe(types.frozen([])),
@@ -30,9 +29,6 @@ export const QuestionnaireStoreModel = types
             catch(error) {
                 console.log("Error setting planning options: " + error)
             }
-        },
-        setDuration(duration) {
-            self.duration = duration
         },
         setStartDate(startDate) {
             self.startDate = startDate
@@ -65,7 +61,7 @@ export const QuestionnaireStoreModel = types
                 console.log("Error setting activities: " + error)
             }
         },
-        setTripReason(tripReasons) {
+        setTripReasons(tripReasons) {
             try {
                 self.tripReasons = tripReasons;
             }
@@ -77,7 +73,6 @@ export const QuestionnaireStoreModel = types
             self.whereFrom = undefined
             self.destination = undefined
             self.planningOptions = undefined
-            self.duration = undefined
             self.startDate = undefined
             self.endDate = undefined
             self.activities = undefined

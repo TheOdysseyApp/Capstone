@@ -7,16 +7,23 @@ import { AntDesign } from '@expo/vector-icons';
 import {useState} from 'react';
 import Button from '../../components/Button';
 import QuestionnaireWhatInterestsYou from "./Interests";
+import { useStores } from "../../mobx-models";
 
 
 const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
 
 const TravelingFromScreen = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const { questionnaireStore } = useStores()
 
     const handleSubmit = () => {
-        console.log(searchQuery)
-        navigation.navigate("QuestionnaireWhatInterestsYou")
+        if(searchQuery && searchQuery.length > 1) {
+            questionnaireStore.setWhereFrom(searchQuery.trim())
+            navigation.navigate("QuestionnaireWhatInterestsYou")
+        }
+        else {
+            //TODO error handling
+        }
     }
     
     return (
@@ -33,6 +40,7 @@ const TravelingFromScreen = ({navigation}) => {
                     </View>
 
                     <View>
+                        {/* TODO this should probably query the google maps api or something */}
                         <SearchBar 
                         style={{marginTop:"20%"}}
                         value={searchQuery}

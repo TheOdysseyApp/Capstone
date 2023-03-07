@@ -8,14 +8,23 @@ import { AntDesign } from '@expo/vector-icons';
 import React from 'react';
 import CheckBoxComponent from '../../components/CheckBox';
 import planningHelp from '../../data/planningHelp.json'
+import { useStores } from '../../mobx-models';
 
 const bgImage = require("../../assets/what-interests-you-bg.png")
 
 const PlanningHelpScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
 
     const handleSubmit = () => {
-        console.log(planningHelp)
-        navigation.navigate("QuestionnaireHowLongWillYouBeThere")
+        const selectedItems = []
+        planningHelp.map((item) => {
+            if(item.checked) selectedItems.push(item.name)
+        })
+
+        if(selectedItems.length > 0) {
+            questionnaireStore.setPlanningOptions(selectedItems)
+            navigation.navigate("QuestionnaireHowLongWillYouBeThere")
+        }
     }
 
     return (

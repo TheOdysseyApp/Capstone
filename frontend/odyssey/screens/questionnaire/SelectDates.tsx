@@ -6,14 +6,23 @@ import { ProgressBar } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import SelectCalendar from '../../components/SelectCalendar';
 import { useState } from "react";
+import { useStores } from "../../mobx-models";
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
 
 const SelectDatesScreen = ({navigation}) => {
     const [dateRange, setDateRange] = useState<{startDate: any, endDate: any}>({startDate: undefined, endDate: undefined})
+    const {questionnaireStore} = useStores()
 
     const handleSubmit = () => {
-        console.log(JSON.stringify(dateRange))
-        navigation.navigate("QuestionnaireWhatDoYouWantToDo")
+        if(dateRange.startDate && dateRange.endDate) {
+            questionnaireStore.setStartDate(dateRange.startDate)
+            questionnaireStore.setEndDate(dateRange.endDate)
+            console.log(questionnaireStore)
+            navigation.navigate("QuestionnaireWhatDoYouWantToDo")
+        }
+        else {
+            //TODO error handling
+        }
     }
 
     return (
