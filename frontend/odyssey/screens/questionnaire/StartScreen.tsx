@@ -22,7 +22,7 @@ const StartScreen = ({navigation}) => {
     }
     
     return (
-<Screen preset="scroll">
+        <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '125%'}}>
                 <SafeAreaView>
                     <View>
@@ -39,10 +39,8 @@ const StartScreen = ({navigation}) => {
                             <ProgressBar style={{marginTop: 295, marginLeft: 20, marginRight:20, height:17, }}progress={0.1} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
-            </ImageBackground>
-            
-</Screen>
-
+            </ImageBackground>    
+        </Screen>
     )
 }
 

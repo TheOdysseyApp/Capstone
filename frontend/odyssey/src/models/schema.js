@@ -32,13 +32,6 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "duration": {
-                    "name": "duration",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "startDate": {
                     "name": "startDate",
                     "isArray": false,

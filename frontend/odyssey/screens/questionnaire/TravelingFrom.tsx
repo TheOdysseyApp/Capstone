@@ -2,11 +2,10 @@ import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-nat
 import SearchBar from "../../components/SearchBar";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import { ProgressBar, Searchbar} from 'react-native-paper';
-import { AntDesign } from '@expo/vector-icons'; 
+import { ProgressBar } from 'react-native-paper';
+import { AntDesign, Ionicons } from '@expo/vector-icons'; 
 import {useState} from 'react';
 import Button from '../../components/Button';
-import QuestionnaireWhatInterestsYou from "./Interests";
 import { useStores } from "../../mobx-models";
 
 
@@ -14,15 +13,16 @@ const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
 
 const TravelingFromScreen = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState<string>("")
     const { questionnaireStore } = useStores()
 
     const handleSubmit = () => {
-        if(searchQuery && searchQuery.length > 1) {
+        if(searchQuery && searchQuery.length > 0) {
             questionnaireStore.setWhereFrom(searchQuery.trim())
             navigation.navigate("QuestionnaireWhatInterestsYou")
         }
         else {
-            //TODO error handling
+            setError("Please enter a departing location.")
         }
     }
     
@@ -49,6 +49,12 @@ const TravelingFromScreen = ({navigation}) => {
                         onPress={function (): void {
                             throw new Error('Function not implemented.');
                         }}/>
+                        {error && (
+                            <View>
+                                <Ionicons name="warning-outline" size={24} color="red" />
+                                <Text>{error}</Text>
+                            </View>
+                        )}
                     </View>
 
                     <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>

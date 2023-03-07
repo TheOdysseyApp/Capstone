@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar } from 'react-native-paper';
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign, Ionicons } from '@expo/vector-icons'; 
 import SelectCalendar from '../../components/SelectCalendar';
 import { useState } from "react";
 import { useStores } from "../../mobx-models";
@@ -11,6 +11,7 @@ const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //chan
 
 const SelectDatesScreen = ({navigation}) => {
     const [dateRange, setDateRange] = useState<{startDate: any, endDate: any}>({startDate: undefined, endDate: undefined})
+    const [error, setError] = useState<string>("")
     const {questionnaireStore} = useStores()
 
     const handleSubmit = () => {
@@ -21,7 +22,7 @@ const SelectDatesScreen = ({navigation}) => {
             navigation.navigate("QuestionnaireWhatDoYouWantToDo")
         }
         else {
-            //TODO error handling
+            setError("")
         }
     }
 
@@ -48,18 +49,14 @@ const SelectDatesScreen = ({navigation}) => {
                                 }}/>
                         </View>   
                      </View>
-                    
-                                        
-                    <View>
-                        <Button 
-                            style={{ marginTop: "-24%", justifyContent: 'center', marginLeft:"14%", width:'73%'}} 
-                            label="Next" 
-                            onPress={handleSubmit}/>
-                    </View>
 
-                    <View>
-                            <ProgressBar style={{marginTop: '4%', marginLeft: 45, marginRight:0, height:17, width:'80%'}}progress={0.30} color="#FFBC59" />
-                    </View>
+                    <Button 
+                        style={{ marginTop: "-24%", justifyContent: 'center', marginLeft:"14%", width:'73%'}} 
+                        label="Next" 
+                        onPress={handleSubmit}
+                    />
+                    <ProgressBar style={{marginTop: '4%', marginLeft: 45, marginRight:0, height:17, width:'80%'}}progress={0.30} color="#FFBC59" />
+                    
                 </SafeAreaView>
             </ImageBackground>
         </Screen>

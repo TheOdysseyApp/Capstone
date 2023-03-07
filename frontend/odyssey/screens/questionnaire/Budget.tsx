@@ -8,6 +8,9 @@ import { AntDesign } from '@expo/vector-icons';
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
 import CardButton from '../../components/CardButton';
 import { useStores } from '../../mobx-models';
+import { DataStore } from 'aws-amplify';
+import { Questionnaire } from '../../src/models';
+import moment from 'moment'
 
 const bgImage = require("../../assets/budget-bg.png")
 
@@ -29,6 +32,26 @@ const BudgetScreen = ({navigation}) => {
             questionnaireStore.setMinBudget(totalRange.min)
             questionnaireStore.setMaxBudget(totalRange.max)
         }
+        
+        console.log(questionnaireStore.startDate.toISOString().substring(0, 10))
+        console.log(questionnaireStore.endDate.toISOString().substring(0, 10))
+
+        DataStore.save(
+            new Questionnaire({
+                whereFrom: questionnaireStore.whereFrom,
+                destination: questionnaireStore.destination, 
+                planningOptions: questionnaireStore.planningOptions,
+                startDate: questionnaireStore.startDate.toISOString().substring(0, 10),
+                endDate: questionnaireStore.endDate.toISOString().substring(0, 10),
+                activities: questionnaireStore.activities,
+                isBudgetPerDay: questionnaireStore.isBudgetPerDay,
+                minBudget: questionnaireStore.minBudget,
+                maxBudget: questionnaireStore.maxBudget,
+                interests: questionnaireStore.interests,
+                tripReason: questionnaireStore.tripReason,
+                userID: 'TBD'
+            })
+        )
         navigation.navigate("QuestionnaireIdeasForYou")
     }
 
@@ -52,7 +75,7 @@ const BudgetScreen = ({navigation}) => {
                         onPressRight={() => setIsDaily(false)}/>
                         {isDaily ? (
                             <RangeSlider 
-                            from={20} 
+                            from={60} 
                             to={5000}
                             onChangeRange={(low, high) => setDailyRange(prev => ({...prev, min: low, max: high}))} 
                             onChangeLow={(low) => setDailyRange(prev => ({...prev, min: low}))}
