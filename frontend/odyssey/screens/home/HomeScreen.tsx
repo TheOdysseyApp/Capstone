@@ -13,7 +13,6 @@ const HomeScreen = ({navigation}) => {
         <Screen preset="scroll">
             <SafeAreaView>
                 <Header/>
-            </SafeAreaView>
 
             <View>
                 <Button textStyle={{fontSize: 13}} 
@@ -29,7 +28,7 @@ const HomeScreen = ({navigation}) => {
                 />
             </View>
 
-            <View>
+            <View style={{alignItems: 'center'}}>
                 <HomeImageButtons source={require("../../assets/book-a-stay.png")} onPress={() => console.log("Book a Stay pressed")}/>
                 <HomeImageButtons source={require("../../assets/book-an-adventure.png")} onPress={() => console.log("Book an Adventure pressed")}/>
                 <HomeImageButtons source={require("../../assets/find-a-coworking-space.png")} onPress={() => console.log("Find a Coworking Space pressed")}/>
@@ -54,6 +53,7 @@ const HomeScreen = ({navigation}) => {
                     onPress={() => navigation.navigate("Questionnaire")}
                 />
             </View>
+            </SafeAreaView>
         </Screen>
     )
 }
@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
         width: "80%",
         justifyContent: 'space-evenly',
         marginBottom: '4%',
-        marginHorizontal: '10%'
+        marginHorizontal: '10%',
+        alignItems: 'center',
+        marginVertical: '10%'
     },
 })
 

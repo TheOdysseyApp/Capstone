@@ -16,7 +16,7 @@ const TripSuggestion = ({source, onPress}: ImageButtonProps) => {
 const styles = StyleSheet.create({
     button: {
         paddingVertical: '4%',
-        paddingHorizontal: '8%',
+        paddingHorizontal: '15%',
         borderRadius: 5,
         justifyContent: 'center'
     }, 
