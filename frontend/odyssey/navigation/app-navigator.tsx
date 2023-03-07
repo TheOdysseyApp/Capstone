@@ -181,10 +181,9 @@ const TabNavigator = () => {
                         <View style={{
                             width: 35,
                             height: 35,
-                            borderRadius: 150 / 2,
-                            backgroundColor: '#FFFFFF',
-                            justifyContent: 'center'}}>
-                            <AntDesign name="pluscircleo" size={32} color="#194260" style={{alignSelf:'center'}}/>
+                            borderRadius: 35 / 2,
+                            backgroundColor: '#FFFFFF',}}>
+                            <AntDesign name="pluscircleo" size={32} color="#194260" style={{position: "absolute", left: 35/2 - 16, top: 35/2 - 16}}/>
                         </View>,
                     tabBarStyle: {
                         backgroundColor: '#194260',
