@@ -8,7 +8,7 @@ import Rail from "./Rail";
 import RailSelected from "./RailSelected";
 import Thumb from "./Thumb";
 
-const RangeSlider = ({ from, to }) => {
+const RangeSlider = ({ from, to, onChangeRange, onChangeLow, onChangeHigh }) => {
   // const RangeSlider = () => {
   const [low, setLow] = useState(from);
   const [high, setHigh] = useState(to);
@@ -23,6 +23,7 @@ const RangeSlider = ({ from, to }) => {
     (newLow, newHigh) => {
       setLow(newLow);
       setHigh(newHigh);
+      onChangeRange(newLow, newHigh)
     },
     [setLow, setHigh]
   
@@ -30,6 +31,7 @@ const RangeSlider = ({ from, to }) => {
   const textValueChangeMin = useCallback(
     (newLow) => {
       setLow(newLow);
+      onChangeLow(newLow)
     },
     [setLow]
   
@@ -37,6 +39,7 @@ const RangeSlider = ({ from, to }) => {
   const textValueChangeMax = useCallback(
     (newHigh) => {
         setHigh(newHigh);
+        onChangeHigh(newHigh)
     },
     [setHigh]
   

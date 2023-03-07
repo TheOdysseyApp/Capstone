@@ -15,6 +15,16 @@ const BudgetScreen = ({navigation}) => {
     const [totalRange, setTotalRange] = useState<{min: number, max: number}>({min: 2000, max: 10000})
     const [isDaily, setIsDaily] = useState<boolean>(true)
 
+    const handleSubmit = () => {
+        if(isDaily) {
+            console.log("Daily budget: " + JSON.stringify(dailyRange))
+        }
+        else {
+            console.log("Total budget: " + JSON.stringify(totalRange))
+        }
+        navigation.navigate("QuestionnaireIdeasForYou")
+    }
+
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '220%'}}>
@@ -35,18 +45,27 @@ const BudgetScreen = ({navigation}) => {
                         onPressRight={() => setIsDaily(false)}/>
                         {isDaily ? (
                             <RangeSlider 
-                            from={dailyRange.min} 
-                            to={dailyRange.max} 
+                            from={20} 
+                            to={5000}
+                            onChangeRange={(low, high) => setDailyRange(prev => ({...prev, min: low, max: high}))} 
+                            onChangeLow={(low) => setDailyRange(prev => ({...prev, min: low}))}
+                            onChangeHigh={(high) => setDailyRange(prev => ({...prev, max: high}))}
                             />
                         ) : (
                             <RangeSlider 
-                            from={totalRange.min} 
-                            to={totalRange.max}
+                            from={2000} 
+                            to={10000}
+                            onChangeRange={(low, high) => setTotalRange(prev => ({...prev, min: low, max: high}))} 
+                            onChangeLow={(low) => setTotalRange(prev => ({...prev, min: low}))}
+                            onChangeHigh={(high) => setTotalRange(prev => ({...prev, max: high}))}
                             />
                         )}
                     </View>
                     <View>
-                        <Button style={{width: '70%', marginTop: "10%", alignSelf:'center'}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
+                        <Button 
+                        style={{width: '70%', marginTop: "10%", alignSelf:'center'}} 
+                        label="Next" 
+                        onPress={handleSubmit}/>
                     </View>
                     <View>
                         <ProgressBar style={{marginTop:"10%", marginLeft: "10%", marginRight:"10%", height:17}} progress={0.6} color="#FFBC59" />
