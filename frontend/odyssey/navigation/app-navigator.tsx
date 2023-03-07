@@ -17,6 +17,7 @@ import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/Questio
 import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
 import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
 import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
+import Payment from "../components/Payment";
 
 const Stack = createNativeStackNavigator()
 
@@ -60,12 +61,25 @@ const AppStack = () => {
                     }}
                 />
                 <Stack.Screen 
-                    name="Home"
+                    name="Payment"
                     component={TabNavigator}
                     options={{
                         headerShown: false,
                     }}
                 />
+        </Stack.Navigator>
+    )
+}
+const payment = () => {
+    return(
+        <Stack.Navigator>
+            <Stack.Screen 
+                name="Payment"
+                component={Payment}
+                options={{
+                    headerShown: false
+                }}
+            />
         </Stack.Navigator>
     )
 }
@@ -146,6 +160,21 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
+            <Tab.Screen
+                name="Payment"
+                component={payment}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => <AntDesign name="key" size={24} color="white" />,
+                    tabBarStyle: {
+                        backgroundColor: '#194260'
+                    },
+                    tabBarLabel: "payment",
+                    tabBarLabelStyle: {
+                        color: 'white'
+                    }
+                }}
+            />
             <Tab.Screen 
                 name="Questionnaire"
                 component={QuestionnaireNavigator}

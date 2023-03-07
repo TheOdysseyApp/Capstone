@@ -19,7 +19,7 @@ const LoginScreen = ({navigation}) => {
         Auth.currentAuthenticatedUser()
             .then((user => {
                 console.log("USER LOGGED IN")
-                navigation.navigate("QuestionnaireStart")
+                navigation.navigate("Payment")
             }))
             .catch((error => {
                 console.log("Not logged in")
