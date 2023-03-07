@@ -1,44 +1,52 @@
-import { useState } from 'react'
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar, Searchbar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
-import CheckBoxComponent from '../../components/CheckBox';
-import React from 'react';
+import {useState} from 'react';
 import Button from '../../components/Button';
-import QuestionnaireHelpPlanning from './QuestionaireHelpPlanning';
+import QuestionnaireWhatInterestsYou from "./Interests";
+
 
 const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
 
-const QuestionaireWhereAreYouTravelingTo = ({navigation}) => {
-    const [searchQuery, setSearchQuery] = React.useState('');
-    const onChangeSearch = query => setSearchQuery(query);
+const TravelingFromScreen = ({navigation}) => {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSubmit = () => {
+        console.log(searchQuery)
+        navigation.navigate("QuestionnaireWhatInterestsYou")
+    }
     
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '130%'}} >
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireStart")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
                     </View>
                     <View style={styles.header}>
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
-                        <Text style={styles.secondary}>Where are you traveling to?</Text>
+                        <Text style={styles.secondary}>Where are you traveling from?</Text>
                     </View>
 
                     <View>
-                        <SearchBar style={{marginTop:"20%"}} label={''} onPress={function (): void {
+                        <SearchBar 
+                        style={{marginTop:"20%"}}
+                        value={searchQuery}
+                        onChangeText={(query: string) => setSearchQuery(query)} 
+                        label={''} 
+                        onPress={function (): void {
                             throw new Error('Function not implemented.');
                         }}/>
                     </View>
 
-                    <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireHelpPlanning")}/>
+                    <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>
 
                     <View>
-                            <ProgressBar style={{marginTop: "20%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "9%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
@@ -83,4 +91,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionaireWhereAreYouTravelingTo;
+export default TravelingFromScreen;

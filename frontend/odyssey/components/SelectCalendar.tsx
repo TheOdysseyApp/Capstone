@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import { DatePickerModal } from 'react-native-paper-dates';
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const theme = {
   ...MD3LightTheme,
@@ -19,11 +19,12 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
   month: 'long',
   year: 'numeric',
 })
-const SelectCalendar = () => { 
-  const [range, setRange] = React.useState<{
-                              startDate: undefined
-                              endDate: undefined
-                            }>({ startDate: undefined, endDate: undefined })
+
+const SelectCalendar = ({startDate, endDate, onSubmit}) => { 
+  // const [range, setRange] = React.useState<{
+  //                             startDate: undefined
+  //                             endDate: undefined
+  //                           }>({ startDate: undefined, endDate: undefined })
 
   const [open, setOpen] = React.useState(false);
 
@@ -41,11 +42,11 @@ const SelectCalendar = () => {
   const onConfirm = React.useCallback(
     ({ startDate, endDate }) => {
       setOpen(false);
-      setRange({ startDate, endDate });
+      onSubmit({startDate, endDate})
+      // setRange({ startDate, endDate });
       setShow(!show)
-      // ChangeText(startDate, endDate)
     },
-    [setOpen, setRange]
+    [setOpen, onSubmit]
   );
   
   const [show,setShow] = useState(false)
@@ -59,25 +60,23 @@ const SelectCalendar = () => {
               <Text style={[styles.text]}>Choose Exact Dates</Text>
           </TouchableOpacity>
           <DatePickerModal
-            
             locale="en"
             mode="range"
             visible={open}
             onDismiss={onDismiss}
-            startDate={range.startDate}
-            endDate={range.endDate}
+            startDate={startDate}
+            endDate={endDate}
             onConfirm={onConfirm}
-            
           />
         </View>
-        <View>
+        {/* <View>
           {show && <Text style={{alignSelf:"center", marginTop:'5%'}} > 
                 {[
                   range.startDate ? dateFormatter.format(range.startDate) : '',
                   range.endDate ? dateFormatter.format(range.endDate) : '',
                 ].join(' - ')}
           </Text>}
-        </View>
+        </View> */}
       </PaperProvider>
     </SafeAreaView>
   );
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        // borderWidth: 0,
         fontSize: 11,
         borderRadius: 10,
         width: '50%',

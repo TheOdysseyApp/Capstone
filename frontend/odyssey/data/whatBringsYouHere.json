@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Work & Travel",
+        "checked": false
+    },
+    {
+        "name": "Self Exploration",
+        "checked": false
+    },
+    {
+        "name": "Friends Trip",
+        "checked": false
+    },
+    {
+        "name": "Romantic Trip",
+        "checked": false
+    },
+    {
+        "name": "Family Trip",
+        "checked": false
+    },
+    {
+        "name": "Adventure",
+        "checked": false
+    }
+]

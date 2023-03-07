@@ -9,17 +9,17 @@ import ConfirmCodeScreen from "../screens/auth/ConfirmCodeScreen";
 import ForgotPassword from "../screens/auth/ForgotPassword";
 import ResetPassword from "../screens/auth/ResetPassword";
 import HomeScreen from "../screens/home/HomeScreen";
-import QuestionnaireHelpPlanning from "../screens/questionnaire/QuestionaireHelpPlanning";
-import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
-import QuestionnaireWhatInterestsYou from "../screens/questionnaire/QuestionnaireWhatInterestsYou";
-import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/QuestionnaireWhatBringsYouHere";
-import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/QuestionnaireHowLongWillYouBeThere";
-import QuestionnaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
-import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
-import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
-import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
+import QuestionnaireHelpPlanning from "../screens/questionnaire/PlanningHelp";
+import QuestionnaireStartScreen from "../screens/questionnaire/StartScreen";
+import QuestionnaireWhatInterestsYou from "../screens/questionnaire/Interests";
+import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/TripReasons";
+import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/SelectDates";
+import QuestionnaireWhereAreYouTravelingTo from "../screens/questionnaire/TravelingTo";
+import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/RelevantActivities";
+import QuestionnaireWhatsYourBudget from "../screens/questionnaire/Budget";
+import QuestionnaireIdeasForYou from "../screens/questionnaire/EndScreen";
 import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 'react-native'
-import QuestionaireTravelingFrom from "../screens/questionnaire/QuestionnaireTravelingFrom";
+import QuestionaireTravelingFrom from "../screens/questionnaire/TravelingFrom";
 
 const Stack = createNativeStackNavigator()
 
@@ -77,13 +77,6 @@ const AppStack = () => {
 const QuestionnaireNavigator = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{
-                    headerShown: false
-                }}
-            />
             <Stack.Screen 
                 name="QuestionnaireStart"
                 component={QuestionnaireStartScreen}
@@ -163,6 +156,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
+            {/* may become a stack navigator if home screen has different screens */}
             <Tab.Screen
                 name="LandingPage"
                 component={HomeScreen}
@@ -188,20 +182,16 @@ const TabNavigator = () => {
                             width: 35,
                             height: 35,
                             borderRadius: 150 / 2,
-                            backgroundColor: '#FFFFFF',}}>
-                            <AntDesign name="pluscircleo" size={32} color="#194260" style={{alignSelf:'center',marginTop:'5%'}}/>
+                            backgroundColor: '#FFFFFF',
+                            justifyContent: 'center'}}>
+                            <AntDesign name="pluscircleo" size={32} color="#194260" style={{alignSelf:'center'}}/>
                         </View>,
                     tabBarStyle: {
                         backgroundColor: '#194260',
-                        height:'8%' 
                     },
                     tabBarLabel: "Plan a Trip",
                     tabBarLabelStyle: {
                         color: 'white',
-                        marginBottom:'-3%', 
-                        // marginTop:'3%'
-                        // paddingBottom:'2%',
-                        // paddingTop:'-2%' 
                     }
                 }}
             />

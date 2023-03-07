@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState, useEffect} from 'react';
 import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import { Checkbox} from 'react-native-paper';
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
@@ -13,16 +13,21 @@ const theme = {
    },
  }
 
-const CheckBoxComponent = ({label}) => {
-   
-   const [checked, setChecked] = React.useState(false);
+const CheckBoxComponent = ({label, initialState, onChange}) => {
+   const [checked, setChecked] = useState<boolean>(false)
+
+   useEffect(() => {
+      setChecked(initialState)
+   }, [])
+
    return (
       <SafeAreaView style={styles.container}>
          <PaperProvider theme={theme}>
             <Checkbox.Item
                status={checked ? 'checked' : 'unchecked'}
                onPress={() => {
-                  setChecked(!checked);
+                  setChecked(!checked)
+                  onChange(!checked)
                }}
                position='leading'
                label={label}

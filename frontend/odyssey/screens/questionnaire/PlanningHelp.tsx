@@ -7,16 +7,19 @@ import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import React from 'react';
 import CheckBoxComponent from '../../components/CheckBox';
-import QuestionaireWhereAreYouTravelingTo from './QuestionaireWhereAreYouTravelingTo';
+import planningHelp from '../../data/planningHelp.json'
 
 const bgImage = require("../../assets/what-interests-you-bg.png")
 
-const QuestionnaireHelpPlanning = ({navigation}) => {
-    const [checked, setChecked] = React.useState(false);
-    const info = ["Where to stay", "What to do", "Where to work", "How to get there"];
+const PlanningHelpScreen = ({navigation}) => {
+
+    const handleSubmit = () => {
+        console.log(planningHelp)
+        navigation.navigate("QuestionnaireHowLongWillYouBeThere")
+    }
 
     return (
-<Screen preset="scroll">
+        <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '118%'}}>
                 <SafeAreaView>
                     <View>
@@ -29,23 +32,28 @@ const QuestionnaireHelpPlanning = ({navigation}) => {
                             <Text style={styles.italics}>Select all that apply.</Text>
                         </View>
                         <View style={{marginTop:"10%", alignItems: 'center'}}>
-                            {info.map((activity) => (
+                            {planningHelp.map((activity, index) => (
                                 <CheckBoxComponent
+                                    key={index}
                                     label={activity}
+                                    initialState={activity.name}
+                                    onChange={(result) => planningHelp[index].checked = result}
                                 />
                             ))}
                         </View>
                         <View>
-                            <Button style={{ marginTop: "30%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>
+                            <Button 
+                                style={{ marginTop: "30%", justifyContent: 'center', marginLeft:40}} 
+                                label="Next" 
+                                onPress={handleSubmit}
+                            />
                         </View>
                         <View>
                             <ProgressBar style={{marginTop: 100, marginLeft: 20, marginRight:20, height:17, }}progress={0.3} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
-            </ImageBackground>
-            
-</Screen>
-
+            </ImageBackground> 
+        </Screen>
     )
 }
 
@@ -101,4 +109,4 @@ const styles = StyleSheet.create({
     }
 })
  
-export default QuestionnaireHelpPlanning;
+export default PlanningHelpScreen;

@@ -1,5 +1,5 @@
-import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground, TextInput } from "react-native";
+import {useState} from 'react';
+import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
@@ -7,13 +7,13 @@ import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
 import CardButton from '../../components/CardButton';
-// import { number } from 'yup';
 
 const bgImage = require("../../assets/budget-bg.png")
 
-const QuestionnaireWhatsYourBudget = ({navigation}) => {
-    const [numberMax, onChangeMax] = React.useState('');
-    const [numberMin, onChangeMin] = React.useState('');
+const BudgetScreen = ({navigation}) => {
+    const [dailyRange, setDailyRange] = useState<{min: number, max: number}>({min: 60, max: 5000})
+    const [totalRange, setTotalRange] = useState<{min: number, max: number}>({min: 2000, max: 10000})
+    const [isDaily, setIsDaily] = useState<boolean>(true)
 
     return (
         <Screen preset="scroll">
@@ -28,18 +28,28 @@ const QuestionnaireWhatsYourBudget = ({navigation}) => {
                         <Text style={styles.secondary}>What's Your Budget?</Text>
                     </View>
                     <View style={styles.cardContent}>
-                        <CardButton label={''} onPress={function (): void {
-                            throw new Error('Function not implemented.');
-                        } }></CardButton>
-                        
-                        <RangeSlider from={60} to={5000} />
-                        
+                        <CardButton 
+                        labelLeft={'Per Day'}
+                        labelRight={'Total'} 
+                        onPressLeft={() => setIsDaily(true)} 
+                        onPressRight={() => setIsDaily(false)}/>
+                        {isDaily ? (
+                            <RangeSlider 
+                            from={dailyRange.min} 
+                            to={dailyRange.max} 
+                            />
+                        ) : (
+                            <RangeSlider 
+                            from={totalRange.min} 
+                            to={totalRange.max}
+                            />
+                        )}
                     </View>
                     <View>
                         <Button style={{width: '70%', marginTop: "10%", alignSelf:'center'}} label="Next" onPress={() => navigation.navigate("QuestionnaireIdeasForYou")}/>
                     </View>
                     <View>
-                        <ProgressBar style={{marginTop:"10%", marginLeft: "10%", marginRight:"10%", height:17}}progress={0.6} color="#FFBC59" />
+                        <ProgressBar style={{marginTop:"10%", marginLeft: "10%", marginRight:"10%", height:17}} progress={0.6} color="#FFBC59" />
                     </View>
                 </SafeAreaView>
             </ImageBackground>
@@ -101,4 +111,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default QuestionnaireWhatsYourBudget;
+export default BudgetScreen;

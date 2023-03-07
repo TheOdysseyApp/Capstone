@@ -6,11 +6,11 @@ import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import {Auth} from 'aws-amplify'
-import QuestionaireTravelingFrom from './QuestionnaireTravelingFrom';
+import QuestionaireTravelingFrom from './TravelingFrom';
 
 const bgImage = require("../../assets/questionnaire-start-screen-bg.png")
 
-const QuestionnaireStartScreen = ({navigation}) => {
+const StartScreen = ({navigation}) => {
     const handleSignOut = async () => {
         try {
             await Auth.signOut();
@@ -20,6 +20,7 @@ const QuestionnaireStartScreen = ({navigation}) => {
             console.log("Error signing out" + error)
         }
     }
+    
     return (
 <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '125%'}}>
@@ -74,4 +75,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireStartScreen;
+export default StartScreen;

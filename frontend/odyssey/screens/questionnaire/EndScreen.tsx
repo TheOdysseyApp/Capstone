@@ -11,7 +11,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 const bgImage = require("../../assets/ideas-for-you-bg.png")
 
-const QuestionnaireIdeasForYou = ({navigation}) => {
+const EndScreen = ({navigation}) => {
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '185%'}}>
@@ -33,7 +33,6 @@ const QuestionnaireIdeasForYou = ({navigation}) => {
                         Until then, please give us 24 hours to
                         complete your itinerary. Be sure to check
                         your email!
-                        
                         </Text>
                     </View>
 
@@ -76,4 +75,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireIdeasForYou;
+export default EndScreen;

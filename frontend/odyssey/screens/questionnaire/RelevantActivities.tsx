@@ -8,13 +8,16 @@ import {ProgressBar, Checkbox} from 'react-native-paper';
 import {Text, View, StyleSheet, ImageBackground} from "react-native";
 import CheckBoxComponent from '../../components/CheckBox';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import activities from '../../data/whatToDo.json'
 
 const bgImage = require("../../assets/what-do-bg.png") // change
 
-const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
-    const [checked, setChecked] = React.useState(false);
-    const info = ["Explore the cuisine", "Mellow outdoor activities", "Challenging outdoor activities", 
-    "Inner work", "Work at coworking spaces", "Meet others", "Shopping", "Go off-grid/unplug"];
+const RelevantActivitiesScreen = ({navigation}) => {
+
+    const handleSubmit = () => {
+        console.log(activities)
+        navigation.navigate("QuestionnaireWhatsYourBudget")
+    }
 
     return (
         <Screen preset="scroll">
@@ -29,15 +32,22 @@ const QuestionnaireWhatDoYouWantToDo = ({navigation}) => {
                         <Text style={styles.secondary}>What do you want to do while you're there?</Text>
                     </View>
                     <View style={{marginTop:"5%", alignItems: 'center'}}>
-                        {info.map((activity) => (
+                        {activities.map((activity, index) => (
                             <CheckBoxComponent
-                                label={activity}
+                                key={index}
+                                label={activity.name}
+                                initialState={activity.checked}
+                                onChange={(result) => activity[index].checked = result}
                             />
                         ))}
                     </View>
 
                     <View>
-                        <Button style={{ marginTop: "8%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireWhatsYourBudget")}/>
+                        <Button 
+                            style={{ marginTop: "8%", justifyContent: 'center', marginLeft:40}} 
+                            label="Next" 
+                            onPress={handleSubmit}
+                        />
                     </View>
 
                     <View>
@@ -92,4 +102,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireWhatDoYouWantToDo;
+export default RelevantActivitiesScreen;

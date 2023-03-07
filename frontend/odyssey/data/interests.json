@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Mountains",
+        "checked": false
+    },
+    {
+        "name": "Beach",
+        "checked": false
+    },
+    {
+        "name": "City",
+        "checked": false
+    },
+    {
+        "name": "Rural/Countryside",
+        "checked": false
+    },
+    {
+        "name": "Lake",
+        "checked": false
+    }
+]
