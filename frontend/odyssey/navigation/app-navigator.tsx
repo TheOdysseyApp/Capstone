@@ -17,7 +17,7 @@ import QuestionaireWhereAreYouTravelingTo from "../screens/questionnaire/Questio
 import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
 import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
 import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
-import Payment from "../components/Payment";
+import Payment from "../screens/payment/payment"
 
 const Stack = createNativeStackNavigator()
 
@@ -162,7 +162,7 @@ const TabNavigator = () => {
         <Tab.Navigator>
             <Tab.Screen
                 name="Payment"
-                component={payment}
+                component={Payment}
                 options={{
                     headerShown: false,
                     tabBarIcon: () => <AntDesign name="key" size={24} color="white" />,
