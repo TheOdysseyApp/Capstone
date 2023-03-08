@@ -10,7 +10,6 @@ export const onCreateQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -20,6 +19,7 @@ export const onCreateQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -37,7 +37,6 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -47,6 +46,7 @@ export const onUpdateQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -64,7 +64,6 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -74,6 +73,7 @@ export const onDeleteQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -87,13 +87,14 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser(filter: $filter) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version
@@ -107,13 +108,14 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser(filter: $filter) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version
@@ -127,13 +129,14 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser(filter: $filter) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version

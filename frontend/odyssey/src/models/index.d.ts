@@ -24,6 +24,7 @@ type EagerQuestionnaire = {
   readonly interests?: (string | null)[] | null;
   readonly tripReason?: (string | null)[] | null;
   readonly userID: string;
+  readonly status: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -46,6 +47,7 @@ type LazyQuestionnaire = {
   readonly interests?: (string | null)[] | null;
   readonly tripReason?: (string | null)[] | null;
   readonly userID: string;
+  readonly status: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -63,10 +65,11 @@ type EagerUser = {
   };
   readonly id: string;
   readonly authID: string;
-  readonly fullName: string;
-  readonly username: string;
+  readonly firstName: string;
+  readonly email: string;
   readonly description?: string | null;
   readonly FilledOut?: (Questionnaire | null)[] | null;
+  readonly lastName: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -78,10 +81,11 @@ type LazyUser = {
   };
   readonly id: string;
   readonly authID: string;
-  readonly fullName: string;
-  readonly username: string;
+  readonly firstName: string;
+  readonly email: string;
   readonly description?: string | null;
   readonly FilledOut: AsyncCollection<Questionnaire>;
+  readonly lastName: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

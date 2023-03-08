@@ -11,7 +11,6 @@ export const createQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -21,6 +20,7 @@ export const createQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -39,7 +39,6 @@ export const updateQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -49,6 +48,7 @@ export const updateQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -67,7 +67,6 @@ export const deleteQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -77,6 +76,7 @@ export const deleteQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -93,13 +93,14 @@ export const createUser = /* GraphQL */ `
     createUser(input: $input, condition: $condition) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version
@@ -116,13 +117,14 @@ export const updateUser = /* GraphQL */ `
     updateUser(input: $input, condition: $condition) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version
@@ -139,13 +141,14 @@ export const deleteUser = /* GraphQL */ `
     deleteUser(input: $input, condition: $condition) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version
