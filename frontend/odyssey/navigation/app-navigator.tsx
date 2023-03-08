@@ -23,7 +23,7 @@ import QuestionaireTravelingFrom from "../screens/questionnaire/TravelingFrom";
 import TripsScreen from "../screens/trips/Trips";
 import SavedScreen from "../screens/saved/Saved";
 import ProfileScreen from "../screens/profile/Profile";
-import Payment from "../components/Payment";
+import Payment from "../screens/payment/Payment";
 
 const Stack = createNativeStackNavigator()
 
