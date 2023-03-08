@@ -198,17 +198,6 @@ const TabNavigator = () => {
     )
 }
 
-// const styles = StyleSheet.create({
-//     bar: {
-        
-//     },
-//     text: {
-//         textAlign: 'center',
-//         color: 'white',
-//         fontSize: 20,
-//     }
-// })
-
 //TODO - type check these props 
 export const AppNavigator = (props) => {
     return (

@@ -10,7 +10,6 @@ import CardButton from '../../components/CardButton';
 import { useStores } from '../../mobx-models';
 import { DataStore } from 'aws-amplify';
 import { Questionnaire } from '../../src/models';
-import moment from 'moment'
 
 const bgImage = require("../../assets/budget-bg.png")
 
@@ -19,7 +18,7 @@ const BudgetScreen = ({navigation}) => {
     const [totalRange, setTotalRange] = useState<{min: number, max: number}>({min: 2000, max: 10000})
     const [isDaily, setIsDaily] = useState<boolean>(true)
 
-    const {questionnaireStore} = useStores()
+    const {questionnaireStore, userStore} = useStores()
 
     const handleSubmit = () => {
         questionnaireStore.setIsBudgetPerDay(isDaily)
@@ -49,7 +48,7 @@ const BudgetScreen = ({navigation}) => {
                 maxBudget: questionnaireStore.maxBudget,
                 interests: questionnaireStore.interests,
                 tripReason: questionnaireStore.tripReason,
-                userID: 'TBD'
+                userID: userStore.uid
             })
         )
         navigation.navigate("QuestionnaireIdeasForYou")

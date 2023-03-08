@@ -7,11 +7,13 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import SelectCalendar from '../../components/SelectCalendar';
 import { useState } from "react";
 import { useStores } from "../../mobx-models";
+import CardButton from "../../components/CardButton";
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
 
 const SelectDatesScreen = ({navigation}) => {
     const [dateRange, setDateRange] = useState<{startDate: any, endDate: any}>({startDate: undefined, endDate: undefined})
     const [error, setError] = useState<string>("")
+    const [isExact, setIsExact] = useState<boolean>(true)
     const {questionnaireStore} = useStores()
 
     const handleSubmit = () => {
@@ -40,13 +42,22 @@ const SelectDatesScreen = ({navigation}) => {
                     </View>
                     <View style={styles.calendar}>
                         <View style={styles.cardContent}>
-                            <Text style={styles.tertiary} >I'm Flexible</Text>
-                            <SelectCalendar 
+                            <CardButton 
+                            labelLeft="Choose Exact Dates"
+                            labelRight="I'm Flexible"
+                            onPressLeft={() => setIsExact(true)}
+                            onPressRight={() => setIsExact(false)}
+                            />
+                            {isExact ? (
+                                <SelectCalendar 
                                 startDate={dateRange.startDate} 
                                 endDate={dateRange.endDate} 
                                 onSubmit={({startDate, endDate}) => {
                                     setDateRange(prev => ({...prev, startDate: startDate, endDate: endDate}))
                                 }}/>
+                            ) : (
+                                null
+                            )}
                         </View>   
                      </View>
 
@@ -108,7 +119,6 @@ const styles = StyleSheet.create({
     },
     tertiary:{
         textAlign: "center",
-        // fontStyle: 'italic',
         marginTop: 10,
         fontSize: 12,
         fontWeight: '300',
@@ -120,12 +130,10 @@ const styles = StyleSheet.create({
         width: '10%'
     },
     cardContent:{
-        backgroundColor: '#ECF0F3',
+        backgroundColor: '#F4F4F4',
         height: '75%',
         borderRadius: 10,
         borderWidth: 0.5,
-        paddingTop:'2%'
-        
     },
     cardButton:{
         backgroundColor: '#ECF0F3',
