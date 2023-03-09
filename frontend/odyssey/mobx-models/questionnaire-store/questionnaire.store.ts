@@ -89,6 +89,9 @@ export const QuestionnaireStoreModel = types
             self.maxBudget = undefined
             self.interests = undefined
             self.tripReasons = undefined
+            self.duration = undefined
+            self.month = undefined
+
         }
     }))
     .actions((self) => ({
