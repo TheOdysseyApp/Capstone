@@ -13,7 +13,9 @@ export const QuestionnaireStoreModel = types
         minBudget: types.maybe(types.number),
         maxBudget: types.maybe(types.number),
         interests: types.maybe(types.frozen([])),
-        tripReasons: types.maybe(types.frozen([]))
+        tripReasons: types.maybe(types.frozen([])),
+        duration: types.maybe(types.string),
+        month: types.maybe(types.string)
     })
     .actions((self) => ({
         setWhereFrom(whereFrom) {
@@ -68,6 +70,12 @@ export const QuestionnaireStoreModel = types
             catch (error) {
                 console.log("Error setting activities: " + error)
             }
+        },
+        setDuration(duration) {
+            self.duration = duration;
+        },
+        setMonth(month) {
+            self.month = month;
         },
         resetQuestionnaireData() {
             self.whereFrom = undefined
