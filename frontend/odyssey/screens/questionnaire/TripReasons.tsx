@@ -28,16 +28,15 @@ const TripReasonsScreen = ({navigation}) => {
 
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '120%'}} >
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '121%'}} >
                 <SafeAreaView>
-                    <View>
+                  
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
-                    </View>
-                    <View>
+                    
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What brings you here?</Text>
-                    </View>
+                  
                     <View style={{marginTop:"10%", alignItems: 'center'}}>
                             {info.map((trip, index) => (
                                 <CheckBoxComponent
@@ -48,12 +47,8 @@ const TripReasonsScreen = ({navigation}) => {
                                 />
                             ))}
                     </View>
-                    <View>
-                        <Button style={{ marginTop: "10%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>
-                    </View>
-                    <View>
-                        <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
-                    </View>
+                        <Button style={styles.button} label="Next" onPress={handleSubmit}/>
+                        <ProgressBar style={styles.progressBar}progress={0.3} color="#FFBC59" />
                 </SafeAreaView>
             </ImageBackground>
         </Screen>
@@ -61,6 +56,12 @@ const TripReasonsScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    progressBar:{
+        marginTop: "20%", 
+        marginLeft: 20, 
+        marginRight:20, 
+        height:'10%'
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
@@ -84,8 +85,10 @@ const styles = StyleSheet.create({
     },
     button:{
         justifyContent: 'center',
-        marginTop: "20%",
-        width: '10%'
+        marginTop: "13.5%",
+        marginLeft:'18%',
+        height: '9%',
+        width: '65%',
     }
 })
 

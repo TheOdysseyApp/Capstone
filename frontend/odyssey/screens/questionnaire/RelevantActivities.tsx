@@ -33,14 +33,10 @@ const RelevantActivitiesScreen = ({navigation}) => {
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '120%'}}>
                 <SafeAreaView>
-                    <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>
                         <Header/>
-                    </View>
-                    <View>
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
-                        <Text style={styles.secondary}>What do you want to do while you're there?</Text>
-                    </View>
+                        <Text style={styles.secondary}>What do you want to do{'\n'} while you're there?</Text>
                     <View style={{marginTop:"5%", alignItems: 'center'}}>
                         {activities.map((activity, index) => (
                             <CheckBoxComponent
@@ -51,18 +47,12 @@ const RelevantActivitiesScreen = ({navigation}) => {
                             />
                         ))}
                     </View>
-
-                    <View>
                         <Button 
-                            style={{ marginTop: "8%", justifyContent: 'center', marginLeft:40}} 
+                            style={styles.button} 
                             label="Next" 
                             onPress={handleSubmit}
                         />
-                    </View>
-
-                    <View>
-                        <ProgressBar style={{marginTop: "5%", marginLeft: 20, marginRight:20, height:17}}progress={0.6} color="#FFBC59" />
-                    </View>
+                        <ProgressBar style={styles.progressBar}progress={0.5} color="#FFBC59" />
                 </SafeAreaView>
             </ImageBackground>
         </Screen>
@@ -70,6 +60,19 @@ const RelevantActivitiesScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    progressBar:{
+        marginTop: "15%", 
+        marginLeft: 20, 
+        marginRight:20, 
+        height:'10%'
+    },
+    button:{
+        marginTop: "8%", 
+        justifyContent: 'center', 
+        marginLeft:'20%',
+        width:'65%',
+        height:'9%'
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
@@ -87,26 +90,21 @@ const styles = StyleSheet.create({
     secondary:{
         textAlign: "center",
         fontStyle: 'italic',
-        marginTop: 27,
+        marginTop: '2%',
         fontSize: 20,
         fontWeight: '300'
-    },
-    button:{
-        justifyContent: 'center',
-        marginTop: "20%",
-        width: '10%'
     },
     smallText:{
         textAlign: "center",
         fontStyle: 'italic',
-        marginTop: 35,
+        // marginTop: 35,
         fontSize: 13,
         fontWeight: '300'
     },
     checkbox:{
         textAlign: "center",
         fontStyle: 'italic',
-        top: 35,
+        // top: 35,
         fontSize: 13,
         fontWeight: '300'
     }

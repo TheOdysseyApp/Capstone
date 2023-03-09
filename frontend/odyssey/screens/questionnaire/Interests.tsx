@@ -32,17 +32,13 @@ const InterestsScreen = ({navigation}) => {
     }
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '130%'}} >
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '112%'}} >
                 <SafeAreaView>
-                    <View>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
-                    </View>
-                        <View>
-                            <Text style={styles.header}>Let’s Plan Your Trip!</Text>
-                            <Text style={styles.secondary}>What interests you?</Text>
-                            <Text style={styles.smallText}>Select all that apply.</Text>
-                        </View>
+                        <Text style={styles.header}>Let’s Plan Your Trip!</Text>
+                        <Text style={styles.secondary}>What interests you?</Text>
+                        <Text style={styles.smallText}>Select all that apply.</Text>
                         <View style={{marginTop:"10%", alignItems: 'center'}}>
                             {interestsData.map((destination, index) => (
                                 <CheckBoxComponent
@@ -56,14 +52,9 @@ const InterestsScreen = ({navigation}) => {
                             ))}
 
                         </View>
-
-                        <View>
-                        <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>
-                        </View>
-
-                        <View>
-                            <ProgressBar style={{marginTop: "12%", marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
-                        </View>
+                        <Button style={styles.button} label="Next" onPress={handleSubmit}/>
+                        <ProgressBar style={styles.progressBar}progress={0.2} color="#FFBC59" />
+                        
                 </SafeAreaView>
             </ImageBackground>
         </Screen>
@@ -71,6 +62,12 @@ const InterestsScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    progressBar:{
+        marginTop: "20%", 
+        marginLeft: 20, 
+        marginRight:20, 
+        height:'10%'
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
@@ -93,14 +90,19 @@ const styles = StyleSheet.create({
         fontWeight: '300'
     },
     button:{
-        justifyContent: 'center',
-        marginTop: "20%",
-        width: '10%'
+        marginTop: "16.5%",
+        justifyContent: 'center', 
+        // marginLeft:40,
+        // marginTop: "40%", 
+        // justifyContent: 'center', 
+        marginLeft:'18%',
+        height: '10%',
+        width: '65%',
     },
     smallText:{
         textAlign: "center",
         fontStyle: 'italic',
-        marginTop: 35,
+        marginTop: 10,
         fontSize: 13,
         fontWeight: '300'
     },
