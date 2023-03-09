@@ -22,7 +22,6 @@ export const RootStore = types
     }))
 
 let _store;
-
 export const useStores = () => {
     const store = useMemo(() => {
         if(!_store) {

@@ -21,29 +21,17 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 })
 
 const SelectCalendar = ({startDate, endDate, onSubmit}) => { 
-  // const [range, setRange] = React.useState<{
-  //                             startDate: undefined
-  //                             endDate: undefined
-  //                           }>({ startDate: undefined, endDate: undefined })
 
   const [open, setOpen] = React.useState(false);
 
   const onDismiss = React.useCallback(() => {
     setOpen(false);
-    // ChangeText(range.startDate, range.endDate)
   }, [setOpen]);
-  
-
-  // const ChangeText = React.useCallback((startDate, endDate) => {
-  //   DateText = startDate.toString().slice(0,15) + ' - ' + endDate.toString().slice(0,15)
-  //   DateText = startDate + ' - ' + endDate
-  // }, []);
 
   const onConfirm = React.useCallback(
     ({ startDate, endDate }) => {
       setOpen(false);
       onSubmit({startDate, endDate})
-      // setRange({ startDate, endDate });
       setShow(!show)
     },
     [setOpen, onSubmit]
@@ -69,14 +57,6 @@ const SelectCalendar = ({startDate, endDate, onSubmit}) => {
             onConfirm={onConfirm}
           />
         </View>
-        {/* <View>
-          {show && <Text style={{alignSelf:"center", marginTop:'5%'}} > 
-                {[
-                  range.startDate ? dateFormatter.format(range.startDate) : '',
-                  range.endDate ? dateFormatter.format(range.endDate) : '',
-                ].join(' - ')}
-          </Text>}
-        </View> */}
       </PaperProvider>
     </SafeAreaView>
   );

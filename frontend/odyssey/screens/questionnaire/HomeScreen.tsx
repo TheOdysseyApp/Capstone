@@ -1,50 +1,25 @@
-import {useEffect} from 'react';
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import React from 'react';
+import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
 import Screen from '../../components/Screen';
 import Header from '../../components/Header';
 import Button from "../../components/Button";
 import HomeImageButtons from "../../components/HomeImageButtons";
 import TripSuggestion from "../../components/TripSuggestion";
-import { Auth, DataStore } from 'aws-amplify';
-import { User } from '../../src/models';
-import { useStores } from '../../mobx-models';
 
 const bgImage = require("../../assets/what-interests-you-bg.png")
 
 const HomeScreen = ({navigation}) => {
-    const {userStore} = useStores()
-
-    // useEffect(() => {
-    //     ; (async function() {
-    //         // make generator function with this code and calling that func here (in userstore) 
-    //         const {attributes} = await Auth.currentAuthenticatedUser()
-    //         const user: any = await DataStore.query(User, (doc) => doc.authID.eq(attributes.sub))
-    //         userStore.setUid(user.id)
-    //         userStore.setName(user.fullName)
-    //         userStore.setEmail(user.username)
-    //     })()
-    // }, [])
-
     return (
         <Screen preset="scroll">
             <SafeAreaView>
                 <Header/>
+            </SafeAreaView>
 
             <View>
-                <Button textStyle={{fontSize: 13}} 
-                    style={{ 
-                        paddingVertical: '2%', 
-                        width: '45%', 
-                        marginBottom: "5%", 
-                        marginTop: "5%", 
-                        marginLeft:'27%'
-                    }} 
-                    label="Plan a Trip" 
-                    onPress={() => navigation.navigate("Questionnaire")}
-                />
+                <Button textStyle={{fontSize: 13}} style={{ paddingVertical: '2%', width: '45%', marginBottom: "5%", marginTop: "5%", marginLeft:'27%'}} label="Plan a Trip" onPress={() => navigation.navigate("QuestionnaireStartScreen")}/>
             </View>
 
-            <View style={{alignItems: 'center'}}>
+            <View>
                 <HomeImageButtons source={require("../../assets/book-a-stay.png")} onPress={() => console.log("Book a Stay pressed")}/>
                 <HomeImageButtons source={require("../../assets/book-an-adventure.png")} onPress={() => console.log("Book an Adventure pressed")}/>
                 <HomeImageButtons source={require("../../assets/find-a-coworking-space.png")} onPress={() => console.log("Find a Coworking Space pressed")}/>
@@ -62,14 +37,8 @@ const HomeScreen = ({navigation}) => {
 
             <View>
                 <Text style={styles.header}>Not sure where? Let's explore!</Text>
-                <Button 
-                    textStyle={{fontSize: 13}} 
-                    style={{ paddingVertical: '2%', width: '45%', marginBottom: "5%", marginTop: "3%", marginLeft:'27%'}} 
-                    label="Plan a Trip" 
-                    onPress={() => navigation.navigate("Questionnaire")}
-                />
+                <Button textStyle={{fontSize: 13}} style={{ paddingVertical: '2%', width: '45%', marginBottom: "5%", marginTop: "3%", marginLeft:'27%'}} label="Plan a Trip" onPress={() => navigation.navigate("QuestionnaireStartScreen")}/>
             </View>
-            </SafeAreaView>
         </Screen>
     )
 }
@@ -86,9 +55,7 @@ const styles = StyleSheet.create({
         width: "80%",
         justifyContent: 'space-evenly',
         marginBottom: '4%',
-        marginHorizontal: '10%',
-        alignItems: 'center',
-        marginVertical: '10%'
+        marginHorizontal: '10%'
     },
 })
 
