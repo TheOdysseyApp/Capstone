@@ -10,6 +10,13 @@ import { useStores } from "../../mobx-models";
 import CardButton from "../../components/CardButton";
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
 
+
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+
 const SelectDatesScreen = ({navigation}) => {
     const [dateRange, setDateRange] = useState<{startDate: any, endDate: any}>({startDate: undefined, endDate: undefined})
     const [error, setError] = useState<string>("")
@@ -49,12 +56,24 @@ const SelectDatesScreen = ({navigation}) => {
                             onPressRight={() => setIsExact(false)}
                             />
                             {isExact ? (
-                                <SelectCalendar 
-                                startDate={dateRange.startDate} 
-                                endDate={dateRange.endDate} 
-                                onSubmit={({startDate, endDate}) => {
-                                    setDateRange(prev => ({...prev, startDate: startDate, endDate: endDate}))
-                                }}/>
+                                <View style={styles.calendarContainer}>
+                                    {dateRange.startDate && dateRange.endDate ? (
+                                        <>
+                                        <Text style={{textAlign: 'center'}}>{dateFormatter.format(dateRange.startDate)}</Text>
+                                        <Text style={{textAlign: 'center'}}>To</Text>
+                                        <Text style={{textAlign: 'center'}}>{dateFormatter.format(dateRange.endDate)}</Text>
+                                        </>
+                                    ): (
+                                        null
+                                    )}
+                                    <SelectCalendar 
+                                    startDate={dateRange.startDate} 
+                                    endDate={dateRange.endDate} 
+                                    onSubmit={({startDate, endDate}) => {
+                                        setDateRange(prev => ({...prev, startDate: startDate, endDate: endDate}))
+                                    }}
+                                    />
+                                </View>
                             ) : (
                                 null
                             )}
@@ -157,6 +176,9 @@ const styles = StyleSheet.create({
     },
     calendar:{
         padding:'14%',
+    },
+    calendarContainer: {
+        marginTop: '5%',
     }
 })
 

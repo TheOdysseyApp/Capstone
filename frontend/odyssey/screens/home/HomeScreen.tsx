@@ -14,16 +14,16 @@ const bgImage = require("../../assets/what-interests-you-bg.png")
 const HomeScreen = ({navigation}) => {
     const {userStore} = useStores()
 
-    useEffect(() => {
-        ; (async function() {
-            // make generator function with this code and calling that func here (in userstore) 
-            const {attributes} = await Auth.currentAuthenticatedUser()
-            const user: any = await DataStore.query(User, (doc) => doc.authID.eq(attributes.sub))
-            userStore.setUid(user.id)
-            userStore.setName(user.fullName)
-            userStore.setEmail(user.username)
-        })()
-    }, [])
+    // useEffect(() => {
+    //     ; (async function() {
+    //         // make generator function with this code and calling that func here (in userstore) 
+    //         const {attributes} = await Auth.currentAuthenticatedUser()
+    //         const user: any = await DataStore.query(User, (doc) => doc.authID.eq(attributes.sub))
+    //         userStore.setUid(user.id)
+    //         userStore.setName(user.fullName)
+    //         userStore.setEmail(user.username)
+    //     })()
+    // }, [])
 
     return (
         <Screen preset="scroll">
