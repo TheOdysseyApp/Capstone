@@ -20,11 +20,13 @@ const ConfirmCodeScreen = ({route, navigation}) => {
             const { event } = payload;
             if (event === 'autoSignIn') {
                 const {attributes} = payload.data;
+                console.log(attributes);
                 await DataStore.save(
                     new User({
                         authID: attributes.sub,
-                        fullName: attributes.name,
-                        username: attributes.email,
+                        firstName: attributes.firstName,
+                        lastName: attributes.lastName,
+                        email: attributes.email,
                         description: ""
                     })
                 )
