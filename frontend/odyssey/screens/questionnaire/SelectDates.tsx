@@ -8,6 +8,7 @@ import SelectCalendar from '../../components/SelectCalendar';
 import { useState } from "react";
 import { useStores } from "../../mobx-models";
 import CardButton from "../../components/CardButton";
+import MenuButton from "../../components/MenuButton";
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
 
 
@@ -22,6 +23,8 @@ const SelectDatesScreen = ({navigation}) => {
     const [error, setError] = useState<string>("")
     const [isExact, setIsExact] = useState<boolean>(true)
     const {questionnaireStore} = useStores()
+
+    const menuOptions = ["3 days", "A week", "A month"]
 
     const handleSubmit = () => {
         if(dateRange.startDate && dateRange.endDate) {
@@ -57,15 +60,9 @@ const SelectDatesScreen = ({navigation}) => {
                             />
                             {isExact ? (
                                 <View style={styles.calendarContainer}>
-                                    {dateRange.startDate && dateRange.endDate ? (
-                                        <>
-                                        <Text style={{textAlign: 'center'}}>{dateFormatter.format(dateRange.startDate)}</Text>
-                                        <Text style={{textAlign: 'center'}}>To</Text>
-                                        <Text style={{textAlign: 'center'}}>{dateFormatter.format(dateRange.endDate)}</Text>
-                                        </>
-                                    ): (
-                                        null
-                                    )}
+                                    <Text style={styles.date}>{dateRange.startDate ? dateFormatter.format(dateRange.startDate) : "Start Date"}</Text>
+                                    <Text style={styles.tertiary}>To</Text>
+                                    <Text style={styles.date}>{dateRange.endDate ?  dateFormatter.format(dateRange.endDate) : "End Date"}</Text>
                                     <SelectCalendar 
                                     startDate={dateRange.startDate} 
                                     endDate={dateRange.endDate} 
@@ -75,7 +72,11 @@ const SelectDatesScreen = ({navigation}) => {
                                     />
                                 </View>
                             ) : (
-                                null
+                                <View style={styles.containerStyle}>
+                                    {menuOptions.map((option, index) => (
+                                        <MenuButton key={index} label={option} onPress={() => console.log(option)}/>
+                                    ))}
+                                </View>
                             )}
                         </View>   
                      </View>
@@ -103,8 +104,6 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 4},
         shadowOpacity: 0.1,
         shadowRadius: 2,
-        // margin: -10,
-        // height:'100%',
         alignself: 'center', 
         marginRight:'14%', 
         marginTop:'10%',
@@ -138,10 +137,9 @@ const styles = StyleSheet.create({
     },
     tertiary:{
         textAlign: "center",
-        marginTop: 10,
         fontSize: 12,
         fontWeight: '300',
-        marginBottom: 18
+        marginBottom: '3%'
     },
     button:{
         justifyContent: 'center',
@@ -171,14 +169,28 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     containerStyle:{
-        padding: 0,
-        flexDirection: 'row'
+        marginTop: '5%',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     calendar:{
         padding:'14%',
     },
     calendarContainer: {
         marginTop: '5%',
+    },
+    date: {
+        textAlign: 'center',
+        marginBottom: '3%',
+        color: '#194260',
+        fontWeight: 'bold',
+        width: '60%',
+        borderWidth: 0.5,
+        borderRadius: 5,
+        backgroundColor: '#D3D3D3',
+        overflow: 'hidden',
+        alignSelf: 'center',
+        paddingVertical: '2%'
     }
 })
 

@@ -57,14 +57,6 @@ const SelectCalendar = ({startDate, endDate, onSubmit}) => {
             onConfirm={onConfirm}
           />
         </View>
-        {/* <View>
-          {show && <Text style={{alignSelf:"center", marginTop:'5%'}} > 
-                {[
-                  range.startDate ? dateFormatter.format(range.startDate) : '',
-                  range.endDate ? dateFormatter.format(range.endDate) : '',
-                ].join(' - ')}
-          </Text>}
-        </View> */}
       </PaperProvider>
     </SafeAreaView>
   );
