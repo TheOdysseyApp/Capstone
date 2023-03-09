@@ -77,6 +77,13 @@ const AppStack = () => {
 const QuestionnaireNavigator = () => {
     return (
         <Stack.Navigator>
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{
+                    headerShown: false
+                }}
+            />
             <Stack.Screen 
                 name="QuestionnaireStart"
                 component={QuestionnaireStartScreen}
