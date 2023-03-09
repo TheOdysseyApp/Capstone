@@ -48,7 +48,8 @@ const BudgetScreen = ({navigation}) => {
                 maxBudget: questionnaireStore.maxBudget,
                 interests: questionnaireStore.interests,
                 tripReason: questionnaireStore.tripReason,
-                userID: userStore.uid
+                userID: userStore.uid,
+                status: ""
             })
         )
         navigation.navigate("QuestionnaireIdeasForYou")

@@ -10,13 +10,38 @@ import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { useStores } from '../../mobx-models';
 
+
 const bgImage = require("../../assets/ideas-for-you-bg.png")
 
 const EndScreen = ({navigation}) => {
     const {questionnaireStore} = useStores()
 
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    })
     useEffect(() => {
         console.log(questionnaireStore)
+
+    // will use later: body of email 
+
+    //TODO: add name of user from userstore
+    // 'kassabm@uci.edu',
+    //     'User\'s Questionnaire Responses',
+    // `User's DynamoDB ID: ${questionnaireStore.uid}\n
+    // Depature location: ${questionnaireStore.whereFrom}\n 
+    // Destination location: ${questionnaireStore.destination}\n
+    // Need help planning: ${questionnaireStore.planningOptions}\n
+    // Trip Start Date: ${dateFormatter.format(questionnaireStore.startDate)}\n
+    // Trip End Date: ${dateFormatter.format(questionnaireStore.endDate)}\n
+    // Activities Interested In: ${questionnaireStore.activities}\n
+    // Is Budget Per Day? (or Total): ${questionnaireStore.isBudgetPerDay}
+    // Minimum Budget: ${questionnaireStore.minBudget}\n
+    // Depature location: ${questionnaireStore.maxBudget}\n
+    // Activities interested in: ${questionnaireStore.interests}\n
+    // Reason for Trip: ${questionnaireStore.maxBudget}`
+    
     }, [])
     return (
         <Screen preset="scroll">
