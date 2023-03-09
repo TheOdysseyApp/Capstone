@@ -9,15 +9,17 @@ import ConfirmCodeScreen from "../screens/auth/ConfirmCodeScreen";
 import ForgotPassword from "../screens/auth/ForgotPassword";
 import ResetPassword from "../screens/auth/ResetPassword";
 import HomeScreen from "../screens/home/HomeScreen";
-import QuestionnaireHelpPlanning from "../screens/questionnaire/QuestionaireHelpPlanning";
-import QuestionnaireStartScreen from "../screens/questionnaire/QuestionnaireStartScreen";
-import QuestionnaireWhatInterestsYou from "../screens/questionnaire/QuestionnaireWhatInterestsYou";
-import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/QuestionnaireWhatBringsYouHere";
-import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/QuestionnaireHowLongWillYouBeThere";
-import QuestionnaireWhereAreYouTravelingTo from "../screens/questionnaire/QuestionaireWhereAreYouTravelingTo";
-import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/QuestionnaireWhatDoYouWantToDo";
-import QuestionnaireWhatsYourBudget from "../screens/questionnaire/QuestionnaireWhatsYourBudget";
-import QuestionnaireIdeasForYou from "../screens/questionnaire/QuestionnaireIdeasForYou";
+import QuestionnaireHelpPlanning from "../screens/questionnaire/PlanningHelp";
+import QuestionnaireStartScreen from "../screens/questionnaire/StartScreen";
+import QuestionnaireWhatInterestsYou from "../screens/questionnaire/Interests";
+import QuestionnaireWhatBringsYouHere from "../screens/questionnaire/TripReasons";
+import QuestionnaireHowLongWillYouBeThere from "../screens/questionnaire/SelectDates";
+import QuestionnaireWhereAreYouTravelingTo from "../screens/questionnaire/TravelingTo";
+import QuestionnaireWhatDoYouWantToDo from "../screens/questionnaire/RelevantActivities";
+import QuestionnaireWhatsYourBudget from "../screens/questionnaire/Budget";
+import QuestionnaireIdeasForYou from "../screens/questionnaire/EndScreen";
+import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 'react-native'
+import QuestionaireTravelingFrom from "../screens/questionnaire/TravelingFrom";
 
 const Stack = createNativeStackNavigator()
 
@@ -145,6 +147,13 @@ const QuestionnaireNavigator = () => {
                     headerShown: false
                 }}
             />
+             <Stack.Screen 
+                name="QuestionaireTravelingFrom"
+                component={QuestionaireTravelingFrom}
+                options={{
+                    headerShown: false
+                }}
+            />
         </Stack.Navigator>
     )
 }
@@ -154,6 +163,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
+            {/* may become a stack navigator if home screen has different screens */}
             <Tab.Screen
                 name="LandingPage"
                 component={HomeScreen}
@@ -174,13 +184,20 @@ const TabNavigator = () => {
                 component={QuestionnaireNavigator}
                 options={{
                     headerShown: false,
-                    tabBarIcon: () => <AntDesign name="pluscircleo" size={24} color="white" />,
+                    tabBarIcon: () => 
+                        <View style={{
+                            width: 35,
+                            height: 35,
+                            borderRadius: 35 / 2,
+                            backgroundColor: '#FFFFFF',}}>
+                            <AntDesign name="pluscircleo" size={32} color="#194260" style={{position: "absolute", left: 35/2 - 16, top: 35/2 - 16}}/>
+                        </View>,
                     tabBarStyle: {
-                        backgroundColor: '#194260'
+                        backgroundColor: '#194260',
                     },
-                    tabBarLabel: "Plan a Trip!",
+                    tabBarLabel: "Plan a Trip",
                     tabBarLabelStyle: {
-                        color: 'white'
+                        color: 'white',
                     }
                 }}
             />
@@ -188,6 +205,16 @@ const TabNavigator = () => {
     )
 }
 
+// const styles = StyleSheet.create({
+//     bar: {
+        
+//     },
+//     text: {
+//         textAlign: 'center',
+//         color: 'white',
+//         fontSize: 20,
+//     }
+// })
 
 //TODO - type check these props 
 export const AppNavigator = (props) => {

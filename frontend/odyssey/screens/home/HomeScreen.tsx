@@ -1,25 +1,79 @@
-import { useEffect } from "react"
-import Screen from "../../components/Screen"
-import { Text } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
-import {Auth} from 'aws-amplify'
+import React from 'react';
+import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
+import Screen from '../../components/Screen';
+import Header from '../../components/Header';
+import Button from "../../components/Button";
+import HomeImageButtons from "../../components/HomeImageButtons";
+import TripSuggestion from "../../components/TripSuggestion";
 
-const HomeScreen = (props) => {
+const bgImage = require("../../assets/what-interests-you-bg.png")
 
-    useEffect(() => {
-        (async function() {
-            const {attributes} = await Auth.currentAuthenticatedUser()
-            console.log(attributes)
-        })()
-    }, [])
-
+const HomeScreen = ({navigation}) => {
     return (
         <Screen preset="scroll">
             <SafeAreaView>
-                <Text>Hello</Text>
+                <Header/>
+
+            <View>
+                <Button textStyle={{fontSize: 13}} 
+                    style={{ 
+                        paddingVertical: '2%', 
+                        width: '45%', 
+                        marginBottom: "5%", 
+                        marginTop: "5%", 
+                        marginLeft:'27%'
+                    }} 
+                    label="Plan a Trip" 
+                    onPress={() => navigation.navigate("Questionnaire")}
+                />
+            </View>
+
+            <View style={{alignItems: 'center'}}>
+                <HomeImageButtons source={require("../../assets/book-a-stay.png")} onPress={() => console.log("Book a Stay pressed")}/>
+                <HomeImageButtons source={require("../../assets/book-an-adventure.png")} onPress={() => console.log("Book an Adventure pressed")}/>
+                <HomeImageButtons source={require("../../assets/find-a-coworking-space.png")} onPress={() => console.log("Find a Coworking Space pressed")}/>
+            </View>
+
+            <View>
+                <Text style={styles.header}>Browse Suggested Remote Trips</Text>
+            </View>
+
+            <View style={styles.imageButtonContainer}>
+                <TripSuggestion source={require("../../assets/monteverde-cr.png")} onPress={() => console.log("Monteverde Trip Suggestion pressed")}/>
+                <TripSuggestion source={require("../../assets/tulum-mx.png")} onPress={() => console.log("Tulum Trip Suggestion pressed")}/>
+                <TripSuggestion source={require("../../assets/sedona-az.png")} onPress={() => console.log("Sedona Trip Suggestion pressed")}/>
+            </View>
+
+            <View>
+                <Text style={styles.header}>Not sure where? Let's explore!</Text>
+                <Button 
+                    textStyle={{fontSize: 13}} 
+                    style={{ paddingVertical: '2%', width: '45%', marginBottom: "5%", marginTop: "3%", marginLeft:'27%'}} 
+                    label="Plan a Trip" 
+                    onPress={() => navigation.navigate("Questionnaire")}
+                />
+            </View>
             </SafeAreaView>
         </Screen>
     )
 }
 
-export default HomeScreen
+const styles = StyleSheet.create({
+    header: {
+        fontSize: 18,
+        fontWeight: '600',
+        textAlign: "center",
+        marginVertical: '5%'
+    },
+    imageButtonContainer: {
+        flexDirection: 'row',
+        width: "80%",
+        justifyContent: 'space-evenly',
+        marginBottom: '4%',
+        marginHorizontal: '10%',
+        alignItems: 'center',
+        marginVertical: '10%'
+    },
+})
+
+export default HomeScreen;

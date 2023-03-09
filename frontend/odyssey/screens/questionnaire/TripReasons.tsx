@@ -1,22 +1,37 @@
-import { useState } from 'react'
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons'; 
 import CheckBoxComponent from '../../components/CheckBox';
+import info from '../../data/whatBringsYouHere.json'
+import { useStores } from "../../mobx-models";
 
 const bgImage = require("../../assets/what-brings-you-here-bg.png")
 
-const QuestionnaireWhatBringsYouHere = ({navigation}) => {
-    const info = ["Work & Travel", "Self Exploration", "Friends Trip", "Romantic Trip", "Family Trip", "Adventure"];
+const TripReasonsScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
+
+    const handleSubmit = () => {
+        const reasons = []
+        info.map((reason) => {
+            if(reason.checked) reasons.push(reason.name)
+        })
+
+        if(reasons.length > 0) {
+            questionnaireStore.setTripReasons(reasons)
+            console.log(questionnaireStore)
+            navigation.navigate("QuestionnaireHowLongWillYouBeThere")
+        }
+    }
+
     return (
         <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '120%'}} >
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatInterestsYou")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
                     </View>
                     <View>
@@ -24,15 +39,17 @@ const QuestionnaireWhatBringsYouHere = ({navigation}) => {
                         <Text style={styles.secondary}>What brings you here?</Text>
                     </View>
                     <View style={{marginTop:"10%", alignItems: 'center'}}>
-                            {info.map((trip) => (
+                            {info.map((trip, index) => (
                                 <CheckBoxComponent
-                                    label={trip}
+                                    key={index}
+                                    label={trip.name}
+                                    initialState={trip.checked}
+                                    onChange={(result) => info[index].checked = result}
                                 />
                             ))}
-
                     </View>
                     <View>
-                        <Button style={{ marginTop: "10%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>
+                        <Button style={{ marginTop: "10%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>
                     </View>
                     <View>
                         <ProgressBar style={{marginTop: 70, marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
@@ -72,4 +89,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireWhatBringsYouHere;
+export default TripReasonsScreen;

@@ -8,33 +8,19 @@ type ButtonProps = {
     textStyle?: TextStyle
     label: string
     onPress: () => void
+    value: string
+    onChangeText: (string) => void
 }
 
-const SearchBar = ({style, textStyle, label, onPress}: ButtonProps) => {
-    const [searchQuery, setSearchQuery] = React.useState('');
-    const onChangeSearch = query => setSearchQuery(query);
-
+const SearchBar = ({style, textStyle, label, onPress, value, onChangeText}: ButtonProps) => {
     return (
-        // <View 
-        //     style={ styles.inputContainer
-        //     }>
-        //     <AntDesign name="search1" size={24}/>
-        //     <TextInput style={styles.searchBar}
-        //         placeholder="Search"
-        //     />
-        //     {/* <TouchableOpacity onPress={onPress} style={styles.icon}>
-        //         <AntDesign name="right" size={24} color="white"/>
-        //     </TouchableOpacity> */}
-        // </View>
         <View style={styles.inputContainer}>
             <Searchbar style={styles.searchBar}
                 placeholder="Search"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
+                value={value}
+                onChangeText={onChangeText}
             />
         </View>
-
-
     )
 }
 

@@ -15,10 +15,11 @@ const HomeImageButtons = ({source, onPress}: ImageButtonProps) => {
 
 const styles = StyleSheet.create({
     button: {
-        paddingVertical: '4%',
-        paddingHorizontal: '12%',
+        // paddingVertical: '4%',
+        // paddingHorizontal: '12%',
+        flex: 1,
+        marginVertical: '4%',
         borderRadius: 5,
-        justifyContent: 'center'
     }, 
     image: {
         height: 150, 

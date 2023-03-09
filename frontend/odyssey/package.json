@@ -29,6 +29,7 @@
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.0",
     "mobx-state-tree": "^5.1.7",
+    "moment": "^2.29.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
@@ -39,6 +40,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-select-dropdown": "^3.3.0",
     "react-native-web": "~0.18.9",
+    "rn-range-slider": "^2.2.2",
     "typescript": "^4.6.3",
     "yup": "^1.0.0"
   },

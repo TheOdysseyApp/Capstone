@@ -3,7 +3,6 @@ type Questionnaire @model @auth(rules: [{allow: public}]) {
   whereFrom: String!
   destination: String
   planningOptions: [String]
-  duration: String
   startDate: AWSDate
   endDate: AWSDate
   activities: [String!]
@@ -22,4 +21,5 @@ type User @model @auth(rules: [{allow: public}]) {
   username: String!
   description: String
   FilledOut: [Questionnaire] @hasMany(indexName: "byUser", fields: ["id"])
-} 
+}
+ 

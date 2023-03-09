@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Where to stay",
+        "checked": false
+    },
+    {
+        "name": "What to do",
+        "checked": false
+    },
+    {
+        "name": "Where to work",
+        "checked": false
+    },
+    {
+        "name": "How to get there",
+        "checked": false
+    }
+]

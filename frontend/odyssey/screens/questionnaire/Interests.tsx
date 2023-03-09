@@ -1,28 +1,41 @@
-import { useState } from 'react'
-import InputField from "../../components/InputField";
 import Button from "../../components/Button";
-import ImageButton from "../../components/ImageButton";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import { Ionicons } from '@expo/vector-icons';
-import {ProgressBar, Checkbox} from 'react-native-paper';
+import {ProgressBar} from 'react-native-paper';
 import {AntDesign } from '@expo/vector-icons'; 
 import React from 'react';
 import {Text, StyleSheet, View, ImageBackground} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CheckBoxComponent from '../../components/CheckBox';
+import interestsData from '../../data/interests.json'
+import { useStores } from "../../mobx-models";
 
 const bgImage = require("../../assets/what-interests-you-bg.png")
 
-const QuestionnaireWhatInterestsYou = ({navigation}) => {
-    const [checked, setChecked] = React.useState(false);
-    const info = ["Mountains", "Beach", "City","Rural/Countryside", "Lake"];
+const InterestsScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
+
+    const handleSubmit = () => {
+        const interests = []
+        interestsData.map((interest) => {
+            if(interest.checked) interests.push(interest.name)
+        })
+        
+        if(interests.length > 0) {
+            questionnaireStore.setInterests(interests)
+            console.log(questionnaireStore)
+            navigation.navigate("QuestionnaireWhatBringsYouHere")
+        }
+        else {
+            //error checking
+        }
+    }
     return (
-<Screen preset="scroll">
+        <Screen preset="scroll">
             <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '130%'}} >
                 <SafeAreaView>
                     <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireStart")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
                     </View>
                         <View>
@@ -31,24 +44,29 @@ const QuestionnaireWhatInterestsYou = ({navigation}) => {
                             <Text style={styles.smallText}>Select all that apply.</Text>
                         </View>
                         <View style={{marginTop:"10%", alignItems: 'center'}}>
-                            {info.map((destination) => (
+                            {interestsData.map((destination, index) => (
                                 <CheckBoxComponent
-                                    label={destination}
+                                    key={index}
+                                    label={destination.name}
+                                    initialState={destination.checked}
+                                    onChange={(result) => 
+                                        interestsData[index].checked = result
+                                    }
                                 />
                             ))}
 
                         </View>
 
                         <View>
-                        <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={() => navigation.navigate("QuestionnaireWhatBringsYouHere")}/>
+                        <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>
                         </View>
 
                         <View>
-                            <ProgressBar style={{marginTop: 100, marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "12%", marginLeft: 20, marginRight:20, height:17}}progress={0.1} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
             </ImageBackground>
-</Screen>
+        </Screen>
     )
 }
 
@@ -95,4 +113,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireWhatInterestsYou;
+export default InterestsScreen;

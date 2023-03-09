@@ -15,7 +15,6 @@ type EagerQuestionnaire = {
   readonly whereFrom: string;
   readonly destination?: string | null;
   readonly planningOptions?: (string | null)[] | null;
-  readonly duration?: string | null;
   readonly startDate?: string | null;
   readonly endDate?: string | null;
   readonly activities?: string[] | null;
@@ -38,7 +37,6 @@ type LazyQuestionnaire = {
   readonly whereFrom: string;
   readonly destination?: string | null;
   readonly planningOptions?: (string | null)[] | null;
-  readonly duration?: string | null;
   readonly startDate?: string | null;
   readonly endDate?: string | null;
   readonly activities?: string[] | null;
