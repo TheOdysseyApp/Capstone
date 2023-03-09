@@ -9,7 +9,7 @@ import Button from '../../components/Button';
 import { useStores } from "../../mobx-models";
 
 
-const bgImage = require("../../assets/where-are-you-traveling-to-bg.png")
+const bgImage = require("../../assets/traveling-from-bg.png")
 
 const TravelingFromScreen = ({navigation}) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -28,18 +28,14 @@ const TravelingFromScreen = ({navigation}) => {
     
     return (
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '130%'}} >
-                <SafeAreaView>
-                    <View>
+            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, height: '150%'}} >
+                <SafeAreaView> 
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
-                    </View>
                     <View style={styles.header}>
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>Where are you traveling from?</Text>
                     </View>
-
-                    <View>
                         {/* TODO this should probably query the google maps api or something */}
                         <SearchBar 
                         style={{marginTop:"20%"}}
@@ -55,13 +51,9 @@ const TravelingFromScreen = ({navigation}) => {
                                 <Text>{error}</Text>
                             </View>
                         )}
-                    </View>
+                    <Button style={styles.button} label="Next" onPress={handleSubmit}/>
 
-                    <Button style={{ marginTop: "60%", justifyContent: 'center', marginLeft:40}} label="Next" onPress={handleSubmit}/>
-
-                    <View>
-                            <ProgressBar style={{marginTop: "9%", marginLeft: 20, marginRight:20, height:17}}progress={0.2} color="#FFBC59" />
-                    </View>
+                    <ProgressBar style={styles.progressBar}progress={0.1} color="#FFBC59" />
                 </SafeAreaView>
             </ImageBackground>
         </Screen>
@@ -69,6 +61,12 @@ const TravelingFromScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    progressBar:{
+        marginTop: "20%", 
+        marginLeft: 20, 
+        marginRight:20, 
+        height:'10%'
+    },
     header: {
         fontSize: 24,
         fontWeight:  '600',
@@ -91,13 +89,21 @@ const styles = StyleSheet.create({
         fontWeight: '300'
     },
     button:{
-        flex: 2,
+        marginTop: "40%", 
+        justifyContent: 'center', 
+        marginLeft:'18%',
+        height: '10%',
+        width: '65%',
+        // marginLeft:'20%',
+        // width:'65%',
+        // height:'9%'
     },
     searchBar:{
         flex: 1,
         marginTop: 50,
         color: '#929292',
         borderRadius: 10
+        
     },
     rowContainer:{
         flexDirection: 'row',
