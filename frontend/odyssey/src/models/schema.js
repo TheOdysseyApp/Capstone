@@ -98,6 +98,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -166,15 +173,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "fullName": {
-                    "name": "fullName",
+                "firstName": {
+                    "name": "firstName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "username": {
-                    "name": "username",
+                "email": {
+                    "name": "email",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -202,6 +209,13 @@ export const schema = {
                             "userID"
                         ]
                     }
+                },
+                "lastName": {
+                    "name": "lastName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -248,6 +262,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "codegenVersion": "3.3.6",
-    "version": "3902f9bc6d5e4c42d61715dc7070f97e"
+    "codegenVersion": "3.3.5",
+    "version": "1e89b990b41baabd6c8e115fa59138a9"
 };

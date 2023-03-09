@@ -4,9 +4,7 @@ import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar} from 'react-native-paper';
-import { AntDesign } from '@expo/vector-icons'; 
 import {Auth} from 'aws-amplify'
-import QuestionaireTravelingFrom from './TravelingFrom';
 
 const bgImage = require("../../assets/questionnaire-start-screen-bg.png")
 

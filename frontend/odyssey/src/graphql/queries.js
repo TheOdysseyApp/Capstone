@@ -8,7 +8,6 @@ export const getQuestionnaire = /* GraphQL */ `
       whereFrom
       destination
       planningOptions
-      duration
       startDate
       endDate
       activities
@@ -18,6 +17,7 @@ export const getQuestionnaire = /* GraphQL */ `
       interests
       tripReason
       userID
+      status
       createdAt
       updatedAt
       _version
@@ -38,7 +38,6 @@ export const listQuestionnaires = /* GraphQL */ `
         whereFrom
         destination
         planningOptions
-        duration
         startDate
         endDate
         activities
@@ -48,6 +47,7 @@ export const listQuestionnaires = /* GraphQL */ `
         interests
         tripReason
         userID
+        status
         createdAt
         updatedAt
         _version
@@ -77,7 +77,6 @@ export const syncQuestionnaires = /* GraphQL */ `
         whereFrom
         destination
         planningOptions
-        duration
         startDate
         endDate
         activities
@@ -87,6 +86,7 @@ export const syncQuestionnaires = /* GraphQL */ `
         interests
         tripReason
         userID
+        status
         createdAt
         updatedAt
         _version
@@ -118,7 +118,6 @@ export const questionnairesByUserID = /* GraphQL */ `
         whereFrom
         destination
         planningOptions
-        duration
         startDate
         endDate
         activities
@@ -128,6 +127,7 @@ export const questionnairesByUserID = /* GraphQL */ `
         interests
         tripReason
         userID
+        status
         createdAt
         updatedAt
         _version
@@ -144,13 +144,14 @@ export const getUser = /* GraphQL */ `
     getUser(id: $id) {
       id
       authID
-      fullName
-      username
+      firstName
+      email
       description
       FilledOut {
         nextToken
         startedAt
       }
+      lastName
       createdAt
       updatedAt
       _version
@@ -169,9 +170,10 @@ export const listUsers = /* GraphQL */ `
       items {
         id
         authID
-        fullName
-        username
+        firstName
+        email
         description
+        lastName
         createdAt
         updatedAt
         _version
@@ -199,9 +201,10 @@ export const syncUsers = /* GraphQL */ `
       items {
         id
         authID
-        fullName
-        username
+        firstName
+        email
         description
+        lastName
         createdAt
         updatedAt
         _version

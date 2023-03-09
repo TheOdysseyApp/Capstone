@@ -12,14 +12,16 @@ type Questionnaire @model @auth(rules: [{allow: public}]) {
   interests: [String]
   tripReason: [String]
   userID: ID! @index(name: "byUser")
+  status: String!
 }
 
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   authID: String!
-  fullName: String!
-  username: String!
+  firstName: String!
+  email: String!
   description: String
   FilledOut: [Questionnaire] @hasMany(indexName: "byUser", fields: ["id"])
+  lastName: String!
 }
  
