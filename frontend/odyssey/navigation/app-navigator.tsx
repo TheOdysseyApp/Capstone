@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { AntDesign, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 //TODO - clean up imports via an index file??
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
@@ -162,11 +162,45 @@ const TabNavigator = () => {
                 component={HomeScreen}
                 options={{
                     headerShown: false,
-                    tabBarIcon: () => <Entypo name="home" size={24} color="white" />,
+                    tabBarIcon: () => 
+                    <View style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 35 / 2,
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1}}>
+                        <Feather name="home" size={20} color="white" style={{position: "absolute", left: 35/2 - 11, top: 35/2 - 12}}/>
+                    </View>,
+                    
                     tabBarStyle: {
                         backgroundColor: '#194260'
                     },
                     tabBarLabel: "Home",
+                    tabBarLabelStyle: {
+                        color: 'white'
+                    }
+
+                    
+                }}
+            />
+            <Tab.Screen
+                name="Trips"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => 
+                    <View style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 35 / 2,
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1}}>
+                    <MaterialCommunityIcons name="calendar-clock-outline" size={20} color="white" style={{position: "absolute", left: 35/2 - 11, top: 35/2 - 11}}/>
+                    </View>,
+                    tabBarStyle: {
+                        backgroundColor: '#194260'
+                    },
+                    tabBarLabel: "Trips",
                     tabBarLabelStyle: {
                         color: 'white'
                     }
@@ -191,6 +225,52 @@ const TabNavigator = () => {
                     tabBarLabel: "Plan a Trip",
                     tabBarLabelStyle: {
                         color: 'white',
+                    }
+                }}
+            />
+            <Tab.Screen
+                name="Saved"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => 
+                    <View style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 35 / 2,
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1}}>
+                    <AntDesign name="hearto" size={20} color="white" style={{position: "absolute", left: 35/2 - 11, top: 35/2 - 11}}/>
+                    </View>,
+                    tabBarStyle: {
+                        backgroundColor: '#194260'
+                    },
+                    tabBarLabel: "Saved",
+                    tabBarLabelStyle: {
+                        color: 'white'
+                    }
+                }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: () => 
+                    <View style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 35 / 2,
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1}}>
+                    <AntDesign name="user" size={20} color="white" style={{position: "absolute", left: 35/2 - 11, top: 35/2 - 11}}/>
+                    </View>,
+                    tabBarStyle: {
+                        backgroundColor: '#194260'
+                    },
+                    tabBarLabel: "Profile",
+                    tabBarLabelStyle: {
+                        color: 'white'
                     }
                 }}
             />
