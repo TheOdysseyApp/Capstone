@@ -14,16 +14,24 @@ const bgImage = require("../../assets/what-interests-you-bg.png")
 const HomeScreen = ({navigation}) => {
     const {userStore} = useStores()
 
-    // useEffect(() => {
-    //     ; (async function() {
-    //         // make generator function with this code and calling that func here (in userstore) 
-    //         const {attributes} = await Auth.currentAuthenticatedUser()
-    //         const user: any = await DataStore.query(User, (doc) => doc.authID.eq(attributes.sub))
-    //         userStore.setUid(user.id)
-    //         userStore.setName(user.fullName)
-    //         userStore.setEmail(user.username)
-    //     })()
-    // }, [])
+    useEffect(() => {
+        //TODO move this into login function (ask everyone to remake accounts)
+        Auth.currentAuthenticatedUser()
+            .then((res) => {
+                const {attributes} = res
+                console.log(attributes)
+                DataStore.query(User, (doc) => doc.authID.eq(attributes.sub))
+                    .then((res) => {
+                        userStore.setUid(res[0].id)
+                        userStore.setFirstName(res[0].firstName)
+                        userStore.setLastName(res[0].lastName)
+                        userStore.setEmail(res[0].email)
+                        console.log(userStore)
+                    })
+                    .catch((error) => console.log("Error querying data store: " + error))
+            })
+            .catch((error) => console.log("Error getting authenticated user: " + error))
+    }, [])
 
     return (
         <Screen preset="scroll">

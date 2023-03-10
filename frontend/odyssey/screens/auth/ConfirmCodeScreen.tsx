@@ -24,8 +24,8 @@ const ConfirmCodeScreen = ({route, navigation}) => {
                 await DataStore.save(
                     new User({
                         authID: attributes.sub,
-                        firstName: attributes.firstName,
-                        lastName: attributes.lastName,
+                        firstName: attributes.given_name,
+                        lastName: attributes.family_name,
                         email: attributes.email,
                         description: ""
                     })

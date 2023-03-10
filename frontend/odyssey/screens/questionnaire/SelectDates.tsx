@@ -3,14 +3,16 @@ import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import { ProgressBar } from 'react-native-paper';
-import { AntDesign, Ionicons } from '@expo/vector-icons'; 
+import { AntDesign, Entypo } from '@expo/vector-icons'; 
 import SelectCalendar from '../../components/SelectCalendar';
 import { useState } from "react";
 import { useStores } from "../../mobx-models";
 import CardButton from "../../components/CardButton";
 import MenuButton from "../../components/MenuButton";
-const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
+import SelectDropdown from 'react-native-select-dropdown'
 
+const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
+const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
     day: 'numeric',
@@ -72,10 +74,54 @@ const SelectDatesScreen = ({navigation}) => {
                                     />
                                 </View>
                             ) : (
-                                <View style={styles.containerStyle}>
-                                    {menuOptions.map((option, index) => (
-                                        <MenuButton key={index} label={option} onPress={() => console.log(option)}/>
-                                    ))}
+                                <View style={{alignItems:'center', paddingVertical:'4%'}}>
+                                    <View style={styles.containerStyle}>
+                                        {menuOptions.map((option, index) => (
+                                            <MenuButton key={index} label={option} onPress={() => console.log(option)}/>
+                                        ))}
+                                    </View>
+                                    <SelectDropdown
+                                        data={countries}
+                                        onSelect={(selectedItem, index) => {
+                                            console.log(selectedItem, index)
+                                        }}
+                                        buttonTextAfterSelection={(selectedItem, index) => {
+                                            return selectedItem
+                                        }}
+                                        rowTextForSelection={(item, index) => {
+                                            return item
+                                        }}
+                                        defaultButtonText={'Choose a Month (optional)'}
+                                        buttonStyle={{
+                                            backgroundColor: '#FFFFFF',
+                                            width: '63%',
+                                            height: '22%',
+                                            // padding: '2%',
+                                            // paddingTop: '2%',
+                                            borderRadius: 8,
+                                            shadowColor: '#171717',
+                                            // shadowOffset: {width: 0, height: 4},
+                                            shadowOpacity: 0.1,
+                                            shadowRadius: 2,
+                                            // margin: 5
+                                            marginBottom:'5%',
+                                          }}
+                                        buttonTextStyle={{
+                                            textAlign: 'center',
+                                            color: '#666666',
+                                            fontSize: 11,
+                                            fontWeight: '300'
+                                        }}
+                                        rowTextStyle={{
+                                            textAlign: 'center',
+                                            color: '#000000',
+                                            fontSize: 11,
+                                            fontWeight: '300'
+                                        }}
+                                        renderDropdownIcon={isOpened => (
+                                            <Entypo name="chevron-small-down" size={24} color="black" />
+                                          )}
+                                    />
                                 </View>
                             )}
                         </View>   
@@ -169,7 +215,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     containerStyle:{
-        marginTop: '5%',
+        marginTop: '10%',
+        marginBottom:'7%',
+        // paddingBottom:'10%',
         flexDirection: 'row',
         justifyContent: 'center'
     },
@@ -182,12 +230,12 @@ const styles = StyleSheet.create({
     date: {
         textAlign: 'center',
         marginBottom: '3%',
-        color: '#194260',
-        fontWeight: 'bold',
+        // color: '#194260',
+        fontWeight: '600',
         width: '60%',
-        borderWidth: 0.5,
+        // borderWidth: 0.5,
         borderRadius: 5,
-        backgroundColor: '#D3D3D3',
+        // backgroundColor: '#D3D3D3',
         overflow: 'hidden',
         alignSelf: 'center',
         paddingVertical: '2%'
