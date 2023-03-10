@@ -25,6 +25,8 @@ type EagerQuestionnaire = {
   readonly tripReason?: (string | null)[] | null;
   readonly userID: string;
   readonly status: string;
+  readonly duration?: string | null;
+  readonly month?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -48,6 +50,8 @@ type LazyQuestionnaire = {
   readonly tripReason?: (string | null)[] | null;
   readonly userID: string;
   readonly status: string;
+  readonly duration?: string | null;
+  readonly month?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

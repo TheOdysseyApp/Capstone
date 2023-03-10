@@ -21,6 +21,7 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
     month: 'long',
     year: 'numeric',
     })
+
     useEffect(() => {
         console.log(questionnaireStore)
 
@@ -33,6 +34,8 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
     // Depature location: ${questionnaireStore.whereFrom}\n 
     // Destination location: ${questionnaireStore.destination}\n
     // Need help planning: ${questionnaireStore.planningOptions}\n
+    // Duration of trip: ${questionnaireStore.duration}\n
+    // Month of trip: ${questionnaireStore.month}\n
     // Trip Start Date: ${dateFormatter.format(questionnaireStore.startDate)}\n
     // Trip End Date: ${dateFormatter.format(questionnaireStore.endDate)}\n
     // Activities Interested In: ${questionnaireStore.activities}\n

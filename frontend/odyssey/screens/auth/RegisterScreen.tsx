@@ -68,8 +68,9 @@ const RegisterScreen = ({navigation}) => {
                                         username: values.email,
                                         password: values.password,
                                         attributes: {
-                                            firstName: values.firstName,
-                                            lastName: values.lastName,
+                                            given_name: values.firstName,
+                                            family_name: values.lastName,
+                                            name: `${values.firstName} ${values.lastName}`
                                         },
                                         autoSignIn: {
                                             enabled: true
