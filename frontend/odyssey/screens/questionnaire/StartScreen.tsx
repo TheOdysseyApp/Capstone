@@ -34,7 +34,7 @@ const StartScreen = ({navigation}) => {
                             <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="Sign Out" onPress={handleSignOut}/>
                         </View>
                         <View>
-                            <ProgressBar style={{marginTop: 295, marginLeft: 20, marginRight:20, height:17, }}progress={0.1} color="#FFBC59" />
+                            <ProgressBar style={{marginTop: "40%", marginLeft: 20, marginRight:20, height:17, }}progress={0.05} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
             </ImageBackground>    

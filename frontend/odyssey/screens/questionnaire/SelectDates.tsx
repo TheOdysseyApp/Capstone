@@ -12,7 +12,7 @@ import MenuButton from "../../components/MenuButton";
 import SelectDropdown from 'react-native-select-dropdown'
 
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
-const countries = ["Egypt", "Canada", "Australia", "Ireland"]
+const months = ['January','February',"March", "April", "May", "June",'July','August', 'September', 'October', 'November', 'December']
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
     day: 'numeric',
@@ -74,14 +74,14 @@ const SelectDatesScreen = ({navigation}) => {
                                     />
                                 </View>
                             ) : (
-                                <View style={{alignItems:'center', paddingVertical:'4%'}}>
+                                <View style={{alignItems:'center', paddingVertical:'6%'}}>
                                     <View style={styles.containerStyle}>
                                         {menuOptions.map((option, index) => (
                                             <MenuButton key={index} label={option} onPress={() => console.log(option)}/>
                                         ))}
                                     </View>
                                     <SelectDropdown
-                                        data={countries}
+                                        data={months}
                                         onSelect={(selectedItem, index) => {
                                             console.log(selectedItem, index)
                                         }}
@@ -128,11 +128,11 @@ const SelectDatesScreen = ({navigation}) => {
                      </View>
 
                     <Button 
-                        style={{ marginTop: "-24%", justifyContent: 'center', marginLeft:"14%", width:'73%'}} 
+                        style={styles.button} 
                         label="Next" 
                         onPress={handleSubmit}
                     />
-                    <ProgressBar style={{marginTop: '4%', marginLeft: 45, marginRight:0, height:17, width:'80%'}}progress={0.30} color="#FFBC59" />
+                    <ProgressBar style={styles.progressBar}progress={0.4} color="#FFBC59" />
                     
                 </SafeAreaView>
             </ImageBackground>
@@ -141,6 +141,19 @@ const SelectDatesScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    button:{
+        marginTop: "-25%", 
+        justifySelf: 'center', 
+        marginLeft:'18%',
+        height: '10%',
+        width: '65%',
+    },
+    progressBar:{
+        marginTop: "11%", 
+        marginLeft: '10%', 
+        marginRight:'10%', 
+        height:'13%'
+    },
     dropdown:{
         backgroundColor: '#FFFFFF',
         width: '73%',
@@ -187,11 +200,11 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         marginBottom: '3%'
     },
-    button:{
-        justifyContent: 'center',
-        marginTop: "20%",
-        width: '10%'
-    },
+    // button:{
+    //     justifyContent: 'center',
+    //     marginTop: "20%",
+    //     width: '10%'
+    // },
     cardContent:{
         backgroundColor: '#F4F4F4',
         height: '75%',
@@ -215,7 +228,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     containerStyle:{
-        marginTop: '10%',
+        marginTop: '10.9%',
         marginBottom:'7%',
         // paddingBottom:'10%',
         flexDirection: 'row',
@@ -225,13 +238,13 @@ const styles = StyleSheet.create({
         padding:'14%',
     },
     calendarContainer: {
-        marginTop: '5%',
+        marginTop: '10%',
     },
     date: {
         textAlign: 'center',
         marginBottom: '3%',
         // color: '#194260',
-        fontWeight: '600',
+        fontWeight: '400',
         width: '60%',
         // borderWidth: 0.5,
         borderRadius: 5,
