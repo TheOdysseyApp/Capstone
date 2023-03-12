@@ -20,7 +20,7 @@ const BudgetScreen = ({navigation}) => {
 
     const {questionnaireStore, userStore} = useStores()
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         questionnaireStore.setIsBudgetPerDay(isDaily)
 
         if(isDaily) {
@@ -31,17 +31,14 @@ const BudgetScreen = ({navigation}) => {
             questionnaireStore.setMinBudget(totalRange.min)
             questionnaireStore.setMaxBudget(totalRange.max)
         }
-        
-        console.log(questionnaireStore.startDate.toISOString().substring(0, 10))
-        console.log(questionnaireStore.endDate.toISOString().substring(0, 10))
 
-        DataStore.save(
+        await DataStore.save(
             new Questionnaire({
                 whereFrom: questionnaireStore.whereFrom,
                 destination: questionnaireStore.destination, 
                 planningOptions: questionnaireStore.planningOptions,
-                startDate: questionnaireStore.startDate.toISOString().substring(0, 10),
-                endDate: questionnaireStore.endDate.toISOString().substring(0, 10),
+                startDate: questionnaireStore.startDate?.toISOString().substring(0, 10),
+                endDate: questionnaireStore.endDate?.toISOString().substring(0, 10),
                 activities: questionnaireStore.activities,
                 isBudgetPerDay: questionnaireStore.isBudgetPerDay,
                 minBudget: questionnaireStore.minBudget,

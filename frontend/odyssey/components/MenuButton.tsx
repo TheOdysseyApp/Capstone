@@ -7,11 +7,12 @@ type ButtonProps = {
     textStyle?: TextStyle
     label: string
     onPress: () => void
+    active: boolean
 }
 
-const MenuButton = ({style, textStyle, label, onPress}: ButtonProps) => {
+const MenuButton = ({style, textStyle, label, onPress, active}: ButtonProps) => {
     return (
-        <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+        <TouchableOpacity style={[styles.button, style, active ? {backgroundColor:  'gray'} : null]} onPress={onPress}>
             <Text style={[styles.text, textStyle]}>{label}</Text>
         </TouchableOpacity>
     )
@@ -22,7 +23,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         width: '24%',
         height: '90%',
-        // padding: '2%',
         paddingTop: '2%',
         borderRadius: 8,
         shadowColor: '#171717',

@@ -91,7 +91,6 @@ export const QuestionnaireStoreModel = types
             self.tripReasons = undefined
             self.duration = undefined
             self.month = undefined
-
         }
     }))
     .actions((self) => ({
