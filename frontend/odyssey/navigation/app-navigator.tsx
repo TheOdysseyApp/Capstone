@@ -23,7 +23,7 @@ import QuestionaireTravelingFrom from "../screens/questionnaire/TravelingFrom";
 import TripsScreen from "../screens/trips/Trips";
 import SavedScreen from "../screens/saved/Saved";
 import ProfileScreen from "../screens/profile/Profile";
-import Payment from "../screens/payment/Payment";
+import Payment from "../screens/payment/payment";
 
 const Stack = createNativeStackNavigator()
 
@@ -67,7 +67,7 @@ const AppStack = () => {
                     }}
                 />
                 <Stack.Screen 
-                    name="Payment"
+                    name="Home"
                     component={TabNavigator}
                     options={{
                         headerShown: false,
