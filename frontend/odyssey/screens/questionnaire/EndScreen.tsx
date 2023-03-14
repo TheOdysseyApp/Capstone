@@ -1,20 +1,50 @@
-import { useState } from 'react'
+import { useEffect, } from 'react'
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, ImageBackground, Dimensions } from "react-native";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import ProgressBar from 'react-native-paper';
-import Button from '../../components/Button';
-import { AntDesign } from '@expo/vector-icons'; 
-import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import { useStores } from '../../mobx-models';
+
 
 const bgImage = require("../../assets/ideas-for-you-bg.png")
 
-const QuestionnaireIdeasForYou = ({navigation}) => {
+const EndScreen = ({navigation}) => {
+    const {questionnaireStore} = useStores()
+
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    })
+
+    useEffect(() => {
+        console.log(questionnaireStore)
+
+    // will use later: body of email 
+
+    //TODO: add name of user from userstore
+    // 'kassabm@uci.edu',
+    //     'User\'s Questionnaire Responses',
+    // `User's DynamoDB ID: ${questionnaireStore.uid}\n
+    // Depature location: ${questionnaireStore.whereFrom}\n 
+    // Destination location: ${questionnaireStore.destination}\n
+    // Need help planning: ${questionnaireStore.planningOptions}\n
+    // Duration of trip: ${questionnaireStore.duration}\n
+    // Month of trip: ${questionnaireStore.month}\n
+    // Trip Start Date: ${dateFormatter.format(questionnaireStore.startDate)}\n
+    // Trip End Date: ${dateFormatter.format(questionnaireStore.endDate)}\n
+    // Activities Interested In: ${questionnaireStore.activities}\n
+    // Is Budget Per Day? (or Total): ${questionnaireStore.isBudgetPerDay}
+    // Minimum Budget: ${questionnaireStore.minBudget}\n
+    // Depature location: ${questionnaireStore.maxBudget}\n
+    // Activities interested in: ${questionnaireStore.interests}\n
+    // Reason for Trip: ${questionnaireStore.maxBudget}`
+    
+    }, [])
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '185%'}}>
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}}>
+            <Screen preset="scroll">
                 <SafeAreaView>
                     <View style={{}}>
                         <Header/>
@@ -33,13 +63,12 @@ const QuestionnaireIdeasForYou = ({navigation}) => {
                         Until then, please give us 24 hours to
                         complete your itinerary. Be sure to check
                         your email!
-                        
                         </Text>
                     </View>
 
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 
@@ -76,4 +105,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default QuestionnaireIdeasForYou;
+export default EndScreen;

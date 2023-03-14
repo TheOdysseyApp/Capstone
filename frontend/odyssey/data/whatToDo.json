@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Explore the cuisine",
+        "checked": false
+    },
+    {
+        "name": "Mellow outdoor activities",
+        "checked": false
+    },
+    {
+        "name": "Challenging outdoor activities",
+        "checked": false
+    },
+    {
+        "name": "Inner work",
+        "checked": false
+    },
+    {
+        "name": "Work at coworking spaces",
+        "checked": false
+    },
+    {
+        "name": "Meet others",
+        "checked": false
+    },
+    {
+        "name": "Shopping",
+        "checked": false
+    },
+    {
+        "name": "Go off-grid/unplug",
+        "checked": false
+    }
+]

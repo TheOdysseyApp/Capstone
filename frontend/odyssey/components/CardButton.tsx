@@ -5,19 +5,50 @@ import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 're
 type ButtonProps = {
     style?: ViewStyle
     textStyle?: TextStyle
-    label: string
-    onPress: () => void
+    labelLeft: string
+    labelRight: string
+    onPressLeft: () => void
+    onPressRight: () => void
 }
 
-const CardButton = ({style, textStyle, label, onPress}: ButtonProps) => {
-    const [buttonStyle] = useState()
+const CardButton = ({style, textStyle, labelLeft, labelRight, onPressLeft, onPressRight}: ButtonProps) => {
+    const [isLeftActive, setIsLeftActive] = useState<boolean>(true)
+    
     return (
         <View style={{flexDirection:'row'}}>
-            <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-                <Text style={[styles.text, textStyle]}>Per Day</Text>
+            <TouchableOpacity 
+                style={[
+                    isLeftActive ? styles.button : styles.buttonNotActive, 
+                    {
+                        borderTopLeftRadius: 10,
+                        borderRightWidth: !isLeftActive ? 0.5 : 0,
+                        borderBottomWidth: !isLeftActive ? 0.5 : 0,
+                        borderBottomRightRadius: !isLeftActive ? 10 : 0,   
+                    }, 
+                    style]} 
+                onPress={() => {
+                    onPressLeft()
+                    setIsLeftActive(true)
+                }}
+            >
+                <Text style={[styles.text, textStyle]}>{labelLeft}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.buttonNotActive, style]} onPress={onPress}>
-                <Text style={[styles.text, textStyle]}>Total</Text>
+            <TouchableOpacity 
+                style={[
+                    !isLeftActive ? styles.button : styles.buttonNotActive, 
+                    {
+                        borderTopRightRadius: 10,
+                        borderLeftWidth: isLeftActive ? 0.5 : 0,
+                        borderBottomWidth: isLeftActive ? 0.5 : 0,
+                        borderBottomLeftRadius: isLeftActive ? 10 : 0,
+                    }, 
+                    style]} 
+                onPress={() => {
+                    onPressRight()
+                    setIsLeftActive(false)
+                }}
+            >
+                <Text style={[styles.text, textStyle]}>{labelRight}</Text>
             </TouchableOpacity>
         </View>
         
@@ -30,28 +61,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#F4F4F4',
         width: '50%',
         padding: 20,
-    //    borderTopRightRadius: 10,
-        borderTopLeftRadius: 10,
-        // borderWidth: 0.5,
-        
+        // borderTopLeftRadius: 10,
     },
     buttonNotActive: {
         backgroundColor: '#D9D9D9',
         width: '50%',
         padding: 20,
-       borderTopRightRadius: 10,
-       borderBottomLeftRadius: 10,
-       borderRightWidth: 0.5,
-       borderBottomWidth: 0.5,
-       borderLeftWidth: 0.5,
-       
-        // borderTopLeftRadius: 10,
-        
     },
     text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 12,
+        fontSize: 11,
     }
 })
 

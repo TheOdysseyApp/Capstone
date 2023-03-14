@@ -1,0 +1,29 @@
+type Questionnaire @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  whereFrom: String!
+  destination: String
+  planningOptions: [String]
+  startDate: AWSDate
+  endDate: AWSDate
+  activities: [String!]
+  isBudgetPerDay: Boolean!
+  minBudget: Int!
+  maxBudget: Int!
+  interests: [String]
+  tripReason: [String]
+  userID: ID! @index(name: "byUser")
+  status: String!
+  duration: String
+  month: String
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  authID: String!
+  firstName: String!
+  email: String!
+  description: String
+  FilledOut: [Questionnaire] @hasMany(indexName: "byUser", fields: ["id"])
+  lastName: String!
+}
+ 
