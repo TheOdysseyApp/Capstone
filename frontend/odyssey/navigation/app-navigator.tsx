@@ -20,6 +20,9 @@ import QuestionnaireWhatsYourBudget from "../screens/questionnaire/Budget";
 import QuestionnaireIdeasForYou from "../screens/questionnaire/EndScreen";
 import {TouchableOpacity, StyleSheet, Text, ViewStyle, TextStyle, View} from 'react-native'
 import QuestionaireTravelingFrom from "../screens/questionnaire/TravelingFrom";
+import TripsScreen from "../screens/trips/Trips";
+import SavedScreen from "../screens/saved/Saved";
+import ProfileScreen from "../screens/profile/Profile";
 
 const Stack = createNativeStackNavigator()
 
@@ -67,6 +70,7 @@ const AppStack = () => {
                     component={TabNavigator}
                     options={{
                         headerShown: false,
+                        gestureEnabled: false
                     }}
                 />
         </Stack.Navigator>
@@ -185,7 +189,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="Trips"
-                component={HomeScreen}
+                component={TripsScreen}
                 options={{
                     headerShown: false,
                     tabBarIcon: () => 
@@ -230,7 +234,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="Saved"
-                component={HomeScreen}
+                component={SavedScreen}
                 options={{
                     headerShown: false,
                     tabBarIcon: () => 
@@ -253,7 +257,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="Profile"
-                component={HomeScreen}
+                component={ProfileScreen}
                 options={{
                     headerShown: false,
                     tabBarIcon: () => 
