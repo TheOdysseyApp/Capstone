@@ -86,7 +86,7 @@ const RangeSlider = ({ from, to, onChangeRange, onChangeLow, onChangeHigh }) => 
         renderRailSelected={renderRailSelected}
         onValueChanged={handleValueChange}
       />
-      <View style={{flexDirection:'row', alignSelf:'center', alignItems:'center', marginBottom:'-40%'}}>
+      <View style={{flexDirection:'row', alignSelf:'center', alignItems:'center', marginTop: '10%'}}>
         <TextInput
             style={{
               height: '60%',

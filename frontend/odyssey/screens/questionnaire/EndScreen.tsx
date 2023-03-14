@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, } from 'react'
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, ImageBackground, Dimensions } from "react-native";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import ProgressBar from 'react-native-paper';
-import Button from '../../components/Button';
-import { AntDesign } from '@expo/vector-icons'; 
-import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { useStores } from '../../mobx-models';
 
@@ -47,8 +43,8 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
     
     }, [])
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '185%'}}>
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}}>
+            <Screen preset="scroll">
                 <SafeAreaView>
                     <View style={{}}>
                         <Header/>
@@ -71,8 +67,8 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
                     </View>
 
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 

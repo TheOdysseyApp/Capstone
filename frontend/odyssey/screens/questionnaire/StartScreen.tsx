@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
+import { ScrollView, Text, View, Image, StyleSheet, ImageBackground, Dimensions } from "react-native";
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
@@ -20,8 +21,8 @@ const StartScreen = ({navigation}) => {
     }
     
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '125%'}}>
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}}>
+            <Screen preset="scroll">
                 <SafeAreaView>
                     <View>
                         <Header/>
@@ -29,16 +30,16 @@ const StartScreen = ({navigation}) => {
                         <View>
                             <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                             <Text style={styles.secondary}>Where are you traveling to?</Text>
-                            <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="I’m flexible, let’s explore!" onPress={() => navigation.navigate("QuestionaireTravelingFrom")}/>
-                            <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="I know where I’m traveling" onPress={() => navigation.navigate("QuestionaireTravelingFrom")}/>
+                            <Button style={{ marginTop: "17%", justifyContent: 'center', marginLeft:40}} label="I’m flexible, let’s explore!" onPress={() => navigation.navigate("QuestionaireTravelingFrom", {knowsDestination: false})}/>
+                            <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="I know where I’m traveling" onPress={() => navigation.navigate("QuestionaireTravelingFrom", {knowsDestination: true})}/>
                             <Button style={{marginTop: "5%", justifyContent: 'center', marginLeft:40}} label="Sign Out" onPress={handleSignOut}/>
                         </View>
                         <View>
-                            <ProgressBar style={{marginTop: "40%", marginLeft: 20, marginRight:20, height:17, }}progress={0.05} color="#FFBC59" />
+                            <ProgressBar style={styles.progressBar}progress={0.05} color="#FFBC59" />
                         </View>
                 </SafeAreaView>
-            </ImageBackground>    
-        </Screen>
+            </Screen>
+        </ImageBackground>    
     )
 }
 
@@ -68,7 +69,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: "20%",
         width: '10%'
-    }
+    },
+    progressBar:{
+        width: '90%',
+        alignSelf: 'center', 
+        height: 17,
+        marginTop: '10%'
+    },
 })
 
 export default StartScreen;

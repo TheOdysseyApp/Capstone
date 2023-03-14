@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Screen from '../../components/Screen';
 import {AntDesign } from '@expo/vector-icons';
 import {ProgressBar} from 'react-native-paper';
-import {Text, View, StyleSheet, ImageBackground} from "react-native";
+import {Text, View, StyleSheet, ImageBackground, Dimensions} from "react-native";
 import CheckBoxComponent from '../../components/CheckBox';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import activities from '../../data/whatToDo.json'
@@ -30,14 +30,14 @@ const RelevantActivitiesScreen = ({navigation}) => {
     }
 
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '120%'}}>
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}}>
+            <Screen preset="scroll">
                 <SafeAreaView>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireHowLongWillYouBeThere")}/>
+                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What do you want to do{'\n'} while you're there?</Text>
-                    <View style={{marginTop:"5%", alignItems: 'center'}}>
+                    <View style={{ width: '80%', alignSelf: 'center', marginVertical: '5%'}}>
                         {activities.map((activity, index) => (
                             <CheckBoxComponent
                                 key={index}
@@ -52,26 +52,23 @@ const RelevantActivitiesScreen = ({navigation}) => {
                             label="Next" 
                             onPress={handleSubmit}
                         />
-                        <ProgressBar style={styles.progressBar}progress={0.5} color="#FFBC59" />
+                        <ProgressBar style={styles.progressBar} progress={0.5} color="#FFBC59" />
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     progressBar:{
-        marginTop: "15%", 
-        marginLeft: '10%', 
-        marginRight:'10%',  
-        height:'11%'
+        width: '90%',
+        alignSelf: 'center', 
+        height: 17,
+        marginTop: '10%'
     },
     button:{
-        marginTop: "8%", 
-        justifyContent: 'center', 
-        marginLeft:'20%',
-        width:'65%',
-        height:'9%'
+        alignSelf: 'center',
+        marginTop: '15%'
     },
     header: {
         fontSize: 24,

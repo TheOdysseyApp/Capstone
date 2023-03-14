@@ -4,7 +4,7 @@ import Screen from '../../components/Screen';
 import {ProgressBar} from 'react-native-paper';
 import {AntDesign } from '@expo/vector-icons'; 
 import React from 'react';
-import {Text, StyleSheet, View, ImageBackground} from 'react-native';
+import {Text, StyleSheet, View, ImageBackground, Dimensions} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CheckBoxComponent from '../../components/CheckBox';
 import interestsData from '../../data/interests.json'
@@ -31,15 +31,15 @@ const InterestsScreen = ({navigation}) => {
         }
     }
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '112%'}} >
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}} >
+            <Screen preset="scroll">
                 <SafeAreaView>
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
                         <Header/>
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What interests you?</Text>
-                        <Text style={styles.smallText}>Select all that apply.</Text>
-                        <View style={{marginTop:"10%", alignItems: 'center'}}>
+                        <Text style={styles.italics}>Select all that apply.</Text>
+                        <View style={{ width: '80%', alignSelf: 'center', marginVertical: '5%' }}>
                             {interestsData.map((destination, index) => (
                                 <CheckBoxComponent
                                     key={index}
@@ -53,34 +53,26 @@ const InterestsScreen = ({navigation}) => {
 
                         </View>
                         <Button style={styles.button} label="Next" onPress={handleSubmit}/>
-                        <ProgressBar style={styles.progressBar}progress={0.2} color="#FFBC59" />
+                        <ProgressBar style={styles.progressBar} progress={0.2} color="#FFBC59" />
                         
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     progressBar:{
-        marginTop: "20%", 
-        marginLeft: '10%', 
-        marginRight:'10%', 
-        height:'11%'
+        width: '90%',
+        alignSelf: 'center', 
+        height: 17,
+        marginTop: '10%'
     },
     header: {
         fontSize: 24,
         fontWeight:  '600',
         textAlign: "center",
         marginTop: "1%"
-    },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        resizeMode: 'contain',
-            height: 50,
-            width: 50,
-
     },
     secondary:{
         textAlign: "center",
@@ -90,29 +82,17 @@ const styles = StyleSheet.create({
         fontWeight: '300'
     },
     button:{
-        marginTop: "16.5%",
-        justifyContent: 'center', 
-        // marginLeft:40,
-        // marginTop: "40%", 
-        // justifyContent: 'center', 
-        marginLeft:'18%',
-        height: '10%',
-        width: '65%',
+        alignSelf: 'center',
+        marginTop: '5%'
     },
-    smallText:{
+    italics:{
         textAlign: "center",
         fontStyle: 'italic',
-        marginTop: 10,
-        fontSize: 13,
-        fontWeight: '300'
+        marginTop: 27,
+        fontSize: 18,
+        fontWeight: '300',
+        fontFamily: 'Cochin'
     },
-    checkbox:{
-        textAlign: "center",
-        fontStyle: 'italic',
-        top: 35,
-        fontSize: 13,
-        fontWeight: '300'
-    }
 })
 
 export default InterestsScreen;

@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, ImageBackground, Dimensions } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
@@ -55,17 +56,16 @@ const BudgetScreen = ({navigation}) => {
     }
 
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '220%'}}>
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}}>
+            <Screen preset="scroll">
                 <SafeAreaView>
-             
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.navigate("QuestionnaireWhatDoYouWantToDo")}/>
                         <Header/>
                     
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What's Your Budget?</Text>
 
-                    <View style={styles.cardContent}>
+                    <View style={styles.card}>
                         <CardButton 
                         labelLeft={'Per Day'}
                         labelRight={'Total'} 
@@ -98,24 +98,20 @@ const BudgetScreen = ({navigation}) => {
                         <ProgressBar style={styles.progressBar} progress={0.6} color="#FFBC59" />
  
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     progressBar:{
-        marginTop: "15%", 
-        marginLeft: '10%', 
-        marginRight:'10%', 
-        height:'11%'
+        width: '90%',
+        alignSelf: 'center', 
+        height: 17,
+        marginTop: '10%'
     },
     button:{
-        marginTop: "11.5%", 
-        justifyContent: 'center', 
-        marginLeft:'18%',
-        width:'65%',
-        height:'10%'
+        alignSelf: 'center',
     },
     header: {
         fontSize: 24,
@@ -140,7 +136,17 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         placeholderfontsize: 10,
-      },
+    },
+    card: {
+        width: '80%',
+        alignSelf: 'center',
+        height: '40%',
+        borderRadius: 10,
+        borderWidth: 0.5,
+        backgroundColor: '#F4F4F4',
+        overflow: 'hidden',
+        marginVertical: '15%'
+    },
     secondary:{
         textAlign: "center",
         fontStyle: 'italic',
@@ -148,23 +154,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '300'
     },
-    // button:{
-    //     justifyContent: 'center',
-    //     marginTop: "10%",
-    //     width: '10%'
-    // },
-    cardContent:{
-        backgroundColor: '#F4F4F4',
-        height: '45%',
-        borderRadius: 10,
-        borderWidth: 0.5,
-        marginTop:'10%',
-        marginRight:'15%',
-        marginLeft:'15%',
-        marginBttom:'-15%',
-        
-    },
-
 })
 
 export default BudgetScreen;

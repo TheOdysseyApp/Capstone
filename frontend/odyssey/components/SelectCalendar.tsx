@@ -41,9 +41,9 @@ const SelectCalendar = ({startDate, endDate, onSubmit}) => {
   // let DateText
 
   return (
-    <SafeAreaView>
+    <View style={{width: '100%', height: '41%'}}>
       <PaperProvider theme={theme}>
-        <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <TouchableOpacity style={[styles.button]} onPress={() => setOpen(true)}>
               <Text style={[styles.text]}>Choose Exact Dates</Text>
           </TouchableOpacity>
@@ -58,7 +58,7 @@ const SelectCalendar = ({startDate, endDate, onSubmit}) => {
           />
         </View>
       </PaperProvider>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -73,9 +73,6 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
         fontSize: 11,
         borderRadius: 10,
-        width: '50%',
-        height: '100%',
-
     },
     text: {
         fontSize: 12,

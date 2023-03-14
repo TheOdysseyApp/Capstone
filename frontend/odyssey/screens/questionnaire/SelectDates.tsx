@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, ImageBackground, Dimensions } from "react-native";
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
@@ -10,6 +10,7 @@ import { useStores } from "../../mobx-models";
 import CardButton from "../../components/CardButton";
 import MenuButton from "../../components/MenuButton";
 import SelectDropdown from 'react-native-select-dropdown'
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const bgImage = require("../../assets/how-long-will-you-be-there-bg.png") //change this later?
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -47,25 +48,22 @@ const SelectDatesScreen = ({navigation}) => {
     }
 
     return (
-        <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '170%'}} >
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}} >
+            <Screen preset="scroll">
                 <SafeAreaView>
-                    <View>
-                        <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
-                        <Header/>
-                    </View>
-                    <View>
-                        <Text style={styles.header}>Let’s Plan Your Trip!</Text>
-                        <Text style={styles.secondary}>How long will you be there?</Text>
-                    </View>
-                    <View style={styles.calendar}>
-                        <View style={styles.cardContent}>
+                    <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
+                    <Header/>
+                    <Text style={styles.header}>Let’s Plan Your Trip!</Text>
+                    <Text style={styles.secondary}>How long will you be there?</Text>
+                    
+                    <View style={styles.card}>
                             <CardButton 
                             labelLeft="Choose Exact Dates"
                             labelRight="I'm Flexible"
                             onPressLeft={() => setIsExact(true)}
                             onPressRight={() => setIsExact(false)}
                             />
+                            <View style={styles.cardContent}>
                             {isExact ? (
                                 <View style={styles.calendarContainer}>
                                     <Text style={styles.date}>{dateRange.startDate ? dateFormatter.format(dateRange.startDate) : "Start Date"}</Text>
@@ -141,20 +139,19 @@ const SelectDatesScreen = ({navigation}) => {
                                           )}
                                     />
                                 </View>
-                            )}
-                        </View>   
+                            )}  
+                            </View> 
                      </View>
 
                     <Button 
-                        style={{ marginTop: "-24%", justifyContent: 'center', marginLeft:"14%", width:'73%'}} 
+                        style={styles.button} 
                         label="Next" 
                         onPress={handleSubmit}
                     />
-                    <ProgressBar style={{marginTop: '4%', marginLeft: 45, marginRight:0, height:17, width:'80%'}}progress={0.30} color="#FFBC59" />
-                    
+                    <ProgressBar style={styles.progressBar} progress={0.30} color="#FFBC59" />
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 
@@ -206,58 +203,46 @@ const styles = StyleSheet.create({
         marginBottom: '3%'
     },
     button:{
-        justifyContent: 'center',
-        marginTop: "20%",
-        width: '10%'
+        alignSelf: 'center',
+    },
+    card: {
+        width: '80%',
+        alignSelf: 'center',
+        height: '40%',
+        borderRadius: 10,
+        borderWidth: 0.5,
+        backgroundColor: '#F4F4F4',
+        overflow: 'hidden',
+        marginVertical: '15%'
     },
     cardContent:{
         backgroundColor: '#F4F4F4',
-        height: '75%',
-        borderRadius: 10,
-        borderWidth: 0.5,
-    },
-    cardButton:{
-        backgroundColor: '#ECF0F3',
-        width: '50%',
-        height: '78%',
-        padding: 20,
-        borderRadius: 4,
-        textAlign: 'center',
-    },
-    cardButtonInactive:{
-        backgroundColor: '#FFFFFF',
-        width: '49%',
-        height: '78%',
-        padding: 20,
-        borderRadius: 4,
-        textAlign: 'center',
     },
     containerStyle:{
         marginTop: '10%',
         marginBottom:'7%',
-        // paddingBottom:'10%',
         flexDirection: 'row',
         justifyContent: 'center'
-    },
-    calendar:{
-        padding:'14%',
-    },
-    calendarContainer: {
-        marginTop: '5%',
     },
     date: {
         textAlign: 'center',
         marginBottom: '3%',
-        // color: '#194260',
         fontWeight: '600',
         width: '60%',
-        // borderWidth: 0.5,
         borderRadius: 5,
-        // backgroundColor: '#D3D3D3',
         overflow: 'hidden',
         alignSelf: 'center',
         paddingVertical: '2%'
-    }
+    },
+    calendarContainer: {
+        paddingVertical: '7.5%'
+    },
+    progressBar:{
+        width: '90%',
+        alignSelf: 'center', 
+        height: 17,
+        marginTop: '10%'
+    },
 })
 
 export default SelectDatesScreen;

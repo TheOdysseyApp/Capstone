@@ -59,7 +59,7 @@ const CardButton = ({style, textStyle, labelLeft, labelRight, onPressLeft, onPre
 const styles = StyleSheet.create({
     button: {
         backgroundColor: '#F4F4F4',
-        width: '49.7%',
+        width: '50%',
         padding: 20,
         // borderTopLeftRadius: 10,
     },

@@ -1,4 +1,5 @@
-import { Text, View, StyleSheet, SafeAreaView, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, ImageBackground, Dimensions } from "react-native";
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Button from "../../components/Button";
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
@@ -27,8 +28,8 @@ const TripReasonsScreen = ({navigation}) => {
     }
 
     return (
+        <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: Dimensions.get('window').height}} >
         <Screen preset="scroll">
-            <ImageBackground source={bgImage} resizeMode={'cover'} style={{ flex: 1, width: '100%', height: '121%'}} >
                 <SafeAreaView>
                   
                         <AntDesign style={{marginLeft: "5%"}} name="left" size={24} color="black" onPress={() => navigation.goBack()}/>
@@ -37,7 +38,7 @@ const TripReasonsScreen = ({navigation}) => {
                         <Text style={styles.header}>Let’s Plan Your Trip!</Text>
                         <Text style={styles.secondary}>What brings you here?</Text>
                   
-                    <View style={{marginTop:"10%", alignItems: 'center'}}>
+                    <View style={{ width: '80%', alignSelf: 'center', marginVertical: '5%' }}>
                             {info.map((trip, index) => (
                                 <CheckBoxComponent
                                     key={index}
@@ -50,31 +51,23 @@ const TripReasonsScreen = ({navigation}) => {
                         <Button style={styles.button} label="Next" onPress={handleSubmit}/>
                         <ProgressBar style={styles.progressBar}progress={0.3} color="#FFBC59" />
                 </SafeAreaView>
-            </ImageBackground>
-        </Screen>
+            </Screen>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     progressBar:{
-        marginTop: "20%", 
-        marginLeft: '10%', 
-        marginRight:'10%', 
-        height:'11%'
+        width: '90%',
+        alignSelf: 'center', 
+        height: 17,
+        marginTop: '10%'
     },
     header: {
         fontSize: 24,
         fontWeight:  '600',
         textAlign: "center",
         marginTop: "1%"
-    },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        resizeMode: 'contain',
-            height: 50,
-            width: 50,
-
     },
     secondary:{
         textAlign: "center",
@@ -84,11 +77,8 @@ const styles = StyleSheet.create({
         fontWeight: '300'
     },
     button:{
-        justifyContent: 'center',
-        marginTop: "13.5%",
-        marginLeft:'18%',
-        height: '9%',
-        width: '65%',
+        alignSelf: 'center',
+        marginTop: '5%'
     }
 })
 
