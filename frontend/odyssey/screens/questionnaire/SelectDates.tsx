@@ -82,7 +82,7 @@ const SelectDatesScreen = ({navigation}) => {
                                     />
                                 </View>
                             ) : (
-                                <View style={{alignItems:'center', paddingVertical:'4%'}}>
+                                <View style={{alignItems:'center', paddingVertical:'8.7%'}}>
                                     <View style={styles.containerStyle}>
                                         {menuOptions.map((option, index) => (
                                             <MenuButton 
